@@ -1,0 +1,52 @@
+:root {
+    --headerandfootercolor: #606060;
+    --navcolor: #505050;
+    --navcolor2: black;
+    --sitecolor: #404040;
+}
+
+* {
+    box-sizing: border-box;
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'Helvetica Neu', 'Helvetica', sans-serif;
+    background-color: var(--sitecolor);
+}
+
+header {
+    background: var(--headerandfootercolor);
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+nav {
+    background: var(--navcolor);
+}
+
+nav a:hover {
+    cursor: crosshair;
+    background: var(--navcolor2);
+}
+
+.bottom {
+    background: var(--headerandfootercolor);
+    display: block;
+    text-align: left;
+    margin: 0;
+}
+
+.searchBar {
+    height: 200px;
+}
