@@ -50,3 +50,7 @@ nav a:hover {
 .searchBar {
     height: 200px;
 }
+
+#profileIcon {
+    height: 50px;
+}
