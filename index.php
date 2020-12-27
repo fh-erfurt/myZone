@@ -2,15 +2,28 @@
 #session_save_path(__DIR__.DIRECTORY_SEPARATOR.'data');
 session_start();
 
+// load configurations
 require_once './config/paths.php';
-# require_once './core/functions.php';
+require_once './config/database.php';
 
+// load controllers
 require_once COREPATH.'controller.php';
+require_once COREPATH.'baseModel.php';
+# require_once COREPATH.'functions.php';
+
+require_once CONTROLLERSPATH.'errorsController.php';
+
+// load DV models
+#require_once MODELSPATH .'baseModel.php';
+require_once MODELSPATH.'userLogin.php';
+require_once MODELSPATH.'customer.php';
+
+# TODO aufräumen
+
 
 $loggedIn = isset($_SESSION['user']);
 
-$title = 'myZone';
-// TODO JGE dynamic title?
+$title = 'myZone'; # TODO JGE dynamic title?
 
 // check get parameters and assign variables
 $controllerName = isset($_GET['c']) ? $_GET['c'] : 'pages';
@@ -33,7 +46,6 @@ if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
     else
     {
         // redirect to an error page
-        require_once 'controllers\errorsController.php';
         $controller = new \dwp\controllers\ErrorsController('pages', 'error404');
         $controller->actionError404();
     }
@@ -41,7 +53,6 @@ if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
 else
 {
     // redirect to an error page
-    require_once 'controllers\errorsController.php';
     $controller = new \dwp\controllers\ErrorsController('pages', 'error404');
 }
 ?>
