@@ -4,7 +4,7 @@
         </div>
     </div>
 
-    <div class="right"> <!-- TODO Edit button JS? -->
+    <div class="right">
         <div>
             <label for="firstName">Vorname</label>
             <input type="text" name="firstName" id="firstName" value="<?=htmlspecialchars($_SESSION['currentUser']['firstName'])?>" readonly>
@@ -28,4 +28,7 @@
         <a href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=edit">
             <input type="submit" value="persönliche Daten bearbeiten">
         </a>
+        <form action="index.php?c=profile&a=logout" method="post">
+            <input name="submit" type="submit" value="Logout"/>
+        </form>
     </div>

@@ -1,13 +1,20 @@
-<header>
-    <h1>MyZone</h1>
-    <!--<img src="img.png" alt="Cover">-->
-    <?=isset($_SESSION['currentUser']['username']) ? $_SESSION['currentUser']['username'] : ''?>
-    <a href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=view"><img id="profileIcon" src="<?=ROOTPATH?>assets/img/profile.png"></a>
-    <? if($_SESSION['loggedIn']) : ?>
-    <form action="index.php?c=profile&a=logout" method="post">
-        <input name="submit" type="submit" value="Logout"/>
-    </form>
-    <? endif; ?>
+<header class="header">
+    <div class="inset">
+        <a href="<?=$_SERVER['PHP_SELF']?>" class="logo">myZone</a>
+        <a href="<?=$_SERVER['PHP_SELF']?>" class="logoMob">mZ</a>
+        <div class="interact">
+            <div class="search-box">
+                <input class="search-txt" type="text" name="" placeholder="Suchen">
+                <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
+            </div>
+            <div class="shopping-cart">
+                <a class="shopping-cart-btn" href="#"><i class="fas fa-shopping-cart fa-2x"></i></a>
+            </div>
+            <div class="user">
+                <a class="user-btn" href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=view" ><i class="far fa-user-circle fa-2x"></i></a>
+            </div>
+        </div>
+    </div>
     <nav>
         <a href="<?=$_SERVER['PHP_SELF']?>"                           >HOME</a>
         <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=search"          >SEARCH</a>

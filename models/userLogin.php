@@ -1,9 +1,13 @@
 <?
 
+
 namespace dwp\models;
 
-class UserLogin extends \dwp\core\BaseModel
+use dwp\core\BaseModel;
+
+class UserLogin extends BaseModel
 {
+
     const TABLENAME = '`userLogins`';
 
     protected $schema = [

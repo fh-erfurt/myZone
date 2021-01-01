@@ -1,4 +1,4 @@
-<form action="<?=$_SERVER['PHP_SELF']?>?c=profile&a=edit" method="post" class="personal-data">
+<form action="<?=$_SERVER['PHP_SELF']?>?c=profile&a=submitEdit" method="post" class="personal-data">
 
     <div class="left">
         <div class="img">
@@ -32,7 +32,7 @@
             <label for="changePw">Passwort ändern?</label>
             <input type="text" name="newPassword" id="newPw">
         </div>
-        <input type="submit" value="neue Daten speichern" name="submitNewData"> <!-- TODO -->
+        <input type="submit" value="neue Daten speichern" name="submitNewData"> <!-- TODO altes passwort eingabe-->
     </div>
 
 </form>
