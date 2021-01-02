@@ -105,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `myZone`.`products` (
   `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `name` VARCHAR(45) NOT NULL,
+  `price` DECIMAL(5,2) NOT NULL,
   `category` VARCHAR(20) NULL,
   `brand` VARCHAR(45) NULL,
   `color` VARCHAR(45) NULL,
@@ -142,7 +143,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 
----------------------------------- test data
+/* test data */
 
 
 INSERT INTO `myZone`.`customers` (`id`, `firstName`, `lastName`, `email`, `phone`)
@@ -151,5 +152,8 @@ VALUES (1, 'testFirstName', 'testLastName', 'test@email.de', '018054646');
 INSERT INTO `myZone`.`userLogins` (`id`, `validated`, `enabled`, `username`, `failedLoginCount`, `passwordHash`, `customer`)
 VALUES (1, 1, 1, 'testUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 1);
 
-
+INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`)
+VALUES (1, 'Club C85 Vintage', 99.99, 'shoes', 'Rebook', 'white'),
+       (2, 'Air Max 97', 129.99, 'shoes', 'Nike', 'red'),
+       (3, 'Classic Clog', 69.69, 'shoes', 'crocs', 'bronze');
 

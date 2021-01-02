@@ -2,6 +2,8 @@
 
 namespace dwp\core;
 
+use PDOException;
+
 abstract class BaseModel
 {
     const TYPE_INT      = 'int';

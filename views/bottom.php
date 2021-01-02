@@ -1,14 +1,22 @@
-<footer class="bottom">
-    <ul>
-        <li><a href="">Impressum</a></li>
-        <li><a href="">Über uns</a></li>
-        <li><a href="">Datenschutz</a></li>
-    </ul>
-    <?=isset($_SESSION['errors']) && $_SESSION['errors'] ? 'Errors Array (SQL): '.var_dump($_SESSION['errors']) : ''?>
-
-    <?
-    echo 'loginData: '; var_dump($_SESSION['loginData']);
-    echo '<br>'.'errors[0]: '; var_dump($_SESSION['errors0']);
-    echo '<br>'.'SQL: '; var_dump($_SESSION['sql']);
-    ?>
+<footer class="footer">
+    <div class="bottom">
+        <a href="#">Impressum</a>
+    </div>
+    <div class="bottom">
+        <a href="#">Über Uns</a>
+    </div>
+    <div class="bottom">
+        <a href="#">Datenschutz</a>
+    </div>
+<script src="script.js"></script>
 </footer>
+<div style="height:500px">
+    <?
+    echo isset($_SESSION['errors']) && $_SESSION['errors'] ? 'Errors Array (SQL): '.var_dump($_SESSION['errors']) : '';
+    echo '<textarea>';
+    echo 'loginData: '; var_dump($_SESSION['loginData']);
+    echo '</textarea><br><textarea>';
+    echo 'SQL: ';       var_dump($_SESSION['sql']);
+    echo '</textarea>';
+    ?>
+</div>
