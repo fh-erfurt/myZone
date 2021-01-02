@@ -1,15 +1,14 @@
 :root {
     --headerandfootercolor: #606060;
-    --navcolor: #505050;
-    --navcolor2: black;
+    --navcolor: orange;
+    --navcolor2: green;
     --sitecolor: #404040;
 }
 
-nav {
+.jakob {
     background: var(--navcolor);
 }
 
-nav a:hover {
-    cursor: crosshair;
+.jakob a:hover {
     background: var(--navcolor2);
 }
