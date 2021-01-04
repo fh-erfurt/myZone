@@ -2,7 +2,9 @@
 
 namespace dwp\models;
 
-class Customer extends \dwp\core\BaseModel
+use dwp\core\BaseModel;
+
+class Customer extends BaseModel
 {
     const TABLENAME = '`customers`';
 

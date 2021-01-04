@@ -13,7 +13,7 @@ require_once COREPATH.'baseModel.php';
 
 require_once CONTROLLERSPATH.'errorsController.php';
 
-// load DV models
+// load DB models
 #require_once MODELSPATH .'baseModel.php';
 require_once MODELSPATH.'userLogin.php';
 require_once MODELSPATH.'customer.php';
@@ -62,7 +62,15 @@ else
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?=ROOTPATH.'assets/css/style.css'?>">
+
+    <script type="text/javascript" src="script.js"></script>
+    <script src="https://kit.fontawesome.com/d97dcc17bd.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="<?=ROOTPATH.'assets/css/jakob.css'?>">
+    <link rel="stylesheet" href="<?=ROOTPATH.'assets/css/dariush.css'?>" type="text/css" />
     <title><?=$title?></title>
 </head>
 <body>

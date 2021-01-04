@@ -9,13 +9,14 @@ abstract class BaseModel
     const TYPE_FLOAT    = 'float';
     const TYPE_STRING   = 'string';
     # TODO JGE
+    # $this->data[$key] zu $this->{$key}
 
     protected $schema = []; # enthält Datentypen
     protected $data = [];   # enthält später Daten, wie in DB
 
-    public function __construct($params)
+    public function __construct($params) #TODO eventuell durch schema überprüfen
     {
-        foreach($this->schema as $key => $value)
+        foreach($this->schema as $key => $schemaOptions)
         {
             if(isset($params[$key]))
             {
@@ -44,6 +45,7 @@ abstract class BaseModel
         {
             $this->data[$key] = $value;
         }
+        else
         throw new \Exception('You can not write to property "'.$key.'" for the class "'.get_called_class().'".');
     }
 
@@ -101,16 +103,27 @@ abstract class BaseModel
         $db = $GLOBALS['db'];
         try
         {
-            $sql = 'UPDATE '.self::tablename().' SET';
+            $sql = 'UPDATE '.self::tablename().' SET ';
 
-            foreach($this->schema as $key => $schemaOptions)
+            # TODO JGE
+            /*foreach($this->schema as $key => $schemaOptions)
             {
                 if($this->data[$key] !== null)
                 {
                     $sql .= $key.' = '.$db->quote($this->data[$key]).', ';
                 }
+            }*/
+            foreach($this->data as $key => $value)
+            {
+                if($value !== null)
+                {
+                    # TODO if(schema type == BaseModel TYPE_INT) $db->quote(key)
+                    # TODO auch bei insert etc
+                    $sql .= $key.' = '.$db->quote($value).',';
+                }
             }
             $sql = trim($sql, ',').' WHERE id = '.$this->data['id'];
+            $_SESSION['sql'] = $sql; # TODO
             $db->prepare($sql)->execute();
 
             return true;

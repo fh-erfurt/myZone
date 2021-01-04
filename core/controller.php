@@ -5,8 +5,8 @@ namespace dwp\core;
 class Controller
 {
     protected $controller  = null;	// stores the called controllers name
-    protected $action 	   = null;	// stores the colled action name
-    protected $currentUser = null;  // store current logged in user here
+    protected $action 	   = null;	// stores the called action name
+    protected $currentUser = null;  // store current logged in user here TODO
 
     protected $params = [];			// stores useful params for view rendering
 
@@ -16,13 +16,9 @@ class Controller
         $this->action = $action;
     }
 
-    /**
-     * Check if a valid login is available for this current session
-     * @return Boolean 		true if the user logged in otherwise false
-     */
     public function loggedIn()
     {
-        return ( isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true);
+        return (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true);
     }
 
     /**

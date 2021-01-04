@@ -4,11 +4,33 @@
 namespace dwp\controllers;
 
 
+use dwp\models\UserLogin;
+use dwp\models\Customer;
+
 class ProfileController extends \dwp\core\Controller
 {
+    public function updateCurrentUserInSessionWithLoginData($loginData)
+    {
+        $customerData = Customer::select("id = ".$loginData['customer'])[0];
+        $_SESSION['currentUser'] = [
+            'username'   => $loginData['username'],
+            'userId'     => $loginData['id'],
+            'customerId' => $customerData['id'],
+            'firstName'  => $customerData['firstName'],
+            'lastName'   => $customerData['lastName'],
+            'email'      => $customerData['email'],
+            'phone'      => $customerData['phone']
+        ];
+    }
+
+    public function updateCurrentUserInSession()
+    {
+        $this->updateCurrentUserInSessionWithLoginData(UserLogin::select("id = ".$GLOBALS['db']->quote(trim($_SESSION['currentUser']['userId'])))[0]);
+    }
+
     public function actionView()
     {
-        if($this->loggedIn())
+        if($this->loggedIn()) // TODO JGE Codeblock auslagern? (Redundanz)
         {
             $this->setParam($this->action, 'view');
         }
@@ -20,7 +42,47 @@ class ProfileController extends \dwp\core\Controller
 
     public function actionEdit()
     {
-        $this->setParam($this->action, 'edit');
+        if($this->loggedIn())
+        {
+            $this->setParam($this->action, 'edit');
+        }
+        else
+        {
+            header('Location: index.php?c=profile&a=login');
+        }
+    }
+
+    public function actionSubmitEdit()
+    {
+        $errors = [];
+        if($this->loggedIn())
+        {
+            if(isset($_POST['submitNewData']))
+            {
+                $newUserLoginParams = [
+                    'id'        =>      $_SESSION['currentUser']['userId'] ,
+                    'username'  => trim($_POST['username']                )
+                ];  # TODO passwort
+                $newCustomerParams  = [
+                    'id'        =>      $_SESSION['currentUser']['customerId'] ,
+                    'firstName' => trim($_POST['firstName']                   ),
+                    'lastName'  => trim($_POST['lastName']                    ),
+                    'email'     => trim($_POST['email']                       ),
+                    'phone'     => trim($_POST['phone']                       )
+                ];
+                $newUserLogin = new UserLogin($newUserLoginParams);
+                $newCustomer  = new Customer($newCustomerParams);
+                $newUserLogin->save($errors);
+                $newCustomer-> save($errors);
+            }
+            $_SESSION['errors'] = $errors;
+            $this->updateCurrentUserInSession();
+            header('Location: index.php?c=profile&a=view');
+        }
+        else
+        {
+            header('Location: index.php?c=profile&a=login');
+        }
     }
 
     public function actionLogin()
@@ -40,23 +102,14 @@ class ProfileController extends \dwp\core\Controller
         {
             if(!empty($username) && !empty($password))
             {
-                #$passwordFromDB = mysqli_query($GLOBALS['db'], "SELECT passwordHash from login where "username = ".trim($username)); TODO
-                $loginData = \dwp\models\UserLogin::select("username = ".$GLOBALS['db']->quote(trim($username)))[0];
+                $loginData = UserLogin::select("username = ".$GLOBALS['db']->quote(trim($username)))[0];
                 if(isset($loginData['passwordHash']) && password_verify($password, $loginData['passwordHash']))
                 {
                     // TODO: Store useful variables into the session like account and also set loggedIn = true
                     $errMsg = '';
-                    $customerData = \dwp\models\Customer::select("id = ".$loginData['customer'])[0];
                     $_SESSION['loggedIn'] = true;
-                    $_SESSION['currentUser'] = [
-                        'username'  => $loginData['username'],
-                        'userId'    => $loginData['id'],
-                        'firstName' => $customerData['firstName'],
-                        'lastName'  => $customerData['lastName'],
-                        'email'     => $customerData['email'],
-                        'phone'     => $customerData['phone']
-                    ];
-                    header('Location: index.php?c=pages&a=home'); // TODO eventuell auf Profil weiterleiten?
+                    $this->updateCurrentUserInSessionWithLoginData($loginData);
+                    header('Location: index.php?c=pages&a=home'); // TODO eventuell auf Profil weiterleiten? Aufgerudfene Seite merken?
                 }
                 else
                 {
