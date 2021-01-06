@@ -76,13 +76,13 @@ abstract class BaseModel
             {
                 $sql .= '`'.$key.'`,';
 
-                if($this->data[$key] === null)
+                if($this->{$key} === null)
                 {
                     $valueString .= 'NULL,';
                 }
                 else
                 {
-                    $valueString .= '`'.$db->quote($this->data[$key]).'`,';
+                    $valueString .= '`'.$db->quote($this->{$key}).'`,';
                 }
             }
 
@@ -124,7 +124,7 @@ abstract class BaseModel
                     $sql .= $key.' = '.$db->quote($value).',';
                 }
             }
-            $sql = trim($sql, ',').' WHERE id = '.$this->data['id'];
+            $sql = trim($sql, ',').' WHERE id = '.$this->{'id'};
             $_SESSION['sql'] = $sql; # TODO
             $db->prepare($sql)->execute();
 
@@ -142,9 +142,10 @@ abstract class BaseModel
         $db = $GLOBALS['db'];
         try
         {
+            #TODO
             #$sql = 'DELETE '.self::tablename().' FROM WHERE id = '.$this->data['id'];
             #$db->exec($sql);
-            $db->exec('DELETE '.self::tablename().' FROM WHERE id = '.$this->data['id']);
+            $db->exec('DELETE '.self::tablename().' FROM WHERE id = '.$this->{'id'});
             return true;
         }
         catch(\PDOException $e)
@@ -158,7 +159,7 @@ abstract class BaseModel
     {
         foreach($this->schema as $key => $schemaOptions)
         {
-            if(isset($this->data[$key]) && is_array($schemaOptions))
+            if(isset($this->{$key}) && is_array($schemaOptions))
             {
                 $valueErrors = $this->validateValue($key, data[$key], $schemaOptions);
 
