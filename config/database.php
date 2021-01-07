@@ -12,7 +12,7 @@ $dbName = 'myZone';
 
 $dns   = 'mysql:dbname='.$dbName.';host=localhost';
 $user  = 'root';
-$pw    = ''; # root hat nicht funktioniert
+$pw    = ''; # root
 $options    = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC

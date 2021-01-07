@@ -16,7 +16,6 @@
         </div>
     </div>
 </header>
-<br>
 <nav class="jakob">
     <a href="<?=$_SERVER['PHP_SELF']?>"                           >HOME</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=search"          >SEARCH</a>

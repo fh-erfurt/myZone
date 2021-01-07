@@ -17,6 +17,8 @@
     echo 'loginData: '; var_dump($_SESSION['loginData']);
     echo '</textarea><br><textarea>';
     echo 'SQL: ';       var_dump($_SESSION['sql']);
+    echo '</textarea><br><textarea>';
+    echo '$_SERVER: ';       var_dump($_SERVER);
     echo '</textarea>';
     ?>
 </div>

@@ -16,9 +16,9 @@ require_once COREPATH.'baseModel.php';
 require_once CONTROLLERSPATH.'errorsController.php';
 
 // load DB models
-#require_once MODELSPATH .'baseModel.php';
 require_once MODELSPATH.'userLogin.php';
 require_once MODELSPATH.'customer.php';
+require_once MODELSPATH.'product.php';
 
 # TODO aufräumen
 

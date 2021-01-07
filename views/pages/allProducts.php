@@ -105,7 +105,7 @@
         <div class="filter">Sortieren:
             <div class="filter-box">
                 <select class="sort-by_f">
-
+                    <option>Preis</option>
                 </select>
             </div>
         </div>
@@ -128,8 +128,16 @@
 <section class="content">
     <h1 class="title">Schuhe Men:</h1>
     <div class="row">
-        <? $sql = 'SELECT * FROM `products`';
-           $products = $GLOBALS['db']->query($sql)->fetchAll();
+        <?
+        try
+        {
+            $searchfor = isset($_GET['s']) ? 'name like \'%'.(trim($_GET['s'])).'%\' or brand like \'%'.(trim($_GET['s'])).'%\'' : '';
+            $products = null;
+            $products = \dwp\models\Product::select($searchfor);
+            if(empty($products))
+            {
+                echo 'Suche hat keine Ergebnisse.'; #TODO DNA Container mit Anzeige
+            }
         foreach($products as $product): ?>
             <a class="link" href="#">
                 <div class="product">
@@ -143,6 +151,16 @@
                     </div>
                 </div>
             </a>
-        <? endforeach;?>
+        <? endforeach;
+        }   # TODO JGE illegale Suchen abfangen (' OR 1 = 1 OR brand like ' und so weiter)
+        catch (Error $error)
+        {
+            echo 'Error caught: '.$error->getMessage(); # TODO
+        }
+        catch (PDOException $exception)
+        {
+            echo 'Exception caught: '.$exception->getMessage(); # TODO
+        }
+        ?>
     </div>
 </section>
