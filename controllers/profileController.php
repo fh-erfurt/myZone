@@ -3,10 +3,16 @@
 
 namespace dwp\controllers;
 
-
 use dwp\models\UserLogin;
 use dwp\models\Customer;
 
+/**
+ * Class ProfileController
+ *
+ * Controller used for all functions affecting the session and current user like login and edit.
+ *
+ * @package dwp\controllers
+ */
 class ProfileController extends \dwp\core\Controller
 {
     public function updateCurrentUserInSessionWithLoginData($loginData)

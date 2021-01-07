@@ -1,4 +1,6 @@
 <?php
+
+use \dwp\controllers\ErrorsController;
 #session_save_path(__DIR__.DIRECTORY_SEPARATOR.'data');
 session_start();
 
@@ -14,9 +16,9 @@ require_once COREPATH.'baseModel.php';
 require_once CONTROLLERSPATH.'errorsController.php';
 
 // load DB models
-#require_once MODELSPATH .'baseModel.php';
 require_once MODELSPATH.'userLogin.php';
 require_once MODELSPATH.'customer.php';
+require_once MODELSPATH.'product.php';
 
 # TODO aufräumen
 
@@ -46,14 +48,14 @@ if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
     else
     {
         // redirect to an error page
-        $controller = new \dwp\controllers\ErrorsController('pages', 'error404');
+        $controller = new ErrorsController('pages', 'error404');
         $controller->actionError404();
     }
 }
 else
 {
     // redirect to an error page
-    $controller = new \dwp\controllers\ErrorsController('pages', 'error404');
+    $controller = new ErrorsController('pages', 'error404');
 }
 ?>
 
@@ -65,12 +67,10 @@ else
 
     <script type="text/javascript" src="script.js"></script>
     <script src="https://kit.fontawesome.com/d97dcc17bd.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="<?=ROOTPATH.'assets/css/jakob.css'?>">
-    <link rel="stylesheet" href="<?=ROOTPATH.'assets/css/dariush.css'?>" type="text/css" />
+    <link rel="stylesheet" href="<?=ROOTPATH.'assets/css/style.css'?>" type="text/css" />
     <title><?=$title?></title>
 </head>
 <body>
