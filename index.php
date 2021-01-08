@@ -65,9 +65,9 @@ else
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script type="text/javascript" src="script.js"></script>
+
     <script src="https://kit.fontawesome.com/d97dcc17bd.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+
 
     <link rel="stylesheet" href="<?=ROOTPATH.'assets/css/jakob.css'?>">
     <link rel="stylesheet" href="<?=ROOTPATH.'assets/css/style.css'?>" type="text/css" />
@@ -76,7 +76,7 @@ else
 <body>
 
 <?
-include VIEWSPATH . 'navbar.php';
+include VIEWSPATH . 'header.php';
 
 $controller->render();
 
