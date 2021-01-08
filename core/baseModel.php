@@ -37,7 +37,6 @@ abstract class BaseModel
         {
             return $this->data[$key];
         }
-
         throw new \Exception('You can not access property "'.$key.'" for the class "'.get_called_class().'".');
     }
 
@@ -47,8 +46,7 @@ abstract class BaseModel
         {
             $this->data[$key] = $value;
         }
-        else
-        throw new \Exception('You can not write to property "'.$key.'" for the class "'.get_called_class().'".');
+        else throw new \Exception('You can not write to property "'.$key.'" for the class "'.get_called_class().'".');
     }
 
     public function save(&$errors)
@@ -125,7 +123,7 @@ abstract class BaseModel
                 }
             }
             $sql = trim($sql, ',').' WHERE id = '.$this->{'id'};
-            $_SESSION['sql'] = $sql; # TODO
+            $_SESSION['sql'] = $sql; # TODO nur für log ausgabe in bottom.php
             $db->prepare($sql)->execute();
 
             return true;
@@ -207,17 +205,15 @@ abstract class BaseModel
     public static function tablename()
     {
         $class = get_called_class();
-        if(defined($class.'::TABLENAME'))
-        {
-            return $class::TABLENAME;
-        }
+        if(defined($class.'::TABLENAME')) return $class::TABLENAME;
         return null;
     }
 
     public static function select($where = '')
     {
         $db = $GLOBALS['db'];
-        $result = null;
+        $results = [];
+        $class = get_called_class();
 
         try
         {
@@ -226,13 +222,18 @@ abstract class BaseModel
             {
                 $sql .= ' WHERE '.$where.';';
             }
-            $result = $db->query($sql)->fetchAll();
+            $results = $db->query($sql)->fetchAll();
+            $l = count($results);
+            for ($i = 0; $i < $l; $i++)
+            {
+                $results[$i] = new $class($results[$i]);
+            }
         }
         catch(PDOException $e)
         {
             die('Select statement failed: '.$e->getMessage());
         }
-        return $result;
+        return $results;
     }
 }
 ?>
