@@ -22,4 +22,5 @@
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=allProducts"     >ALLE PRODUKTE</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=page3"           >SEITE3</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >SEITE4</a>
+    <? if($_SESSION['loggedIn']) :?> <p>-------------You are logged in!--</p> <?endif;?>
 </nav>

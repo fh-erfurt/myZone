@@ -17,7 +17,7 @@ test account: testUser / 123456 <!-- TODO JGE-->
         <label for="username">
             Nutzername
         </label>
-        <input id="username" name="username" type="username" placeholder="Nutzername" value="<?=htmlspecialchars($username)?>" required />
+        <input id="username" name="username" type="text" placeholder="Nutzername" value="<?=htmlspecialchars($username)?>" required />
     </div>
 
     <div class="input">
@@ -31,6 +31,6 @@ test account: testUser / 123456 <!-- TODO JGE-->
         <input name="submit" type="submit" value="Login"/>
     </div>
     <div class="login-footer">
-        <a href="index.php?c=pages&a=signup">Konto erstellen</a>
+        <a href="index.php?c=profile&a=signup">Konto erstellen</a>
     </div>
 </form>
