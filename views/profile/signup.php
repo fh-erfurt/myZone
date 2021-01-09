@@ -4,7 +4,7 @@
 
 
 
-<h1>Register</h1>
+<h1>Konto erstellen</h1>
 
 <?php if($errMsg !== null) : ?>
     <div class="error-message">
@@ -22,7 +22,8 @@ exitsiert bereits: testUser / 123456 <!-- TODO JGE-->
         'confirmPassword' => ['Passwort bestätigen', 'password', false]
     ];
     foreach($fields as $attribute => $placeholderTypeRemember) :
-          $value = $placeholderTypeRemember[2] ? $_POST[$attribute] : ''?>
+        // if the remember value is true AND the post parameter is set save it into the variable, which is written into the textfield.
+          $value = $placeholderTypeRemember[2] ? $_POST[$attribute] ??  '' : ''; ?>
         <div class="input">
             <label for="<?=$attribute?>">
                 <?=$placeholderTypeRemember[0]?>
@@ -32,7 +33,7 @@ exitsiert bereits: testUser / 123456 <!-- TODO JGE-->
     <?php endforeach; ?>
 
     <div class="input submit">
-        <input name="submit" type="submit" value="Login"/>
+        <input name="submit" type="submit" value="Konto erstellen"/>
     </div>
     ES WIRD NOCH NICHTS AN DB GESENDET <? # TODO ?>
 </form>
