@@ -11,7 +11,44 @@
                 <a class="shopping-cart-btn" href="#"><i class="fas fa-shopping-cart fa-2x"></i></a>
             </div>
             <div class="user">
-                <a class="user-btn" href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=view" ><i class="far fa-user-circle fa-2x"></i></a>
+                <input class="pop-up-btn" type="checkbox" id="pop-up-btn" />
+                <label class="pop-up-icon" for="pop-up-btn">
+                    <div class="pop-icon">
+                        <i class="far fa-user-circle fa-2x"></i>
+                    </div>
+                </label>
+            <div class="pop-up">
+                    <label class="close-icon" for="pop-up-btn">
+                        <img class="x-icon" src="<?=ROOTPATH. '/assets/img/icons/buchstabe-x.svg'?>">
+                    </label>
+                    <form class="login" action="index.php?c=profile&a=login" method="post">
+                        <h1 class="login-headline">Login</h1>
+                        <div class="input-login">
+                            <label class="typein" for="username">
+                                Nutzername
+                            </label>
+                            <div class="typein-box">
+                                <input id="username" name="username" type="username" placeholder="" value="<?=htmlspecialchars($username)?>" required />
+                            </div>
+                        </div>
+
+                        <div class="input-login">
+                            <label class="typein" for="password">
+                                Passwort</label>
+                            <div class="typein-box">
+                                <input id="password" name="password" type="password" placeholder="" required />
+                            </div>
+                        </div>
+
+                        <div class="input-submit">
+                            <input class="submit-btn" name="submit" type="submit" value="Login"/>
+                        </div>
+
+                        <div class="login-footer">
+                            <a class="login-footer-link" href="index.php?c=pages&a=signup">Konto erstellen</a>
+                        </div>
+                    </form>
+            </div>
             </div>
         </div>
     </div>

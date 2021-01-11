@@ -1,0 +1,177 @@
+.home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.about-us{
+    display: flex;
+    position: absolute;
+    width: 50%;
+    height: auto;
+    background-color: var(--footercolor);
+    z-index: 1;
+    padding: 10px;
+    box-shadow: var(--shadow) #d0d0d0;
+    filter: alpha(opacity=80);
+    opacity: 0.9;
+    -moz-opacity: 0.9;
+    border-radius: 15px;
+    flex-direction: column;
+    text-align: center;
+    top: 666px;
+    overflow-y: auto;
+}
+
+.about-us::-webkit-scrollbar{
+    display: none;
+}
+
+.about-us-headline{
+    font-weight: bold;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.about-us-text{
+    padding: 5px 10px 10px 10px;
+    font-size: 16px;
+}
+
+.top-seller{
+    position: absolute;
+    z-index: 1;
+    width: 70%;
+    height: auto;
+    border-radius: 20px;
+    top: 220px;
+    background-color: var(--footercolor);
+    box-shadow: var(--shadow) #d0d0d0;
+    filter: alpha(opacity=80);
+    opacity: 0.9;
+    -moz-opacity: 0.9;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-seller-headline{
+    font-size: 28px;
+    font-weight: normal;
+    padding: 5px;
+    display: flex;
+}
+
+.collum{
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+}
+
+.collum::-webkit-scrollbar{
+    display: none;
+}
+
+.background-img{
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+.footer{
+    width: auto;
+    height: 120px;
+    background-color: var(--footercolor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    bottom: 0;
+}
+
+.bottom{
+    padding: 5px;
+    font-size: 18px;
+    font-weight: normal;
+    color: black;
+}
+
+.bottom a{
+    color: black;
+    transition: 0.1s;
+}
+
+.bottom a:hover{
+    font-size: 17px;
+}
+
+@media only screen and (max-width: 1280px) {
+
+    .top-seller {
+        top: 200px;
+    }
+
+    .about-us {
+        width: 70%;
+        top: 615px;
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-width: 1040px){
+
+    .about-us{
+        width: 90%;
+        padding: 5px;
+        top: 535px;
+        height: auto;
+        overflow-y: auto ;
+    }
+
+    .about-us-headline{
+        font-size: 22px;
+        padding: 5px;
+    }
+
+    .about-us-text{
+        font-size: 16px;
+    }
+
+    .top-seller{
+        width: 90%;
+        padding: 10px;
+        top: 170px;
+    }
+
+    .top-seller-headline{
+        font-size: 22px;
+    }
+
+    .about-us-text{
+        font-size: 14px;
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+
+    .top-seller{
+        top: 160px;
+    }
+
+    .about-us{
+        top: 518px;
+        height: 80px;
+    }
+
+    .bottom{
+        font-size: 14px;
+    }
+
+    .footer{
+        height: 100px;
+    }
+}
