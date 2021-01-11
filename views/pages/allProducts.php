@@ -11,7 +11,7 @@ include VIEWSPATH . 'filter.php';
         try
         {
             $searchfor = isset($_GET['s']) ? 'name like \'%'.(trim($_GET['s'])).'%\' or brand like \'%'.(trim($_GET['s'])).'%\'' : '';
-            $products = null;
+            $products = [];
             $products = \dwp\models\Product::select($searchfor);
             if(empty($products))
             {
@@ -21,12 +21,12 @@ include VIEWSPATH . 'filter.php';
             <a class="link" href="#">
                 <div class="product">
                     <div class="upper">
-                        <img class="img" src="<?=ROOTPATH?>assets/img/products/product_<?=$product['id']?>.jpg">
+                        <img class="img" src="<?=ROOTPATH?>assets/img/products/product_<?=$product->{'id'}?>.jpg">
                     </div>
                     <div class="lower">
-                        <h1 class="brand"><?=$product['brand']?></h1>
-                        <h2 class="model"><?=$product['name']?></h2>
-                        <h3 class="price"><?=$product['price']?>€</h3>
+                        <h1 class="brand"><?=$product->{'brand'}?></h1>
+                        <h2 class="model"><?=$product->{'name'}?></h2>
+                        <h3 class="price"><?=$product->{'price'}?>€</h3>
                     </div>
                 </div>
             </a>

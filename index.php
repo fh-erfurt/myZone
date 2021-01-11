@@ -20,16 +20,15 @@ require_once MODELSPATH.'userLogin.php';
 require_once MODELSPATH.'customer.php';
 require_once MODELSPATH.'product.php';
 
-# TODO aufräumen
-
-
+// check if a user is logged in
 $loggedIn = isset($_SESSION['user']);
 
-$title = 'myZone'; # TODO JGE dynamic title?
-
 // check get parameters and assign variables
-$controllerName = isset($_GET['c']) ? $_GET['c'] : 'pages';
-$actionName     = isset($_GET['a']) ? $_GET['a'] : 'home'; # TODO JGE error als standard?
+$controllerName = $_GET['c'] ?? 'pages';
+$actionName     = $_GET['a'] ?? 'home';
+
+// set the shown title for the page
+$title = 'myZone'; # TODO JGE dynamic title?
 
 if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
 {
@@ -48,14 +47,14 @@ if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
     else
     {
         // redirect to an error page
-        $controller = new ErrorsController('pages', 'error404');
+        $controller = new ErrorsController('errors', 'error404');
         $controller->actionError404();
     }
 }
 else
 {
     // redirect to an error page
-    $controller = new ErrorsController('pages', 'error404');
+    $controller = new ErrorsController('errors', 'error404');
 }
 ?>
 

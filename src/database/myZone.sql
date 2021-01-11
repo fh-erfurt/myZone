@@ -68,7 +68,6 @@ CREATE TABLE IF NOT EXISTS `myZone`.`userLogins` (
   `enabled` TINYINT NOT NULL,
   `username` VARCHAR(25) NOT NULL,
   `lastLogin` TIMESTAMP NULL,
-  `lastActive` TIMESTAMP NULL,
   `failedLoginCount` TINYINT NOT NULL,
   `passwordHash` VARCHAR(255) NOT NULL,
   `customer` INT NOT NULL,

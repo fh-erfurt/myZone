@@ -17,15 +17,15 @@ class ProfileController extends \dwp\core\Controller
 {
     public function updateCurrentUserInSessionWithLoginData($loginData)
     {
-        $customerData = Customer::select("id = ".$loginData['customer'])[0];
+        $customerData = Customer::select("id = ".$loginData->{'customer'})[0];
         $_SESSION['currentUser'] = [
-            'username'   => $loginData['username'],
-            'userId'     => $loginData['id'],
-            'customerId' => $customerData['id'],
-            'firstName'  => $customerData['firstName'],
-            'lastName'   => $customerData['lastName'],
-            'email'      => $customerData['email'],
-            'phone'      => $customerData['phone']
+            'username'   => $loginData->{'username'},
+            'userId'     => $loginData->{'id'},
+            'customerId' => $customerData->{'id'},
+            'firstName'  => $customerData->{'firstName'},
+            'lastName'   => $customerData->{'lastName'},
+            'email'      => $customerData->{'email'},
+            'phone'      => $customerData->{'phone'}
         ];
     }
 
@@ -36,26 +36,14 @@ class ProfileController extends \dwp\core\Controller
 
     public function actionView()
     {
-        if($this->loggedIn()) // TODO JGE Codeblock auslagern? (Redundanz)
-        {
-            $this->setParam($this->action, 'view');
-        }
-        else
-        {
-            header('Location: index.php?c=profile&a=login');
-        }
+        if($this->loggedIn()) $this->setParam($this->action, 'view'); // TODO JGE Codeblock auslagern? (Redundanz)
+        else                  header('Location: index.php?c=profile&a=login');
     }
 
     public function actionEdit()
     {
-        if($this->loggedIn())
-        {
-            $this->setParam($this->action, 'edit');
-        }
-        else
-        {
-            header('Location: index.php?c=profile&a=login');
-        }
+        if($this->loggedIn()) $this->setParam($this->action, 'edit');
+        else                  header('Location: index.php?c=profile&a=login');
     }
 
     public function actionSubmitEdit()
@@ -93,8 +81,7 @@ class ProfileController extends \dwp\core\Controller
 
     public function actionLogin()
     {
-        if(isset($_SESSION['currentUser']))
-        header('Location: index.php?c=pages&a=home'); // TODO eventuell auf Profil weiterleiten?
+        if($this->loggedIn()) header('Location: index.php?c=profile&a=view');
 
         // store error message
         $errMsg = null;
@@ -109,7 +96,7 @@ class ProfileController extends \dwp\core\Controller
             if(!empty($username) && !empty($password))
             {
                 $loginData = UserLogin::select("username = ".$GLOBALS['db']->quote(trim($username)))[0];
-                if(isset($loginData['passwordHash']) && password_verify($password, $loginData['passwordHash']))
+                if(($loginData->{'passwordHash'}) && password_verify($password, $loginData->{'passwordHash'}))
                 {
                     // TODO: Store useful variables into the session like account and also set loggedIn = true
                     $errMsg = '';
@@ -137,6 +124,14 @@ class ProfileController extends \dwp\core\Controller
 
         // set param email to prefill login input field
         $this->setParam('username', $username);
+        $this->setParam('errMsg', $errMsg);
+    }
+
+    public function actionSignup()
+    {
+        if($this->loggedIn()) header('Location: index.php?c=pages&a=home');
+        else                  $this->setParam($this->action, 'signup');
+        $errMsg = 'kein Fehler';
         $this->setParam('errMsg', $errMsg);
     }
 
