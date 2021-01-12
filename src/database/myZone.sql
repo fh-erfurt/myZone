@@ -146,13 +146,36 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 INSERT INTO `myZone`.`customers` (`id`, `firstName`, `lastName`, `email`, `phone`)
-VALUES (1, 'testFirstName', 'testLastName', 'test@email.de', '018054646');
+VALUES (1, 'testFirstName', 'testLastName', 'test@email.de', '018054646'),
+       (2, 'totallyRealFName', 'totallyRealLName', 'real@person.com', '010012345');
 
 INSERT INTO `myZone`.`userLogins` (`id`, `validated`, `enabled`, `username`, `failedLoginCount`, `passwordHash`, `customer`)
-VALUES (1, 1, 1, 'testUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 1);
+VALUES (1, 1, 1, 'testUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 1),
+       (2, 1, 1, 'realUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 2);
 
 INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`)
 VALUES (1, 'Club C85 Vintage', 99.99, 'shoes', 'Rebook', 'white'),
        (2, 'Air Max 97', 129.99, 'shoes', 'Nike', 'red'),
-       (3, 'Classic Clog', 69.69, 'shoes', 'crocs', 'bronze');
+       (3, 'Classic Clog', 69.69, 'shoes', 'crocs', 'bronze'),
+       (4, 'Yeezy Boost 380 "Alien"', 199.99, 'shoes', 'Adidas', 'green');
 
+INSERT INTO `myZone`.`orders` (`shipmentDate`, `customer`)
+VALUES ('2020-12-30', 1),
+       ('2020-12-31', 2),
+       ('2021-01-01', 1),
+       ('2021-01-10', 2);
+
+INSERT INTO `myZone`.`orderItems` (`quantity`, `actualPrice`, `order`, `product`)
+VALUES (2, 199.98, 1, 1),
+       (1, 199.99, 1, 4),
+       (5, 348.45, 2, 3),
+       (1,  99.99, 2, 1),
+       (1, 129.99, 2, 2),
+       (1,  69.69, 3, 3),
+       (1, 199.99, 4, 4);
+
+/* SELECT name, price, category, brand, color, products.`id`, sum(quantity) as `sum` FROM products
+INNER JOIN orderItems
+ON products.id = orderItems.product
+GROUP BY product
+ORDER BY `sum`  DESC */

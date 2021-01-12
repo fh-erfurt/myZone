@@ -209,7 +209,7 @@ abstract class BaseModel
         return null;
     }
 
-    public static function select($where = '')
+    public static function selectWhere($where = '')
     {
         $db = $GLOBALS['db'];
         $results = [];
@@ -217,12 +217,7 @@ abstract class BaseModel
 
         try
         {
-            $sql = 'SELECT * FROM '.self::tablename();
-            if(!empty($where))
-            {
-                $sql .= ' WHERE '.$where.';';
-            }
-            $results = $db->query($sql)->fetchAll();
+            $results = $db->query('SELECT * FROM '.self::tablename().(empty($where) ? '' : ' WHERE '.$where.';'))->fetchAll();
             $l = count($results);
             for ($i = 0; $i < $l; $i++)
             {
@@ -231,9 +226,43 @@ abstract class BaseModel
         }
         catch(PDOException $e)
         {
-            die('Select statement failed: '.$e->getMessage());
+            echo 'Select statement failed: '.$e->getMessage();
         }
-        return $results;
+        finally
+        {
+            return $results;
+        }
+    }
+
+    /**
+     * be careful with using this since it is easy to get syntax errors.
+     * @param string $cols the columns you want to be returned
+     * @param string $commands the additional commands to execute in the query
+     * @return mixed
+     */
+    public static function select($cols = '', $commands = '')
+    {
+        $db = $GLOBALS['db'];
+        $results = [];
+        $class = get_called_class();
+
+        try
+        {
+            $results = $db->query('SELECT '.(empty($cols) ? '*' : $cols).' FROM '.self::tablename().' '.$commands)->fetchAll();
+            $l = count($results);
+            for ($i = 0; $i < $l; $i++)
+            {
+                $results[$i] = new $class($results[$i]);
+            }
+        }
+        catch(PDOException $e)
+        {
+            echo 'Select statement failed: '.$e->getMessage(); # TODO zeigt Nutzer Fehler/Schwachstellen (alle die()-Fehler))
+        }
+        finally
+        {
+            return $results;
+        }
     }
 }
 ?>

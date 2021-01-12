@@ -1,7 +1,8 @@
-<?php
-    # TODO JGE echo password_hash('123456', PASSWORD_DEFAULT);
+<?php /** @noinspection SqlResolve */
+# TODO JGE echo password_hash('123456', PASSWORD_DEFAULT);
 ?>
 <?
+use \dwp\models\Product;
 include VIEWSPATH . 'navbar.php';
 ?>
 <div class="home">
@@ -14,79 +15,36 @@ include VIEWSPATH . 'navbar.php';
     <div class="top-seller">
         <h1 class="top-seller-headline">Topseller:</h1>
         <div class="collum">
+            <?
+            try
+            {
+                $products = [];
+                $products = Product::select('`name`, `price`, `category`, `brand`, `color`, `products`.`id`, sum(`quantity`) as `sum`',
+                                       'INNER JOIN `orderItems` ON `products`.id = `orderItems`.product GROUP BY `product` ORDER BY `sum` DESC');
+            foreach($products as $product): ?>
             <a class="link" href="#">
                 <div class="product">
                     <div class="upper">
-                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_1.jpg'?>">
+                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->{'id'}?>.jpg">
                     </div>
                     <div class="lower">
-                        <h1 class="brand">Reebok</h1>
-                        <h2 class="model">Club C85 Vintage</h2>
-                        <h3 class="price">99,99€</h3>
+                        <h1 class="brand"><?=$product->{'brand'}?></h1>
+                        <h2 class="model"><?=$product->{'name'}?></h2>
+                        <h3 class="price"><?=$product->{'price'}?>€</h3>
                     </div>
                 </div>
             </a>
-            <a class="link" href="#">
-                <div class="product">
-                    <div class="upper">
-                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_1.jpg'?>">
-                    </div>
-                    <div class="lower">
-                        <h1 class="brand">Reebok</h1>
-                        <h2 class="model">Club C85 Vintage</h2>
-                        <h3 class="price">99,99€</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="link" href="#">
-                <div class="product">
-                    <div class="upper">
-                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_1.jpg'?>">
-                    </div>
-                    <div class="lower">
-                        <h1 class="brand">Reebok</h1>
-                        <h2 class="model">Club C85 Vintage</h2>
-                        <h3 class="price">99,99€</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="link" href="#">
-                <div class="product">
-                    <div class="upper">
-                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_1.jpg'?>">
-                    </div>
-                    <div class="lower">
-                        <h1 class="brand">Reebok</h1>
-                        <h2 class="model">Club C85 Vintage</h2>
-                        <h3 class="price">99,99€</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="link" href="#">
-                <div class="product">
-                    <div class="upper">
-                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_1.jpg'?>">
-                    </div>
-                    <div class="lower">
-                        <h1 class="brand">Reebok</h1>
-                        <h2 class="model">Club C85 Vintage</h2>
-                        <h3 class="price">99,99€</h3>
-                    </div>
-                </div>
-            </a>
-            <a class="link" href="#">
-                <div class="product">
-                    <div class="upper">
-                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_1.jpg'?>">
-                    </div>
-                    <div class="lower">
-                        <h1 class="brand">Reebok</h1>
-                        <h2 class="model">Club C85 Vintage</h2>
-                        <h3 class="price">99,99€</h3>
-                    </div>
-                </div>
-            </a>
-
+            <? endforeach;
+            }
+            catch (Error $error)
+            {
+                echo 'Error caught: '.$error->getMessage(); # TODO
+            }
+            catch (PDOException $exception)
+            {
+                echo 'Exception caught: '.$exception->getMessage(); # TODO
+            }
+            ?>
         </div>
 
     </div>
