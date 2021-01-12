@@ -17,7 +17,7 @@
                         <i class="far fa-user-circle fa-2x"></i>
                     </div>
                 </label>
-            <div class="pop-up">
+                <div class="pop-up">
                     <label class="close-icon" for="pop-up-btn">
                         <img class="x-icon" src="<?=ROOTPATH. '/assets/img/icons/buchstabe-x.svg'?>">
                     </label>
@@ -28,7 +28,7 @@
                                 Nutzername
                             </label>
                             <div class="typein-box">
-                                <input id="username" name="username" type="username" placeholder="" value="<?=htmlspecialchars($username)?>" required />
+                                <input id="username" name="username" type="username" placeholder="" value="<?=isset($username) ? $username : ''?>" required />
                             </div>
                         </div>
 
@@ -45,10 +45,10 @@
                         </div>
 
                         <div class="login-footer">
-                            <a class="login-footer-link" href="index.php?c=pages&a=signup">Konto erstellen</a>
+                            <a class="login-footer-link" href="index.php?c=profile&a=signup">Konto erstellen</a>
                         </div>
                     </form>
-            </div>
+                </div>
             </div>
         </div>
     </div>
@@ -59,5 +59,6 @@
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=allProducts"     >ALLE PRODUKTE</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=page3"           >SEITE3</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >SEITE4</a>
-    <? if($_SESSION['loggedIn']) :?> <p>-------------You are logged in!--</p> <?endif;?>
+    <? if($_SESSION['loggedIn']) :?> <p>-------------You are logged in!--</p> <? endif; ?>
+    <? if(isset($GLOBALS['errorMessages']['login'])) : ?><div class="error-message"><?=$GLOBALS['errorMessages']['login']?></div>   <? endif; ?>
 </nav>
