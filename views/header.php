@@ -3,12 +3,16 @@
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logo">myZone</a>
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logoMob">mZ</a>
         <div class="interact">
-            <div class="search-box">
-                <input class="search-txt" type="text" name="" placeholder="Suchen">
-                <button class="search-btn" type="submit">
-                    <img class="search-icon" src="<?=ROOTPATH. '/assets/img/icons/search-icon.svg'?>">
-                </button>
-            </div>
+            <form method="get">
+                <input name="c" value="pages" hidden>
+                <input name="a" value="search" hidden>
+                <div class="search-box">
+                    <input class="search-txt" type="text" name="s" placeholder="Suchen">
+                    <button class="search-btn" type="submit">
+                        <img class="search-icon" src="<?=ROOTPATH. '/assets/img/icons/search-icon.svg'?>">
+                    </button>
+                </div>
+            </form>
             <div class="shopping-cart">
                 <a class="shopping-cart-btn" href="#">
                     <img class="shopping-cart-icon" src="<?=ROOTPATH. '/assets/img/icons/shopping-cart-icon.svg'?>">
