@@ -1,0 +1,109 @@
+<!-- MyZone Overlay -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>myZone</title>
+    <script type="text/javascript" src="cart.js"></script>
+    <script src="https://kit.fontawesome.com/d97dcc17bd.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="cart.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<header class="header">
+    <div class="inset">
+        <a href="http://localhost:8085/php-kurs/myZone/myZone/views/" class="logo">myZone</a>
+        <a href="http://localhost:8085/php-kurs/myZone/myZone/views/" class="logoMob">mZ</a>
+        <div class="interact">
+            <div class="search-box">
+                <input class="search-txt" type="text" name="" placeholder="Suchen">
+                <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
+            </div>
+            <div class="shopping-cart">
+                <a class="shopping-cart-btn" href="#"><i class="fas fa-shopping-cart fa-2x"></i></a>
+            </div>
+            <div class="user">
+                <a class="user-btn" href="#" ><i class="far fa-user-circle fa-2x"></i></a>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="menu">
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="#" class="nav-link1">Men</a>
+                <ul class="dropdown1">
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">Schuhe</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">Streetwear</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">Sale</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link2">Women</a>
+                <ul class="dropdown2">
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">Schuhe</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">Streetwear</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#" class="dropdown-link">Sale</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</section>
+
+<section class="container content-section">
+    <h2 class="section-header">MERCH</h2>
+    <div class="shop-items">
+        <div class="shop-item">
+            <span class="shop-item-title">T-Shirt</span>
+            <img class="shop-item-image" src="">
+            <div class="shop-item-details">
+                <span class="shop-item-price">$19.99</span>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+            </div>
+        </div>
+        <div class="shop-item">
+            <span class="shop-item-title">Coffee Cup</span>
+            <img class="shop-item-image" src="">
+            <div class="shop-item-details">
+                <span class="shop-item-price">$6.99</span>
+                <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Warenkorb -->
+<section class="container content-section">
+    <h2 class="section-header">Cart</h2>
+    <div class="cart-row">
+        <span class="cart-item cart-header cart-column">Item</span>
+        <span class="cart-price cart-header cart-column">Price</span>
+        <span class="cart-quantity cart-header cart-column">Quantity</span>
+    </div>
+    <div class="cart-items">
+    </div>
+    <div class="cart-total">
+        <strong class="cart-total-title">Total</strong>
+        <span class="cart-total-price">$0</span>
+    </div>
+    <button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+</section>
+</body>
+</html>
