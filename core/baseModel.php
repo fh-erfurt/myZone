@@ -211,27 +211,7 @@ abstract class BaseModel
 
     public static function selectWhere($where = '')
     {
-        $db = $GLOBALS['db'];
-        $results = [];
-        $class = get_called_class();
-
-        try
-        {
-            $results = $db->query('SELECT * FROM '.self::tablename().(empty($where) ? '' : ' WHERE '.$where.';'))->fetchAll();
-            $l = count($results);
-            for ($i = 0; $i < $l; $i++)
-            {
-                $results[$i] = new $class($results[$i]);
-            }
-        }
-        catch(PDOException $e)
-        {
-            echo 'Select statement failed: '.$e->getMessage();
-        }
-        finally
-        {
-            return $results;
-        }
+        return get_called_class()::select('', empty($where) ? '' : 'WHERE '.$where);
     }
 
     /**
