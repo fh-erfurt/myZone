@@ -3,7 +3,7 @@
 Stylesheet for MyZone
 *
 *******************/
-@import "header.css";
+@import "header.scss";
 
 @import "menu.css";
 

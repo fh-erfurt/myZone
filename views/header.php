@@ -5,21 +5,25 @@
         <div class="interact">
             <div class="search-box">
                 <input class="search-txt" type="text" name="" placeholder="Suchen">
-                <a class="search-btn" href="#"><i class="fas fa-search"></i></a>
+                <button class="search-btn" type="submit">
+                    <img class="search-icon" src="<?=ROOTPATH. '/assets/img/icons/search-icon.svg'?>">
+                </button>
             </div>
             <div class="shopping-cart">
-                <a class="shopping-cart-btn" href="#"><i class="fas fa-shopping-cart fa-2x"></i></a>
+                <a class="shopping-cart-btn" href="#">
+                    <img class="shopping-cart-icon" src="<?=ROOTPATH. '/assets/img/icons/shopping-cart-icon.svg'?>">
+                </a>
             </div>
             <div class="user">
                 <input class="pop-up-btn" type="checkbox" id="pop-up-btn" />
                 <label class="pop-up-icon" for="pop-up-btn">
                     <div class="pop-icon">
-                        <i class="far fa-user-circle fa-2x"></i>
+                        <img class="user-icon" src="<?=ROOTPATH. '/assets/img/icons/user-icon.svg'?>">
                     </div>
                 </label>
             <div class="pop-up">
                     <label class="close-icon" for="pop-up-btn">
-                        <img class="x-icon" src="<?=ROOTPATH. '/assets/img/icons/buchstabe-x.svg'?>">
+                        <img class="x-icon" src="<?=ROOTPATH. '/assets/img/icons/close-icon.svg'?>">
                     </label>
                     <form class="login" action="index.php?c=profile&a=login" method="post">
                         <h1 class="login-headline">Login</h1>
