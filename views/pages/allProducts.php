@@ -12,7 +12,7 @@ include VIEWSPATH . 'filter.php';
         {
             $searchfor = isset($_GET['s']) ? 'name like \'%'.(trim($_GET['s'])).'%\' or brand like \'%'.(trim($_GET['s'])).'%\'' : '';
             $products = [];
-            $products = \dwp\models\Product::select($searchfor);
+            $products = \dwp\models\Product::selectWhere($searchfor);
             if(empty($products))
             {
                 echo 'Suche hat keine Ergebnisse.'; #TODO DNA Container mit Anzeige
@@ -21,7 +21,7 @@ include VIEWSPATH . 'filter.php';
             <a class="link" href="#">
                 <div class="product">
                     <div class="upper">
-                        <img class="img" src="<?=ROOTPATH?>assets/img/products/product_<?=$product->{'id'}?>.jpg">
+                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->{'id'}?>.jpg">
                     </div>
                     <div class="lower">
                         <h1 class="brand"><?=$product->{'brand'}?></h1>

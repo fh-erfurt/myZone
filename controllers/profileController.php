@@ -17,7 +17,7 @@ class ProfileController extends \dwp\core\Controller
 {
     public function updateCurrentUserInSessionWithLoginData($loginData)
     {
-        $customerData = Customer::select("id = ".$loginData->{'customer'})[0];
+        $customerData = Customer::selectWhere("id = ".$loginData->{'customer'})[0];
         $_SESSION['currentUser'] = [
             'username'   => $loginData->{'username'},
             'userId'     => $loginData->{'id'},
@@ -31,7 +31,7 @@ class ProfileController extends \dwp\core\Controller
 
     public function updateCurrentUserInSession()
     {
-        $this->updateCurrentUserInSessionWithLoginData(UserLogin::select("id = ".$GLOBALS['db']->quote(trim($_SESSION['currentUser']['userId'])))[0]);
+        $this->updateCurrentUserInSessionWithLoginData(UserLogin::selectWhere("id = ".$GLOBALS['db']->quote(trim($_SESSION['currentUser']['userId'])))[0]);
     }
 
     public function actionView()
@@ -95,18 +95,20 @@ class ProfileController extends \dwp\core\Controller
         {
             if(!empty($username) && !empty($password))
             {
-                $loginData = UserLogin::select("username = ".$GLOBALS['db']->quote(trim($username)))[0];
-                if(($loginData->{'passwordHash'}) && password_verify($password, $loginData->{'passwordHash'}))
+                $loginData = UserLogin::selectWhere("username = ".$GLOBALS['db']->quote(trim($username)))[0] ?? null;
+                if(isset($loginData) && ($loginData->{'passwordHash'}) && password_verify($password, $loginData->{'passwordHash'})) # TODO if validated & enabled
                 {
                     // TODO: Store useful variables into the session like account and also set loggedIn = true
+                    # session_start();
                     $errMsg = '';
                     $_SESSION['loggedIn'] = true;
                     $this->updateCurrentUserInSessionWithLoginData($loginData);
-                    header('Location: index.php?c=pages&a=home'); // TODO eventuell auf Profil weiterleiten? Aufgerudfene Seite merken?
+                    header('Location: index.php?c=pages&a=home'); // TODO eventuell auf Profil weiterleiten? Aufgerufene Seite merken?
                 }
                 else
                 {
-                    $errMsg = 'Nutzername oder Passwort ist falsch!';
+                    # TODO failedLoginCount++
+                    $errMsg = 'Nutzername oder Passwort ist falsch! Bitte versuchen Sie es noch einmal.';
                 }
             }
             else
@@ -125,13 +127,22 @@ class ProfileController extends \dwp\core\Controller
         // set param email to prefill login input field
         $this->setParam('username', $username);
         $this->setParam('errMsg', $errMsg);
+
+
+
+        // finally put the error message into a global variable to display it
+        $GLOBALS['errorMessages']['login'] = $errMsg;
+
+        // TODO Login Seite bei Fehler aufrufen, Login Icon -> view wenn eingeloggt
+        #$this->controller = 'pages';
+        #$this->action = 'home';
     }
 
     public function actionSignup()
     {
         if($this->loggedIn()) header('Location: index.php?c=pages&a=home');
-        else                  $this->setParam($this->action, 'signup');
-        $errMsg = 'kein Fehler';
+        else                  $this->setParam($this->action, 'signup');                 # TODO Logout & signup?
+        $errMsg = 'kein Fehler';                                                        # TODO
         $this->setParam('errMsg', $errMsg);
     }
 

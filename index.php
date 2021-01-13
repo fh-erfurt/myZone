@@ -21,7 +21,7 @@ require_once MODELSPATH.'customer.php';
 require_once MODELSPATH.'product.php';
 
 // check if a user is logged in
-$loggedIn = isset($_SESSION['user']);
+$_SESSION['loggedIn'] = isset($_SESSION['currentUser']);
 
 // check get parameters and assign variables
 $controllerName = $_GET['c'] ?? 'pages';
