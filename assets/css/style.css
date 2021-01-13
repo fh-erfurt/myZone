@@ -3,7 +3,7 @@
 Stylesheet for MyZone
 *
 *******************/
-@import "header.scss";
+@import "header.css";
 
 @import "menu.css";
 
@@ -12,6 +12,8 @@ Stylesheet for MyZone
 @import "products.css";
 
 @import "home+footer.css";
+
+@import "productpage.css";
 
 
 

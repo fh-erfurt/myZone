@@ -37,7 +37,7 @@ body {
 }
 
 .inset{
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -73,6 +73,7 @@ body {
 }
 
 /********** search-bar ***********/
+
 .search-box{
     display: inline-block;
     background: white;
@@ -82,9 +83,6 @@ body {
     transition: 0.4s linear;
     position: relative;
 }
-
-
-
 
 .search-btn{
     float: right;
@@ -328,12 +326,6 @@ body {
         height: 65px;
     }
 
-    .search-box{
-        .close-btn{
-
-        }
-
-    }
 
 }
 

@@ -63,6 +63,7 @@
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=allProducts"     >ALLE PRODUKTE</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=page3"           >SEITE3</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >SEITE4</a>
+    <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=ProductPage"     >Produktseite</a>
     <? if($_SESSION['loggedIn']) :?> <p>-------------You are logged in!--</p> <? endif; ?>
     <? if(isset($GLOBALS['errorMessages']['login'])) : ?><div class="error-message"><?=$GLOBALS['errorMessages']['login']?></div>   <? endif; ?>
 </nav>
