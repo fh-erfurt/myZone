@@ -327,14 +327,6 @@ body {
     .header {
         height: 65px;
     }
-
-    .search-box{
-        .close-btn{
-
-        }
-
-    }
-
 }
 
 @media only screen and (max-width: 570px) {
