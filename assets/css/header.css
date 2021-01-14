@@ -37,7 +37,7 @@ body {
 }
 
 .inset{
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -82,8 +82,6 @@ body {
     transition: 0.4s linear;
     position: relative;
 }
-
-
 
 
 .search-btn{
