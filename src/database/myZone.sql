@@ -154,7 +154,7 @@ VALUES (1, 1, 1, 'testUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPh
        (2, 1, 1, 'realUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 2);
 
 INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`)
-VALUES (1, 'Club C85 Vintage', 99.99, 'shoes', 'Rebook', 'white'),
+VALUES (1, 'Club C85 Vintage', 99.99, 'shoes', 'Reebok', 'white'),
        (2, 'Air Max 97', 129.99, 'shoes', 'Nike', 'red'),
        (3, 'Classic Clog', 69.69, 'shoes', 'crocs', 'bronze'),
        (4, 'Yeezy Boost 380 "Alien"', 199.99, 'shoes', 'Adidas', 'green');

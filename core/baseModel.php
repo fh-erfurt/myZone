@@ -10,8 +10,6 @@ abstract class BaseModel
     const TYPE_TINYINT  = 'tinyint';
     const TYPE_FLOAT    = 'float';
     const TYPE_STRING   = 'string';
-    # TODO JGE
-    # $this->data[$key] zu $this->{$key}
 
     protected $schema = []; # enthält Datentypen
     protected $data = [];   # enthält später Daten, wie in DB
@@ -117,8 +115,6 @@ abstract class BaseModel
             {
                 if($value !== null)
                 {
-                    # TODO if(schema type == BaseModel TYPE_INT) $db->quote(key)
-                    # TODO auch bei insert etc
                     $sql .= $key.' = '.$db->quote($value).',';
                 }
             }
@@ -140,9 +136,6 @@ abstract class BaseModel
         $db = $GLOBALS['db'];
         try
         {
-            #TODO
-            #$sql = 'DELETE '.self::tablename().' FROM WHERE id = '.$this->data['id'];
-            #$db->exec($sql);
             $db->exec('DELETE '.self::tablename().' FROM WHERE id = '.$this->{'id'});
             return true;
         }

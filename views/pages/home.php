@@ -22,10 +22,10 @@ include VIEWSPATH . 'navbar.php';
                 $products = Product::select('`name`, `price`, `category`, `brand`, `color`, `products`.`id`, sum(`quantity`) as `sum`',
                                        'INNER JOIN `orderItems` ON `products`.id = `orderItems`.product GROUP BY `product` ORDER BY `sum` DESC');
             foreach($products as $product): ?>
-            <a class="link" href="#">
+            <a class="link" href="?c=pages&a=product&id=<?=$product->{'id'}?>">
                 <div class="product">
                     <div class="upper">
-                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->{'id'}?>.jpg">
+                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->{'id'}.'.jpg'?>">
                     </div>
                     <div class="lower">
                         <h1 class="brand"><?=$product->{'brand'}?></h1>

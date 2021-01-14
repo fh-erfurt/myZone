@@ -17,23 +17,18 @@ class PagesController extends \dwp\core\Controller
 {
     public function actionHome()
     {
-        $this->setParam($this->action, 'home');
     }
 
     public function actionSearch()
     {
-        $this->setParam($this->action, 'search');
+        $this->action = 'allProducts';
     }
 
     public function actionAllProducts()
     {
-        $this->setParam($this->action, 'allProducts');
     }
 
-    public function actionProductPage()
+    public function actionProduct()
     {
-        $this->setParam($this->action, 'ProductPage');
     }
-
-
 }

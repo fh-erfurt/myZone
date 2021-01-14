@@ -2,7 +2,8 @@
 
 use \dwp\controllers\ErrorsController;
 #session_save_path(__DIR__.DIRECTORY_SEPARATOR.'data');
-session_start();
+
+if (session_status() == PHP_SESSION_NONE) echo session_start().' TODO JGE '; # TODO
 
 // load configurations
 require_once './config/paths.php';
