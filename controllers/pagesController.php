@@ -27,4 +27,11 @@ class PagesController extends \dwp\core\Controller
     public function actionAllProducts()
     {
     }
+
+    public function actionProductPage()
+    {
+        $this->setParam($this->action, 'ProductPage');
+    }
+
+
 }
