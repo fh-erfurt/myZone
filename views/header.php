@@ -20,10 +20,12 @@
                 </a>
             </div>
             <div class="user">
-                <? if(!$loggedIn) : ?><input class="pop-up-btn" type="checkbox" id="pop-up-btn" /><? endif; ?>
+                <? # if no user is logged in, generate the element to display the login popup on click
+                if(!$loggedIn) : ?><input class="pop-up-btn" type="checkbox" id="pop-up-btn" /><? endif; ?>
                 <label class="pop-up-icon" for="pop-up-btn">
                     <div class="pop-icon">
-                        <? if($loggedIn) echo '<a href="'.$_SERVER['PHP_SELF'].'?c=profile&a=view">'; ?>
+                        <? # if a user is logged in, generate a link to the view profile page
+                        if($loggedIn) echo '<a href="'.$_SERVER['PHP_SELF'].'?c=profile&a=view">'; ?>
                             <img class="user-icon" src="<?=ROOTPATH. '/assets/img/icons/user-icon.svg'?>">
                         </a>
                     </div>
