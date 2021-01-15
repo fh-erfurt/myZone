@@ -3,7 +3,7 @@
 use \dwp\controllers\ErrorsController;
 #session_save_path(__DIR__.DIRECTORY_SEPARATOR.'data');
 
-if (session_status() == PHP_SESSION_NONE) echo session_start().' TODO JGE '; # TODO
+if (session_status() == PHP_SESSION_NONE) session_start();
 
 // load configurations
 require_once './config/paths.php';
@@ -21,15 +21,9 @@ require_once MODELSPATH.'userLogin.php';
 require_once MODELSPATH.'customer.php';
 require_once MODELSPATH.'product.php';
 
-// check if a user is logged in
-$_SESSION['loggedIn'] = isset($_SESSION['currentUser']);
-
-// check get parameters and assign variables
+// check get parameters and assign variables to determine controller and action to run
 $controllerName = $_GET['c'] ?? 'pages';
 $actionName     = $_GET['a'] ?? 'home';
-
-// set the shown title for the page
-$title = 'myZone'; # TODO JGE dynamic title?
 
 if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
 {
@@ -57,6 +51,10 @@ else
     // redirect to an error page
     $controller = new ErrorsController('errors', 'error404');
 }
+
+// set the shown title for the page
+$title = 'myZone';
+#$title = ucfirst($actionName); # TODO JGE dynamic title switch case?
 ?>
 
 <!DOCTYPE html>

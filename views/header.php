@@ -15,7 +15,7 @@
                 </div>
             </form>
             <div class="shopping-cart">
-                <a class="shopping-cart-btn" href="#">
+                <a class="shopping-cart-btn" href="<?$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart">
                     <img class="shopping-cart-icon" src="<?=ROOTPATH. '/assets/img/icons/shopping-cart-icon.svg'?>">
                 </a>
             </div>
@@ -23,7 +23,7 @@
                 <? if(!$loggedIn) : ?><input class="pop-up-btn" type="checkbox" id="pop-up-btn" /><? endif; ?>
                 <label class="pop-up-icon" for="pop-up-btn">
                     <div class="pop-icon">
-                        <? if($loggedIn) : ?><a href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=view"><? endif; ?>
+                        <? if($loggedIn) echo '<a href="'.$_SERVER['PHP_SELF'].'?c=profile&a=view">'; ?>
                             <img class="user-icon" src="<?=ROOTPATH. '/assets/img/icons/user-icon.svg'?>">
                         </a>
                     </div>
