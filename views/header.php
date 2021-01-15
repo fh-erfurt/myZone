@@ -1,3 +1,4 @@
+<? $loggedIn = \dwp\core\Controller::loggedIn()?>
 <header class="header">
     <div class="inset">
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logo">myZone</a>
@@ -19,10 +20,12 @@
                 </a>
             </div>
             <div class="user">
-                <input class="pop-up-btn" type="checkbox" id="pop-up-btn" />
+                <? if(!$loggedIn) : ?><input class="pop-up-btn" type="checkbox" id="pop-up-btn" /><? endif; ?>
                 <label class="pop-up-icon" for="pop-up-btn">
                     <div class="pop-icon">
-                        <img class="user-icon" src="<?=ROOTPATH. '/assets/img/icons/user-icon.svg'?>">
+                        <? if($loggedIn) : ?><a href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=view"><? endif; ?>
+                            <img class="user-icon" src="<?=ROOTPATH. '/assets/img/icons/user-icon.svg'?>">
+                        </a>
                     </div>
                 </label>
                 <div class="pop-up">
@@ -68,6 +71,6 @@
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=page3"           >SEITE3</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >SEITE4</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=ProductPage"     >Produktseite</a>
-    <? if($_SESSION['loggedIn']) :?> <p>-------------You are logged in!--</p> <? endif; ?>
+    <? if($loggedIn) :?><p>-------------You are logged in!--</p> <? endif; ?>
     <? if(isset($GLOBALS['errorMessages']['login'])) : ?><div class="error-message"><?=$GLOBALS['errorMessages']['login']?></div>   <? endif; ?>
 </nav>
