@@ -6,7 +6,7 @@
 
 <h1>Konto erstellen</h1>
 
-<?php if($errMsg !== null) : ?>
+<?php if($errMsg !== null) : # TODO $_SESSION['errors'][...]?>
     <div class="error-message">
         <?=$errMsg?>
     </div>
@@ -17,18 +17,23 @@ exitsiert bereits: testUser / 123456 <!-- TODO JGE-->
     <?php
     // felder, die angezeigt werden sollen mit dazugehörigem placeholder, anzeigetyp und der Information, ob sie bei fehleingabe erinnert werden sollen. TODO JGE english
     $fields = [
-        'username'        => ['Nutzername' ,         'text',     true ],
-        'password'        => ['Passwort' ,           'password', false],
-        'confirmPassword' => ['Passwort bestätigen', 'password', false]
+        'firstName'       => ['Vorname',             'text',     true,  true ],
+        'lastName'        => ['Nachname',            'text',     true,  true ],
+        'email'           => ['E-Mail',              'text',     true,  true ],
+        'phone'           => ['Telefonnummer',       'text',     true,  false],
+
+        'username'        => ['Nutzername',          'text',     true,  true ],
+        'password'        => ['Passwort',            'password', false, true ],
+        'confirmPassword' => ['Passwort bestätigen', 'password', false, true ]
     ];
-    foreach($fields as $attribute => $placeholderTypeRemember) :
+    foreach($fields as $attribute => $placeholder_type_remember_required) :
         // if the remember value is true AND the post parameter is set save it into the variable, which is written into the textfield.
-          $value = $placeholderTypeRemember[2] ? $_POST[$attribute] ??  '' : ''; ?>
+          $value = $placeholder_type_remember_required[2] ? $_POST[$attribute] ??  '' : ''; ?>
         <div class="input">
             <label for="<?=$attribute?>">
-                <?=$placeholderTypeRemember[0]?>
+                <?=$placeholder_type_remember_required[0]?>
             </label>
-            <input id="<?=$attribute?>" name="<?=$attribute?>" type="<?=$placeholderTypeRemember[1]?>" placeholder="<?=$placeholderTypeRemember[0]?>" value="<?=htmlspecialchars($value)?>" required />
+            <input id="<?=$attribute?>" name="<?=$attribute?>" type="<?=$placeholder_type_remember_required[1]?>" placeholder="<?=$placeholder_type_remember_required[0]?>" value="<?=htmlspecialchars($value)?>" <? if($placeholder_type_remember_required[3]) echo 'required'?> />
         </div>
     <?php endforeach; ?>
 
