@@ -70,15 +70,11 @@ abstract class BaseModel
 
             foreach($this->schema as $key => $schemaOptions)
             {
-                $sql .= '`'.$key.'`,';
-
-                if($this->{$key} === null)
+                // don't insert values that are equal to null since it generates errors when not null is set
+                if($this->{$key} !== null)
                 {
-                    $valueString .= 'NULL,';
-                }
-                else
-                {
-                    $valueString .= '`'.$db->quote($this->{$key}).'`,';
+                    $sql .= $key.',';
+                    $valueString .= $db->quote($this->{$key}).',';
                 }
             }
 
@@ -103,14 +99,6 @@ abstract class BaseModel
         {
             $sql = 'UPDATE '.self::tablename().' SET ';
 
-            # TODO JGE
-            /*foreach($this->schema as $key => $schemaOptions)
-            {
-                if($this->data[$key] !== null)
-                {
-                    $sql .= $key.' = '.$db->quote($this->data[$key]).', ';
-                }
-            }*/
             foreach($this->data as $key => $value)
             {
                 if($value !== null)
@@ -118,8 +106,8 @@ abstract class BaseModel
                     $sql .= $key.' = '.$db->quote($value).',';
                 }
             }
+
             $sql = trim($sql, ',').' WHERE id = '.$this->{'id'};
-            $_SESSION['sql'] = $sql; # TODO nur für log ausgabe in bottom.php
             $db->prepare($sql)->execute();
 
             return true;
@@ -152,19 +140,16 @@ abstract class BaseModel
         {
             if(isset($this->{$key}) && is_array($schemaOptions))
             {
-                $valueErrors = $this->validateValue($key, data[$key], $schemaOptions);
+                $valueErrors = $this->validateValue($key, $this->{$key}, $schemaOptions);
 
                 if($valueErrors !== true)
                 {
-                    array_push($errors, ...$valueErrors); # ... steht für elemente in array anhängen, nicht array selbst anhängen
+                    array_push($errors, ...$valueErrors);
                 }
             }
         }
-        if(count($errors) === 0)
-        {
-            return true;
-        }
-        return false;
+
+        return (count($errors) === 0);
     }
 
     protected function validateValue($attribute, &$value, &$schemaOptions)
@@ -175,7 +160,6 @@ abstract class BaseModel
         switch($type)
         {
             case BaseModel::TYPE_INT:
-                break;
             case BaseModel::TYPE_FLOAT:
                 break;
             case BaseModel::TYPE_STRING:
@@ -190,7 +174,7 @@ abstract class BaseModel
                         $errors[] = $attribute.': String can have a maximun of '.$schemaOptions['max'].' characters.';
                     }
                 }
-                break; #eins hoch?
+                break;
         }
         return count($errors) > 0 ? $errors : true;
     }
