@@ -1,4 +1,3 @@
-<? $loggedIn = \dwp\core\Controller::loggedIn()?>
 <header class="header">
     <div class="inset">
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logo">myZone</a>
@@ -76,3 +75,24 @@
     <? if($loggedIn) :?><p>-------------You are logged in!--</p> <? endif; ?>
     <? if(isset($GLOBALS['errorMessages']['login'])) : ?><div class="error-message"><?=$GLOBALS['errorMessages']['login']?></div>   <? endif; ?>
 </nav>
+<div class="login-notification">
+    <? if($_SESSION['loggedIn']) :?>
+        <input class="close-not-btn" type="checkbox" id="close-not-btn" />
+        <div class="successful-login">
+            <img class="check-icon" src="<?=ROOTPATH. '/assets/img/icons/green-check-icon.svg'?>">
+            Du bist nun bei MyZone eingeloggt!
+            <label class="close-not-icon" for="close-not-btn">
+                <img class="x-not-icon" src="<?=ROOTPATH. '/assets/img/icons/close-icon.svg'?>">
+            </label>
+        </div> <? endif; ?>
+    <? if(isset($GLOBALS['errorMessages']['login'])) : ?>
+        <input class="close-error-btn" type="checkbox" id="close-error-btn" />
+        <div class="error-message">
+            <img class="red-x-icon" src="<?=ROOTPATH. '/assets/img/icons/red-x-icon.svg'?>">
+            <?=$GLOBALS['errorMessages']['login']?>
+            <label class="close-not-icon" for="close-error-btn">
+                <img class="x-not-icon" src="<?=ROOTPATH. '/assets/img/icons/close-icon.svg'?>">
+            </label>
+        </div>
+    <? endif; ?>
+</div>

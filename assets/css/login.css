@@ -1,0 +1,70 @@
+.successful-login, .error-message{
+    display: flex;
+    padding: 10px 15px 10px 15px;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    position: absolute;
+    z-index: 4;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -15%);
+    background-color: var(--footercolor);
+    box-shadow: var(--shadow) #b7b7b7;
+    border-radius: 20px;
+    text-align: center;
+
+}
+
+.check-icon{
+    width: 20px;
+    padding: 0 10px 0 0;
+}
+
+.x-not-icon{
+    width: 15px;
+    cursor: pointer;
+    padding: 0 0 0 10px;
+}
+
+.close-not-btn{
+    display: none;
+}
+
+.close-not-btn:checked ~ .successful-login{
+    display: none;
+    opacity: 0;
+}
+
+.red-x-icon{
+    width: 20px;
+    padding: 0 10px 0 0;
+}
+
+.close-error-btn{
+    display: none;
+}
+
+.close-error-btn:checked ~ .error-message{
+    display: none;
+    opacity: 0;
+}
+
+.second-login{
+    position: absolute;
+    margin: 0 auto;
+    z-index: 2;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -15%);
+}
+
+@media only screen and (max-width: 550px) {
+    .buy-or-delete{
+        justify-content: center;
+        flex-direction: column;
+    }
+}

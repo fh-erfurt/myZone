@@ -8,7 +8,6 @@
     <div class="bottom">
         <a href="#">Datenschutz</a>
     </div>
-<script src="script.js"></script>
 </footer>
 <div style="height:500px">
     <?
