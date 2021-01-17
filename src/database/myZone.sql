@@ -172,9 +172,3 @@ VALUES (2, 199.98, 1, 1),
        (1, 129.99, 2, 2),
        (1,  69.69, 3, 3),
        (1, 199.99, 4, 4);
-
-/* SELECT name, price, category, brand, color, products.`id`, sum(quantity) as `sum` FROM products
-INNER JOIN orderItems
-ON products.id = orderItems.product
-GROUP BY product
-ORDER BY `sum`  DESC */
