@@ -81,19 +81,7 @@
 }
 
 .add-to-cart-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 44px;
-    background-color: #1122db;
-    border-radius: 10px;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    outline: none;
+
 }
 
 .add-to-cart-btn:hover{
