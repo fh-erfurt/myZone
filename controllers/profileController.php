@@ -36,14 +36,12 @@ class ProfileController extends \dwp\core\Controller
 
     public function actionView()
     {
-        if($this->loggedIn()) $this->setParam($this->action, 'view'); // TODO JGE Codeblock auslagern? (Redundanz)
-        else                  header('Location: index.php?c=profile&a=login');
+        if(!$this->loggedIn()) header('Location: index.php?c=profile&a=login');
     }
 
     public function actionEdit()
     {
-        if($this->loggedIn()) $this->setParam($this->action, 'edit');
-        else                  header('Location: index.php?c=profile&a=login');
+        if(!$this->loggedIn()) header('Location: index.php?c=profile&a=login');
     }
 
     public function actionSubmitEdit()
@@ -82,60 +80,60 @@ class ProfileController extends \dwp\core\Controller
     public function actionLogin()
     {
         if($this->loggedIn()) header('Location: index.php?c=profile&a=view');
-
-        // store error message
-        $errMsg = null;
-        $loginErrors = [];
-
-        // check user send login field
-        if(isset($_POST['submit']))
+        else
         {
-            // retrieve inputs
-            $username = trim($_POST['username']) ?? '';
-            $password = trim($_POST['password']) ?? '';
+            // initialize array to store errors
+            $loginErrors = [];
 
-            if(!empty($username) && !empty($password))
+            // check for a submitted post form
+            if(isset($_POST['submit']))
             {
-                // get user data from db
-                $loginData = UserLogin::selectWhere("username = ".$GLOBALS['db']->quote($username))[0] ?? null;
+                // retrieve inputs
+                $username = trim($_POST['username']) ?? '';
+                $password = trim($_POST['password']) ?? '';
 
-                // check password
-                if(!empty($loginData) && ($loginData->{'passwordHash'}) && password_verify($password, $loginData->{'passwordHash'}))
+                if(!empty($username) && !empty($password))
                 {
-                    // check if user is validated & enabled
-                    if(!$loginData->{'validated'}) $loginErrors[] = 'Bitte bestätigen Sie Ihre E-Mail Adresse.';
-                    if(!$loginData->{'enabled'})   $loginErrors[] = 'Leider ist Ihr Account vorübergehend deaktiviert, bitte kontaktieren Sie uns für weitere Informationen.';
+                    // get user data from db
+                    $loginData = UserLogin::selectWhere("username = ".$GLOBALS['db']->quote($username))[0] ?? null;
 
-                    if(empty($loginErrors))
+                    // check password
+                    if(!empty($loginData) && ($loginData->{'passwordHash'}) && password_verify($password, $loginData->{'passwordHash'}))
                     {
-                        // important variables get stored into the session and loggedIn gets set to true
-                        $errMsg = '';
-                        $_SESSION['loggedIn'] = true;
-                        $this->updateCurrentUserInSessionWithLoginData($loginData);
-                        // delete login data to prevent leaks before reloading home page
-                        $loginData = null;
-                        header('Location: index.php?c=pages&a=home');
+                        // check if user is validated & enabled
+                        if(!$loginData->{'validated'}) $loginErrors[] = 'Bitte bestätigen Sie Ihre E-Mail Adresse.';
+                        if(!$loginData->{'enabled'})   $loginErrors[] = 'Leider ist Ihr Account vorübergehend deaktiviert, bitte kontaktieren Sie uns für weitere Informationen.';
+
+                        if(empty($loginErrors))
+                        {
+                            // important variables get stored into the session and loggedIn gets set to true
+                            $_SESSION['loggedIn'] = true;
+                            $this->updateCurrentUserInSessionWithLoginData($loginData);
+                            // delete login data to prevent leaks before reloading home page
+                            $loginData = null;
+                            header('Location: index.php?c=pages&a=home');
+                        }
                     }
+                    else $loginErrors[] = 'Nutzername oder Passwort ist falsch! Bitte versuchen Sie es noch einmal.';
                 }
-                else $loginErrors[] = 'Nutzername oder Passwort ist falsch! Bitte versuchen Sie es noch einmal.';
+                else $loginErrors[] = 'Bitte Nutzernamen sowie Passwort eingeben!';
             }
-            else $loginErrors[] = 'Bitte Nutzernamen sowie Passwort eingeben!';
+
+            // set param username to prefill login input field and login errors to be displayed
+            $this->setParam('username',    $username    ?? null);
+            $this->setParam('loginErrors', $loginErrors ?? null);
         }
-
-        // set param username to prefill login input field and login errors to be displayed
-        $this->setParam('username',    $username    ?? null);
-        $this->setParam('loginErrors', $loginErrors ?? null);
-
-        // TODO finally put the error message into a global variable to display it TODO
-        # $GLOBALS['errorMessages']['login'] = $errMsg;
     }
 
     public function actionSignup()
     {
-        $signupErrors = [];
         if($this->loggedIn()) header('Location: index.php?c=profile&a=view');
         else
         {
+            // initialize array to store errors
+            $signupErrors = [];
+
+            // check for a submitted post form
             if(isset($_POST['submit']))
             {
                 $requiredFields = [
@@ -240,7 +238,7 @@ class ProfileController extends \dwp\core\Controller
                                         # if userLogin insert didn't fail
                                         // TODO validate link pseudo email and head to login page
                                         // get user ID from db to generate a validation link
-                                        $GLOBALS['validateUserID'] = UserLogin::select('id', 'WHERE username ='.$db->quote($userLoginData['username']))[0]->{'id'};
+                                        $_SESSION['validateUserID'] = UserLogin::select('id', 'WHERE username ='.$db->quote($userLoginData['username']))[0]->{'id'};
                                         header('Location: index.php?c=profile&a=login');
                                     }
                                     else $sqlErrors[] = 'DATABASE ERROR (INSERT USERLOGIN)';
@@ -261,12 +259,10 @@ class ProfileController extends \dwp\core\Controller
                 if(isset($newCustomer)) var_dump($newCustomer); echo '<br><br>';
             }
             # if nicht eingeloggt, kein submit
+
+            # TODO sqlErrors etc.
+            $this->setParam('signupErrors',   $signupErrors   ?? null);
         }
-
-        # TODO sqlErrors etc.
-
-        $this->setParam($this->action, 'signup');
-        $this->setParam('signupErrors',   $signupErrors   ?? null);
     }
 
     public function actionLogout()
@@ -281,6 +277,15 @@ class ProfileController extends \dwp\core\Controller
 
     public function actionValidateNewUser()
     {
+        $sqlErrors = [];
+        $_SESSION['validateUserID'] = null;
         $userID = $_GET['uid'];
+        $userLoginData = ['id' => $userID, 'validated' => 1];
+        $newUserLogin = new UserLogin($userLoginData);
+        if ($newUserLogin->validate($sqlErrors) === true)
+        {
+            $newUserLogin->save($sqlErrors);
+        }
+        else echo $sqlErrors;
     }
 }

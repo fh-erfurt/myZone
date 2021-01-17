@@ -34,23 +34,14 @@ if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
     $className = '\\dwp\\controllers\\'.ucfirst($controllerName).'Controller';
     $controller = new $className($controllerName, $actionName);
     $actionMethod = 'action'.ucfirst($actionName);
-    if(method_exists($controller, $actionMethod))
-    {
-        // call action method
-        $controller->{$actionMethod}();
-    }
-    else
-    {
-        // redirect to an error page
-        $controller = new ErrorsController('errors', 'error404');
-        $controller->actionError404();
-    }
+
+    // call action method if it exists
+    if(method_exists($controller, $actionMethod)) $controller->{$actionMethod}();
+    else $errCause = 'The method for your called controller is missing';
 }
-else
-{
-    // redirect to an error page
-    $controller = new ErrorsController('errors', 'error404');
-}
+else $errCause = 'The controller for your called controller is missing';
+
+if(isset($errCause) && !empty($errCause)) $controller = new ErrorsController('errors', 'error404');
 
 // set the shown title for the page
 $title = 'myZone';

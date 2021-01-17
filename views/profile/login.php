@@ -1,4 +1,3 @@
-<?php echo $GLOBALS['validateUserID']?>
 <?php if(isset($errMsg)) : # TODO $GLOBALS['errors'][...]?>
     <div class="error-message">
         <?=$errMsg?>
@@ -9,9 +8,9 @@
         <?=$error?>
     </div>
 <?php endforeach; endif; ?>
-<?php if(isset($GLOBALS['validateUserID']) && ! empty($GLOBALS['validateUserID'])) : # TODO $GLOBALS['errors'][...]?>
+<?php if(isset($_SESSION['validateUserID']) && ! empty($_SESSION['validateUserID'])) : # TODO $GLOBALS['errors'][...]?>
     <div class="validate-user" style="background: green">
-        <a href="?c=profile&a=validateNewUser&uid=<?=$GLOBALS['validateUserID']?>"><button>Nutzer valideren</button></a>
+        <a href="?c=profile&a=validateNewUser&uid=<?=$_SESSION['validateUserID']?>"><button>Nutzer valideren</button></a>
     </div>
 <?php endif; ?>
 test account: testUser / 123456 <!-- TODO JGE-->
