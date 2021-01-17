@@ -278,7 +278,6 @@ class ProfileController extends \dwp\core\Controller
     public function actionValidateNewUser()
     {
         $sqlErrors = [];
-        $_SESSION['validateUserID'] = null;
         $userID = $_GET['uid'];
         $userLoginData = ['id' => $userID, 'validated' => 1];
         $newUserLogin = new UserLogin($userLoginData);
@@ -287,5 +286,7 @@ class ProfileController extends \dwp\core\Controller
             $newUserLogin->save($sqlErrors);
         }
         else echo $sqlErrors;
+        $_SESSION['validateUserID'] = null;
+        header('Location: index.php?c=profile&a=login');
     }
 }
