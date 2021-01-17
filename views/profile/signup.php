@@ -1,15 +1,20 @@
 <h1>Konto erstellen</h1>
-<?php if(isset($signupErrors)) : foreach($signupErrors as $error): # TODO $GLOBALS['errors'][...]?>
+<?php if(isset($signupErrors)) : foreach($signupErrors as $error): ?>
     <div class="error-message" style="background: #9d4242">
         <?=$error?>
     </div>
 <?php endforeach; endif; ?>
-exitsiert bereits: testUser / 123456 <!-- TODO JGE --><br>
-gültiges Pw wäre z.B.: pwT35T#+
+<div style="background: orange">
+    bereits vorhandene Nutzerprofile <br> <!-- TODO JGE -->
+    testUser / test@email.de <br>
+    realUser / real@person.com <br>
+    gültiges Pw wäre z.B.: pwT35T#+ <br>
+    WERTE WERDEN IN DB GESPEICHERT
+</div>
 <form action="index.php?c=profile&a=signup" method="post">
 
     <?php
-    // felder, die angezeigt werden sollen mit dazugehörigem placeholder, anzeigetyp und der Information, ob sie bei fehleingabe erinnert werden sollen. TODO JGE english
+    // fieldsto be displayed with placeholder, displaytype and two booleans representing if the values should be remembered and are required.
     $fields = [
         'firstName'       => ['Vorname*',             'text',     true,  true ],
         'lastName'        => ['Nachname*',            'text',     true,  true ],
@@ -34,5 +39,4 @@ gültiges Pw wäre z.B.: pwT35T#+
     <div class="input submit">
         <input name="submit" type="submit" value="Konto erstellen"/>
     </div>
-    WERTE WERDEN IN DB GESPEICHERT <? # TODO ?>
 </form>

@@ -138,15 +138,15 @@ class ProfileController extends \dwp\core\Controller
             {
                 $requiredFields = [
                     // retrieve user inputs
-                    'fn' => trim($_POST['firstName']),
-                    'ln' => trim($_POST['lastName']),
-                    'em' => trim($_POST['email']),
+                    'fn'  => trim($_POST['firstName']),
+                    'ln'  => trim($_POST['lastName']),
+                    'em'  => trim($_POST['email']),
 
                     // retrieve customer inputs
-                    'un' => trim($_POST['username']),
+                    'un'  => trim($_POST['username']),
                     // not using trim on passwords because they can have spaces etc. at the beginning and end
-                    'pw' =>      $_POST['password'],
-                    'cpw' =>     $_POST['confirmPassword']
+                    'pw'  =>      $_POST['password'],
+                    'cpw' =>      $_POST['confirmPassword']
                 ];
 
                 // not required
@@ -159,31 +159,39 @@ class ProfileController extends \dwp\core\Controller
                 // check if all required fields are set
                 foreach ($requiredFields as $key => $value)
                 {
-                    if(empty($value))
+                    if(empty($value) || mb_strlen($value) < 2)
                     {
                         $signupErrors[] = 'Alle Felder müssen ausgefüllt sein.';
                         break;
                     }
                 }
 
-                // check length of given inputs and setting errors on violation # TODO mindestlänge
-                if(!empty($fn) && mb_strlen($fn) > 50)                        $signupErrors[] = 'Vorname darf maximal 50 Zeichen lang sein.';
-                if(!empty($ln) && mb_strlen($ln) > 50)                        $signupErrors[] = 'Nachname darf maximal 50 Zeichen lang sein.';
-                if(!empty($em) && mb_strlen($em) > 45)                        $signupErrors[] = 'E-Mail Adresse darf maximal 45 Zeichen lang sein.';
-                # TODO email regex
-                if(!empty($ph) && mb_strlen($ph) > 25)                        $signupErrors[] = 'Telefonnummer darf maximal 25 Zeichen lang sein.';
-
-                if(!empty($un) && mb_strlen($un) > 25)                        $signupErrors[] = 'Nutzername darf maximal 25 Zeichen lang sein.';
-                if(!empty($pw) && mb_strlen($pw) > 25 || mb_strlen($pw) < 8) $signupErrors[] = 'Passwort muss zwischen 8 und 25 Zeichen lang sein.'; #  TODO wie lang ?
-
-                if (!empty($pw))
+                // check for occurred errors
+                if(empty($signupErrors))
                 {
-                    $pwRegEx = '/^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m';
-                    if ($pw !== $cpw)                    $signupErrors[] = 'Passwörter müssen übereinstimmen.';
-                    else if (!preg_match($pwRegEx, $pw)) $signupErrors[] = 'Passwort zu schwach (jeweils 2 Groß- und Kleinbuchstaben, 2 Zahlen und 2 Sonderzeichen).';
+                    // check length of given inputs and setting errors on violation
+                    // name
+                    if(mb_strlen($fn) > 50)                       $signupErrors[] = 'Vorname darf maximal 50 Zeichen lang sein.';
+                    if(mb_strlen($ln) > 50)                       $signupErrors[] = 'Nachname darf maximal 50 Zeichen lang sein.';
+                    // email
+                    if(mb_strlen($em) > 45)                       $signupErrors[] = 'E-Mail Adresse darf maximal 45 Zeichen lang sein.';
+                                    $emRegEx = '/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/m';
+                    if (!preg_match($emRegEx, $em))               $signupErrors[] = 'Email ungültig.';
+
+                    // phone
+                    if(mb_strlen($ph) > 25)                       $signupErrors[] = 'Telefonnummer darf maximal 25 Zeichen lang sein.';
+
+                    // username
+                    if(mb_strlen($un) > 25)                       $signupErrors[] = 'Nutzername darf maximal 25 Zeichen lang sein.';
+                    // password
+                    if(mb_strlen($pw) > 25 || mb_strlen($pw) < 8) $signupErrors[] = 'Passwort muss zwischen 8 und 25 Zeichen lang sein.';
+                                    $pwRegEx = '/^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m';
+                    if (!preg_match($pwRegEx, $pw))               $signupErrors[] = 'Passwort zu schwach. (jeweils 2 Groß- und Kleinbuchstaben, 2 Zahlen und 2 Sonderzeichen benötigt)';
+                    if ($pw !== $cpw)                             $signupErrors[] = 'Passwörter müssen übereinstimmen.';
                 }
 
-                // check for occured errors
+
+                // check for occurred errors
                 if(empty($signupErrors))
                 {
                     // map customer inputs
@@ -203,11 +211,13 @@ class ProfileController extends \dwp\core\Controller
                     $sqlErrors = [];
 
                     //add the password hash to the data which will get inserted into the database
-                    $userLoginData['passwordHash'] = password_hash($_POST['password'],PASSWORD_DEFAULT);
+                    $userLoginData['passwordHash'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
                     // look for users with given username and customers with given email
                     $foundUsers = UserLogin::selectWhere('username = '.$db->quote($userLoginData['username']))
                                 + Customer:: selectWhere('email = '.   $db->quote($customerData ['email']   ));
+
+                    var_dump($foundUsers);
 
                     // check if any users or customers have been found
                     if(empty($foundUsers))
@@ -251,7 +261,7 @@ class ProfileController extends \dwp\core\Controller
                     }
                     else $signupErrors[] = 'Nutzername oder E-Mail Adresse existiert bereits.';
                 }
-                else {} # TODO wenn es fehler in der eingabe gab
+                else # TODO wenn es fehler in der eingabe gab
 
                 # if submit
 

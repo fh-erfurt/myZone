@@ -11,14 +11,9 @@
 </footer>
 <div style="height:500px">
     <?
-    echo isset($_SESSION['errors']) && $_SESSION['errors'] ? 'Errors Array (SQL): '.var_dump($_SESSION['errors']) : '';
     echo '<textarea>';
-    echo 'loginData: '; var_dump($_SESSION['loginData']);
-    echo '</textarea><br><textarea>';
-    echo 'SQL: ';       var_dump($_SESSION['sql']);
-    echo '</textarea><br><textarea>';
     echo '$_SERVER: ';       var_dump($_SERVER);
-    echo '</textarea><br><textarea>';
+    echo '</textarea><textarea>';
     echo '$_SESSION: ';       var_dump($_SESSION);
     echo '</textarea>';
     ?>
