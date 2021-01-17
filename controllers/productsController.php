@@ -15,6 +15,19 @@ use dwp\models\Product;
  */
 class ProductsController extends \dwp\core\Controller
 {
+    public function actionAll()
+    {
+    }
+
+    public function actionSearch()
+    {
+        $this->action = 'all';
+    }
+
+    public function actionView()
+    {
+    }
+
     public function actionAddToCart()
     {
         // check if there even is a given GET parameter in the request
@@ -41,18 +54,18 @@ class ProductsController extends \dwp\core\Controller
                 $_SESSION['cartItemCount'][$id] = 1;
             }
             // go back to the product page
-            header('Location: index.php?c=pages&a=product&id='.$id);
+            header('Location: index.php?c=products&a=view&id='.$id);
         }
         else header('Location: index.php?c=pages&a=home');
+    }
+
+    public function actionShoppingCart()
+    {
     }
 
     public function actionClearCart()
     {
         $_SESSION['cart'] = null;
         header('Location: index.php?c=products&a=shoppingCart');
-    }
-
-    public function actionShoppingCart()
-    {
     }
 }

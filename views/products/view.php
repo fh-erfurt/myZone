@@ -22,7 +22,7 @@ $db = $GLOBALS['db'];
                 <div class="product-data">
                     <h1 class="pp-brand"><?=$product->{'brand'}?></h1>
                     <h2 class="pp-model"><?=$product->{'name'}?></h2>
-                    <h3 class="pp-color">Calk / Paperwhite / Cya (Farbe aus DB: <?=$product->{'color'}?> brauchen wir eine extra descriptionColor?) </h3>
+                    <h3 class="pp-color">Calk / Paperwhite / Cya FARBE AUS DB: <?=$product->{'color'}?></h3>
                     <h4 class="pp-price"><?=$product->{'price'}?>€</h4>
                 </div>
                 <img class="brand-logo" src="<?=ROOTPATH. '/assets/img/brand_logos/'.$product->{'brand'}.'_logo.png'?>">

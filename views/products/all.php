@@ -18,7 +18,7 @@ include VIEWSPATH . 'filter.php';
                 echo 'Suche hat keine Ergebnisse.'; #TODO DNA Container mit Anzeige
             }
         foreach($products as $product): ?>
-            <a class="link" href="?c=pages&a=product&id=<?=$product->{'id'}?>">
+            <a class="link" href="?c=products&a=view&id=<?=$product->{'id'}?>">
                 <div class="product">
                     <div class="upper">
                         <img class="img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->{'id'}?>.jpg">
