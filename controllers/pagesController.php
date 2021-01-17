@@ -18,4 +18,16 @@ class PagesController extends \dwp\core\Controller
     public function actionHome()
     {
     }
+
+    public function actionImpressum()
+    {
+    }
+
+    public function actionPrivacyPolicy()
+    {
+    }
+
+    public function actionAbout()
+    {
+    }
 }
