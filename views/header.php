@@ -5,7 +5,7 @@
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logoMob">mZ</a>
         <div class="interact">
             <form method="get">
-                <input name="c" value="pages" hidden>
+                <input name="c" value="products" hidden>
                 <input name="a" value="search" hidden>
                 <div class="search-box">
                     <input class="search-txt" type="text" name="s" placeholder="Suchen">
@@ -69,7 +69,7 @@
 <nav class="jakob">
     <a href="<?=$_SERVER['PHP_SELF']?>"                           >HOME</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart" >CART</a>
-    <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=allProducts"     >ALLE PRODUKTE</a>
+    <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=all"          >ALLE PRODUKTE</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=page3"           >SEITE3</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >SEITE4</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=ProductPage"     >Produktseite</a>

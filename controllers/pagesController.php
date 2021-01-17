@@ -18,17 +18,4 @@ class PagesController extends \dwp\core\Controller
     public function actionHome()
     {
     }
-
-    public function actionSearch()
-    {
-        $this->action = 'allProducts';
-    }
-
-    public function actionAllProducts()
-    {
-    }
-
-    public function actionProduct()
-    {
-    }
 }

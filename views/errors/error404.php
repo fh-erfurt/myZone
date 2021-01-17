@@ -1,4 +1,4 @@
-<? $debugMode = false ?>
+<? $debugMode = true ?>
 <div class="error-box">
     <div class="error">
         <img class="sad-face" src="<?=ROOTPATH. '/assets/img/icons/sad-face.svg'?>">
