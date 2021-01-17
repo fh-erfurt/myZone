@@ -1,13 +1,16 @@
-<div>
-    <?
-        if(!isset($errMsg) || empty($errMsg))
-        {
-            $errMsg = 'Error 404: Controller you call does not exists';
-        }
-        # in finaler Version vielleicht einfach so etwas wie 'Upps, irgendwas ist schief gelaufen...'
-    ?>
-    <br><h2><?=$errMsg?></h2>
-    <img src="assets/img/gta-5-wasted.gif" height="400px" alt="error">
-    <!--<audio src="assets/sound/gta-5-wasted.mp3" autoplay></audio>
-    <script>document.getElementsByTagName("audio")[0].volume = 0.1;</script>-->
+<div class="error-box">
+    <div class="error">
+        <img class="sad-face" src="<?=ROOTPATH. '/assets/img/icons/sad-face.svg'?>">
+        <?
+            if(!isset($errMsg) || empty($errMsg))
+            {
+                $errMsg = 'Sorry! Wir können die Seite nicht finden, die du suchst.';
+            }
+            # in finaler Version vielleicht einfach so etwas wie 'Upps, irgendwas ist schief gelaufen...'
+        ?>
+        <h1 class="error-404">404</h1>
+        <h2 class="error404-message"><?=$errMsg?></h2>
+        <a class="home-link" href="<?=$_SERVER['PHP_SELF']?>">Zur Startseite</a>
+    </div>
+    <img class="error-background-img" src="<?=ROOTPATH. '/assets/img/MyZone_Background_blurred.jpg'?>">
 </div>
