@@ -1,9 +1,9 @@
 <?php
 
 use \dwp\controllers\ErrorsController;
-#session_save_path(__DIR__.DIRECTORY_SEPARATOR.'data');
 
-if (session_status() == PHP_SESSION_NONE) echo session_start().' TODO JGE '; # TODO
+#session_save_path(__DIR__.DIRECTORY_SEPARATOR.'data');
+if (session_status() == PHP_SESSION_NONE) session_start();
 
 // load configurations
 require_once './config/paths.php';
@@ -21,15 +21,9 @@ require_once MODELSPATH.'userLogin.php';
 require_once MODELSPATH.'customer.php';
 require_once MODELSPATH.'product.php';
 
-// check if a user is logged in
-$_SESSION['loggedIn'] = isset($_SESSION['currentUser']);
-
-// check get parameters and assign variables
+// check get parameters and assign variables to determine controller and action to run
 $controllerName = $_GET['c'] ?? 'pages';
 $actionName     = $_GET['a'] ?? 'home';
-
-// set the shown title for the page
-$title = 'myZone'; # TODO JGE dynamic title?
 
 if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
 {
@@ -40,23 +34,18 @@ if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
     $className = '\\dwp\\controllers\\'.ucfirst($controllerName).'Controller';
     $controller = new $className($controllerName, $actionName);
     $actionMethod = 'action'.ucfirst($actionName);
-    if(method_exists($controller, $actionMethod))
-    {
-        // call action method
-        $controller->{$actionMethod}();
-    }
-    else
-    {
-        // redirect to an error page
-        $controller = new ErrorsController('errors', 'error404');
-        $controller->actionError404();
-    }
+
+    // call action method if it exists
+    if(method_exists($controller, $actionMethod)) $controller->{$actionMethod}();
+    else $errCause = 'The method for your called controller is missing';
 }
-else
-{
-    // redirect to an error page
-    $controller = new ErrorsController('errors', 'error404');
-}
+else $errCause = 'The controller for your called controller is missing';
+
+if(isset($errCause) && !empty($errCause)) $controller = new ErrorsController('errors', 'error404', $errCause);
+
+// set the shown title for the page
+$title = 'myZone';
+#$title = ucfirst($actionName); # TODO JGE dynamic title switch case?
 ?>
 
 <!DOCTYPE html>

@@ -6,8 +6,6 @@
  * @version 1.0.0
  */
 
-//TODO JGE alles
-
 $dbName = 'myZone';
 
 $dns   = 'mysql:dbname='.$dbName.';host=localhost';
