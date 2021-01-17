@@ -1,1 +1,1 @@
-<?php
+PRIVACY POLICY

@@ -66,7 +66,7 @@ include VIEWSPATH . 'header.php';
 
 $controller->render();
 
-include VIEWSPATH . 'bottom.php';
+include VIEWSPATH . 'footer.php';
 ?>
 
 </body>
