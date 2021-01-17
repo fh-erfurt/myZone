@@ -1,3 +1,4 @@
+<? $loggedIn = \dwp\core\Controller::loggedIn()?>
 <header class="header">
     <div class="inset">
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logo">myZone</a>
