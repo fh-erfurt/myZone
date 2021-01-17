@@ -85,56 +85,49 @@ class ProfileController extends \dwp\core\Controller
 
         // store error message
         $errMsg = null;
-
-        // retrieve inputs
-        $username = trim($_POST['username']) ?? '';
-        $password = trim($_POST['password']) ?? '';
+        $loginErrors = [];
 
         // check user send login field
         if(isset($_POST['submit']))
         {
+            // retrieve inputs
+            $username = trim($_POST['username']) ?? '';
+            $password = trim($_POST['password']) ?? '';
+
             if(!empty($username) && !empty($password))
             {
                 // get user data from db
                 $loginData = UserLogin::selectWhere("username = ".$GLOBALS['db']->quote($username))[0] ?? null;
 
                 // check password
-                if(!empty($loginData) && ($loginData->{'passwordHash'}) && password_verify($password, $loginData->{'passwordHash'})) # TODO if validated & enabled
+                if(!empty($loginData) && ($loginData->{'passwordHash'}) && password_verify($password, $loginData->{'passwordHash'}))
                 {
-                    // important variables get stored into the session and loggedIn gets set to true
-                    $errMsg = '';
-                    $_SESSION['loggedIn'] = true;
-                    $this->updateCurrentUserInSessionWithLoginData($loginData);
-                    $loginData = null; # TODO redundant?
-                    header('Location: index.php?c=pages&a=home');
-                }
-                else
-                {
-                    $errMsg = 'Nutzername oder Passwort ist falsch! Bitte versuchen Sie es noch einmal.';
-                }
-            }
-            else $errMsg = 'Bitte Nutzernamen sowie Passwort eingeben!';
+                    // check if user is validated & enabled
+                    if(!$loginData->{'validated'}) $loginErrors[] = 'Bitte bestätigen Sie Ihre E-Mail Adresse.';
+                    if(!$loginData->{'enabled'})   $loginErrors[] = 'Leider ist Ihr Account vorübergehend deaktiviert, bitte kontaktieren Sie uns für weitere Informationen.';
 
-            // if there is no error reset mail
-            if($errMsg === null)
-            {
-                $username = '';
+                    if(empty($loginErrors))
+                    {
+                        // important variables get stored into the session and loggedIn gets set to true
+                        $errMsg = '';
+                        $_SESSION['loggedIn'] = true;
+                        $this->updateCurrentUserInSessionWithLoginData($loginData);
+                        // delete login data to prevent leaks before reloading home page
+                        $loginData = null;
+                        header('Location: index.php?c=pages&a=home');
+                    }
+                }
+                else $loginErrors[] = 'Nutzername oder Passwort ist falsch! Bitte versuchen Sie es noch einmal.';
             }
-
+            else $loginErrors[] = 'Bitte Nutzernamen sowie Passwort eingeben!';
         }
 
-        // set param email to prefill login input field
-        $this->setParam('username', $username);
-        $this->setParam('errMsg', $errMsg);
+        // set param username to prefill login input field and login errors to be displayed
+        $this->setParam('username',    $username    ?? null);
+        $this->setParam('loginErrors', $loginErrors ?? null);
 
-
-
-        // finally put the error message into a global variable to display it
-        $GLOBALS['errorMessages']['login'] = $errMsg;
-
-        // TODO Login Seite bei Fehler aufrufen, Login Icon -> view wenn eingeloggt
-        #$this->controller = 'pages';
-        #$this->action = 'home';
+        // TODO finally put the error message into a global variable to display it TODO
+        # $GLOBALS['errorMessages']['login'] = $errMsg;
     }
 
     public function actionSignup()
@@ -153,7 +146,7 @@ class ProfileController extends \dwp\core\Controller
 
                     // retrieve customer inputs
                     'un' => trim($_POST['username']),
-                    // not using trim on passwords because they can have spaces etc. at start and end
+                    // not using trim on passwords because they can have spaces etc. at the beginning and end
                     'pw' =>      $_POST['password'],
                     'cpw' =>     $_POST['confirmPassword']
                 ];
@@ -163,7 +156,7 @@ class ProfileController extends \dwp\core\Controller
                 // extract required fields for later use without declaring them twice
                 extract($requiredFields);
 
-                foreach ($requiredFields as $key => $value) { echo '<br>'.(empty($value) ? 1 : 0).$key.': '; var_dump($value);} # TODO debug
+                foreach ($requiredFields as $key => $value) {echo '<br>'.(empty($value) ? 1 : 0).$key.': '; var_dump($value);} # TODO debug
 
                 // check if all required fields are set
                 foreach ($requiredFields as $key => $value)
@@ -179,6 +172,7 @@ class ProfileController extends \dwp\core\Controller
                 if(!empty($fn) && mb_strlen($fn) > 50)                        $signupErrors[] = 'Vorname darf maximal 50 Zeichen lang sein.';
                 if(!empty($ln) && mb_strlen($ln) > 50)                        $signupErrors[] = 'Nachname darf maximal 50 Zeichen lang sein.';
                 if(!empty($em) && mb_strlen($em) > 45)                        $signupErrors[] = 'E-Mail Adresse darf maximal 45 Zeichen lang sein.';
+                # TODO email regex
                 if(!empty($ph) && mb_strlen($ph) > 25)                        $signupErrors[] = 'Telefonnummer darf maximal 25 Zeichen lang sein.';
 
                 if(!empty($un) && mb_strlen($un) > 25)                        $signupErrors[] = 'Nutzername darf maximal 25 Zeichen lang sein.';
@@ -187,11 +181,11 @@ class ProfileController extends \dwp\core\Controller
                 if (!empty($pw))
                 {
                     $pwRegEx = '/^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m';
-                    if ($pw !== $cpw)                   $signupErrors[] = 'Passwörter müssen übereinstimmen.';
+                    if ($pw !== $cpw)                    $signupErrors[] = 'Passwörter müssen übereinstimmen.';
                     else if (!preg_match($pwRegEx, $pw)) $signupErrors[] = 'Passwort zu schwach (jeweils 2 Groß- und Kleinbuchstaben, 2 Zahlen und 2 Sonderzeichen).';
-                    }
+                }
 
-                // check if passwords were set and are equal TODO comment
+                // check for occured errors
                 if(empty($signupErrors))
                 {
                     // map customer inputs
@@ -246,7 +240,7 @@ class ProfileController extends \dwp\core\Controller
                                         # if userLogin insert didn't fail
                                         // TODO validate link pseudo email and head to login page
                                         // get user ID from db to generate a validation link
-                                        $validateUserID = UserLogin::select('id', 'WHERE username ='.$db->quote($userLoginData['username']))[0]->{'id'};
+                                        $GLOBALS['validateUserID'] = UserLogin::select('id', 'WHERE username ='.$db->quote($userLoginData['username']))[0]->{'id'};
                                         header('Location: index.php?c=profile&a=login');
                                     }
                                     else $sqlErrors[] = 'DATABASE ERROR (INSERT USERLOGIN)';
@@ -271,9 +265,8 @@ class ProfileController extends \dwp\core\Controller
 
         # TODO sqlErrors etc.
 
-        $this->setParam($this->action, 'signup');                 # TODO Logout & signup?
-        $this->setParam('validateUserID', isset($validateUserID) ? $validateUserID : null);
-        $this->setParam('signupErrors',   isset($signupErrors)   ? $signupErrors   : null);
+        $this->setParam($this->action, 'signup');
+        $this->setParam('signupErrors',   $signupErrors   ?? null);
     }
 
     public function actionLogout()

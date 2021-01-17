@@ -1,7 +1,7 @@
 <h1>Konto erstellen</h1>
 <?php if(isset($signupErrors)) : foreach($signupErrors as $error): # TODO $GLOBALS['errors'][...]?>
     <div class="error-message" style="background: #9d4242">
-        ERROR MESSAGE: <?=$error?>
+        <?=$error?>
     </div>
 <?php endforeach; endif; ?>
 exitsiert bereits: testUser / 123456 <!-- TODO JGE --><br>

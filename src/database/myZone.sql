@@ -150,7 +150,7 @@ VALUES (1, 'testFirstName', 'testLastName', 'test@email.de', '018054646'),
 
 INSERT INTO `myZone`.`userLogins` (`id`, `validated`, `enabled`, `username`, `failedLoginCount`, `passwordHash`, `customer`)
 VALUES (1, 1, 1, 'testUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 1),
-       (2, 1, 1, 'realUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 2);
+       (2, 1, 0, 'realUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 2);
 
 INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`)
 VALUES (1, 'Club C85 Vintage', 99.99, 'shoes', 'Reebok', 'white'),
