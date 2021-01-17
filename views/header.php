@@ -21,7 +21,7 @@
             </div>
             <div class="user">
                 <? # if no user is logged in, generate the element to display the login popup on click. if you are on the login page, you don't need another form
-                if(!$loggedIn && $_GET['a'] != 'login') : ?><input class="pop-up-btn" type="checkbox" id="pop-up-btn" /><? endif; ?>
+                if(!$loggedIn && $actionName != 'login') : ?><input class="pop-up-btn" type="checkbox" id="pop-up-btn" /><? endif; ?>
                 <label class="pop-up-icon" for="pop-up-btn">
                     <div class="pop-icon">
                         <? # if a user is logged in, generate a link to the view profile page
