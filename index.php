@@ -41,7 +41,7 @@ if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
 }
 else $errCause = 'The controller for your called controller is missing';
 
-if(isset($errCause) && !empty($errCause)) $controller = new ErrorsController('errors', 'error404');
+if(isset($errCause) && !empty($errCause)) $controller = new ErrorsController('errors', 'error404', $errCause);
 
 // set the shown title for the page
 $title = 'myZone';
