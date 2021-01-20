@@ -4,12 +4,12 @@
     </div>
 <?php endif; ?>
 <?php if(isset($loginErrors)) : foreach($loginErrors as $error): # TODO $GLOBALS['errors'][...]?>
-    <div class="error-message" style="background: #9d4242">
+    <div class="error-message">
         <?=$error?>
     </div>
 <?php endforeach; endif; ?>
 <?php if(isset($_SESSION['validateUserID']) && ! empty($_SESSION['validateUserID'])) : # TODO $GLOBALS['errors'][...]?>
-    <div class="validate-user" style="background: green">
+    <div class="validate-user">
         <a href="?c=profile&a=validateNewUser&uid=<?=$_SESSION['validateUserID']?>"><button>Nutzer valideren</button></a>
     </div>
 <?php endif; ?>
