@@ -1,43 +1,50 @@
 <form action="<?=$_SERVER['PHP_SELF']?>?c=profile&a=submitEdit" method="post" class="personal-data">
-
-    <div class="left">
-        <div class="img">
-            <img style="height:100px" src="assets/img/profile.png" alt="<?=$_SESSION['currentUser']['firstName']?>">
-        </div>
-    </div>
-
-    <div class="right">
-        <div>
+    <div class="view-box">
+        <h1 class="view-headline">Kontaktdaten ändern</h1>
+        <div class="view-content">
             <label for="firstName">Vorname</label>
-            <input type="text" name="firstName" id="firstName" value="<?=htmlspecialchars($_SESSION['currentUser']['firstName'])?>">
+            <div class="view-display">
+                <input class="input-txt" type="text" name="firstName" id="firstName" value="<?=htmlspecialchars($_SESSION['currentUser']['firstName'])?>">
+            </div>
         </div>
-        <div>
+        <div class="view-content">
             <label for="lastName">Nachname</label>
-            <input type="text" name="lastName" id="lastName" value="<?=htmlspecialchars($_SESSION['currentUser']['lastName'])?>">
+            <div class="view-display">
+                <input class="input-txt" type="text" name="lastName" id="lastName" value="<?=htmlspecialchars($_SESSION['currentUser']['lastName'])?>">
+            </div>
         </div>
-        <div>
+        <div class="view-content">
             <label for="email">E-Mail</label>
-            <input type="text" name="email" id="email" value="<?=htmlspecialchars($_SESSION['currentUser']['email'])?>">
+            <div class="view-display">
+                <input class="input-txt" type="text" name="email" id="email" value="<?=htmlspecialchars($_SESSION['currentUser']['email'])?>">
+            </div>
         </div>
-        <div>
+        <div class="view-content">
             <label for="phone">Telefonnummer</label>
-            <input type="text" name="phone" id="phone" value="<?=htmlspecialchars($_SESSION['currentUser']['phone'])?>">
+            <div class="view-display">
+                <input class="input-txt" type="text" name="phone" id="phone" value="<?=htmlspecialchars($_SESSION['currentUser']['phone'])?>">
+            </div>
         </div>
-        <div>
+        <div class="view-content">
             <label for="username">Benutzername</label>
-            <input type="text" name="username" id="username" value="<?=htmlspecialchars($_SESSION['currentUser']['username'])?>">
+            <div class="view-display">
+                <input class="input-txt" type="text" name="username" value="<?=htmlspecialchars($_SESSION['currentUser']['username'])?>">
+            </div>
         </div>
-        <div>
+        <div class="pw-edit-box">
             <input type="checkbox" name="changePassword" id="changePw">
             <label for="changePw">Passwort ändern?</label>
-            <input type="text" name="newPassword" id="newPw">
+            <div class="view-display">
+                <input  class="input-txt" type="text" name="newPassword" id="newPw">
+            </div>
         </div>
-        <input type="submit" value="neue Daten speichern" name="submitNewData"> <!-- TODO altes passwort eingabe-->
-    </div>
-
+        <div class="view-content">
+            <input class="view-edit" type="submit" value="Ändern" name="submitNewData"> <!-- TODO altes passwort eingabe-->
+        </div>
+        </div>
 </form>
-<a href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=view">
-    <input type="submit" value="abbrechen">
+<a class="view-box" href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=view">
+    <input class="logout-btn" type="submit" value="Abbrechen">
 </a>
 <?php
 var_dump($_POST);
