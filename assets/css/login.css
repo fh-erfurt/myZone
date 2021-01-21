@@ -16,6 +16,31 @@
     box-shadow: var(--shadow) #b7b7b7;
     border-radius: 20px;
     text-align: center;
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes cssAnimation {
+    to {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        padding: 0;
+    }
+}
+
+@-webkit-keyframes cssAnimation {
+    to {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        padding: 0;
+    }
 
 }
 
@@ -62,9 +87,3 @@
     transform: translate(-50%, -15%);
 }
 
-@media only screen and (max-width: 550px) {
-    .buy-or-delete{
-        justify-content: center;
-        flex-direction: column;
-    }
-}

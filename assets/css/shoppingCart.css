@@ -56,3 +56,21 @@
 .delete-btn:hover{
     box-shadow: var(--shadow) #5d5d5d;
 }
+
+@media only screen and (max-width: 550px) {
+    .buy-or-delete{
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .buy-btn{
+        width: 150px;
+        height: 38px;
+    }
+
+    .delete-btn{
+        margin-top: 10px;
+        font-size: 12px;
+        padding: 8px 15px 8px 15px;
+    }
+}
