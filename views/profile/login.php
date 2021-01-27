@@ -1,6 +1,19 @@
-<?php
-# TODO JGE Login
-?>
+<?php if(isset($errMsg)) : # TODO $GLOBALS['errors'][...]?>
+    <div class="error-message">
+        <?=$errMsg?>
+    </div>
+<?php endif; ?>
+<?php if(isset($loginErrors)) : foreach($loginErrors as $error): # TODO $GLOBALS['errors'][...]?>
+    <div class="error-message">
+        <?=$error?>
+    </div>
+<?php endforeach; endif; ?>
+<?php if(isset($_SESSION['validateUserID']) && ! empty($_SESSION['validateUserID'])) : # TODO $GLOBALS['errors'][...]?>
+    <div class="validate-user">
+        <a href="?c=profile&a=validateNewUser&uid=<?=$_SESSION['validateUserID']?>"><button>Nutzer valideren</button></a>
+    </div>
+<?php endif; ?>
+test account: testUser / 123456 <!-- TODO JGE-->
 <div class="login-inset">
     <div class="second-login">
             <form class="login" action="index.php?c=profile&a=login" method="post">
@@ -33,4 +46,3 @@
     </div>
     <img class="background-img" src="<?=ROOTPATH.'/assets/img/background.jpg'?>">
 </div>
-test account: testUser / 123456 <!-- TODO JGE-->

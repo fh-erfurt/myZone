@@ -64,11 +64,10 @@ CREATE TABLE IF NOT EXISTS `myZone`.`userLogins` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `validated` TINYINT NOT NULL,
-  `enabled` TINYINT NOT NULL,
+  `validated` TINYINT NOT NULL DEFAULT 0,
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   `username` VARCHAR(25) NOT NULL,
   `lastLogin` TIMESTAMP NULL,
-  `failedLoginCount` TINYINT NOT NULL,
   `passwordHash` VARCHAR(255) NOT NULL,
   `customer` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -149,9 +148,9 @@ INSERT INTO `myZone`.`customers` (`id`, `firstName`, `lastName`, `email`, `phone
 VALUES (1, 'testFirstName', 'testLastName', 'test@email.de', '018054646'),
        (2, 'totallyRealFName', 'totallyRealLName', 'real@person.com', '010012345');
 
-INSERT INTO `myZone`.`userLogins` (`id`, `validated`, `enabled`, `username`, `failedLoginCount`, `passwordHash`, `customer`)
-VALUES (1, 1, 1, 'testUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 1),
-       (2, 1, 1, 'realUser', 0, '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 2);
+INSERT INTO `myZone`.`userLogins` (`id`, `validated`, `enabled`, `username`,  `passwordHash`, `customer`)
+VALUES (1, 1, 1, 'testUser', '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 1),
+       (2, 1, 0, 'realUser', '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 2);
 
 INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`)
 VALUES (1, 'Club C85 Vintage', 99.99, 'shoes', 'Reebok', 'white'),
@@ -173,9 +172,3 @@ VALUES (2, 199.98, 1, 1),
        (1, 129.99, 2, 2),
        (1,  69.69, 3, 3),
        (1, 199.99, 4, 4);
-
-/* SELECT name, price, category, brand, color, products.`id`, sum(quantity) as `sum` FROM products
-INNER JOIN orderItems
-ON products.id = orderItems.product
-GROUP BY product
-ORDER BY `sum`  DESC */

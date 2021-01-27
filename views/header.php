@@ -1,10 +1,11 @@
+<? $loggedIn = \dwp\core\Controller::loggedIn()?>
 <header class="header">
     <div class="inset">
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logo">myZone</a>
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logoMob">mZ</a>
         <div class="interact">
             <form method="get">
-                <input name="c" value="pages" hidden>
+                <input name="c" value="products" hidden>
                 <input name="a" value="search" hidden>
                 <div class="search-box">
                     <input class="search-txt" type="text" name="s" placeholder="Suchen">
@@ -14,15 +15,19 @@
                 </div>
             </form>
             <div class="shopping-cart">
-                <a class="shopping-cart-btn" href="#">
+                <a class="shopping-cart-btn" href="<?$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart">
                     <img class="shopping-cart-icon" src="<?=ROOTPATH. '/assets/img/icons/shopping-cart-icon.svg'?>">
                 </a>
             </div>
             <div class="user">
-                <input class="pop-up-btn" type="checkbox" id="pop-up-btn" />
+                <? # if no user is logged in, generate the element to display the login popup on click. if you are on the login page, you don't need another form
+                if(!$loggedIn && $actionName != 'login') : ?><input class="pop-up-btn" type="checkbox" id="pop-up-btn" /><? endif; ?>
                 <label class="pop-up-icon" for="pop-up-btn">
                     <div class="pop-icon">
-                        <img class="user-icon" src="<?=ROOTPATH. '/assets/img/icons/user-icon.svg'?>">
+                        <? # if a user is logged in, generate a link to the view profile page
+                        if($loggedIn) echo '<a href="'.$_SERVER['PHP_SELF'].'?c=profile&a=view">'; ?>
+                            <img class="user-icon" src="<?=ROOTPATH. '/assets/img/icons/user-icon.svg'?>">
+                        </a>
                     </div>
                 </label>
                 <div class="pop-up">
@@ -64,30 +69,19 @@
 <nav class="jakob">
     <a href="<?=$_SERVER['PHP_SELF']?>"                           >HOME</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart" >CART</a>
-    <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=allProducts"     >ALLE PRODUKTE</a>
+    <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=all"          >ALLE PRODUKTE</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=page3"           >SEITE3</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >SEITE4</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=ProductPage"     >Produktseite</a>
-
+    <? if($loggedIn) :?><p>-------------You are logged in!--</p> <? endif; ?>
+    <? if(isset($GLOBALS['errorMessages']['login'])) : ?><div class="error-message"><?=$GLOBALS['errorMessages']['login']?></div>   <? endif; ?>
 </nav>
 <div class="login-notification">
-    <? if($_SESSION['loggedIn']) :?>
-        <input class="close-not-btn" type="checkbox" id="close-not-btn" />
-        <div class="successful-login">
-            <img class="check-icon" src="<?=ROOTPATH. '/assets/img/icons/green-check-icon.svg'?>">
-            Du bist nun bei MyZone eingeloggt!
-            <label class="close-not-icon" for="close-not-btn">
-                <img class="x-not-icon" src="<?=ROOTPATH. '/assets/img/icons/close-icon.svg'?>">
-            </label>
-        </div> <? endif; ?>
     <? if(isset($GLOBALS['errorMessages']['login'])) : ?>
-        <input class="close-error-btn" type="checkbox" id="close-error-btn" />
         <div class="error-message">
             <img class="red-x-icon" src="<?=ROOTPATH. '/assets/img/icons/red-x-icon.svg'?>">
             <?=$GLOBALS['errorMessages']['login']?>
-            <label class="close-not-icon" for="close-error-btn">
-                <img class="x-not-icon" src="<?=ROOTPATH. '/assets/img/icons/close-icon.svg'?>">
-            </label>
+            <label class="close-not-icon" for="close-error-btn"></label>
         </div>
     <? endif; ?>
 </div>
