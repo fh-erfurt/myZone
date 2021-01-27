@@ -21,7 +21,7 @@
             </div>
             <div class="user">
                 <? # if no user is logged in, generate the element to display the login popup on click. if you are on the login page, you don't need another form
-                if(!$loggedIn && $actionName != 'login') : ?><input class="pop-up-btn" type="checkbox" id="pop-up-btn" /><? endif; ?>
+                if(!$loggedIn && $actionName != 'login' && $actionName != 'signup') : ?><input class="pop-up-btn" type="checkbox" id="pop-up-btn" /><? endif; ?>
                 <label class="pop-up-icon" for="pop-up-btn">
                     <div class="pop-icon">
                         <? # if a user is logged in, generate a link to the view profile page
@@ -66,14 +66,14 @@
         </div>
     </div>
 </header>
-<nav class="jakob">
+<nav class="jakob"><!-- TODO remove in final version -->
     <a href="<?=$_SERVER['PHP_SELF']?>"                           >HOME</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart" >CART</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=all"          >ALLE PRODUKTE</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=page3"           >SEITE3</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >SEITE4</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=ProductPage"     >Produktseite</a>
-    <? if($loggedIn) :?><p>-------------You are logged in!--</p> <? endif; ?>
+    <? if($loggedIn) :?><p>-------------You are logged in as <?=$_SESSION['currentUser']['username'] ?? 'ERROR'?>!--</p> <? endif; ?>
     <? if(isset($GLOBALS['errorMessages']['login'])) : ?><div class="error-message"><?=$GLOBALS['errorMessages']['login']?></div>   <? endif; ?>
 </nav>
 <div class="login-notification">

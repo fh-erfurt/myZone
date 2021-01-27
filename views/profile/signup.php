@@ -1,19 +1,13 @@
 <div class="signup">
     <div class="signup-login-box">
         <div class="login-box">
-            <?php if(isset($errMsg)) : # TODO $GLOBALS['errors'][...]?>
-                <div class="error-message">
-                    <img class="red-x-icon" src="<?=ROOTPATH. '/assets/img/icons/red-x-icon.svg'?>">
-                    <?=$errMsg?>
-                </div>
-            <?php endif; ?>
-            <?php if(isset($loginErrors)) : foreach($loginErrors as $error): # TODO $GLOBALS['errors'][...]?>
+            <?php if(isset($loginErrors)) : foreach($loginErrors as $error) : # TODO wird auf login weitergeleitet?>
                 <div class="error-message">
                     <img class="red-x-icon" src="<?=ROOTPATH. '/assets/img/icons/red-x-icon.svg'?>">
                     <?=$error?>
                 </div>
             <?php endforeach; endif; ?>
-            <?php if(isset($_SESSION['validateUserID']) && ! empty($_SESSION['validateUserID'])) : # TODO $GLOBALS['errors'][...]?>
+            <?php if(isset($_SESSION['validateUserID']) && ! empty($_SESSION['validateUserID'])) : ?>
                 <div class="validate-user" style="background: green">
                     <a href="?c=profile&a=validateNewUser&uid=<?=$_SESSION['validateUserID']?>"><button>Nutzer valideren</button></a>
                 </div>
@@ -46,7 +40,7 @@
         </div>
         <div class="signup-box">
                 <h2 class="signup-headline">Ich bin Neukunde</h2>
-            <?php if(isset($signupErrors)) : foreach($signupErrors as $error): # TODO $GLOBALS['errors'][...]?>
+            <?php if(isset($signupErrors)) : foreach($signupErrors as $error) : ?>
                 <div class="error-message">
                     <?=$error?>
                 </div>
@@ -55,23 +49,23 @@
             <form action="index.php?c=profile&a=signup" method="post">
 
                 <?php
-                // felder, die angezeigt werden sollen mit dazugehörigem placeholder, anzeigetyp und der Information, ob sie bei fehleingabe erinnert werden sollen. TODO JGE english
-                $fields = [
+                // felder, die angezeigt werden sollen mit dazugehörigem placeholder, anzeigetyp und der Information, ob sie bei fehleingabe erinnert werden sollen.
+                $signupFields = [
                     'firstName'       => ['Vorname*',             'text',     true,  true ],
                     'lastName'        => ['Nachname*',            'text',     true,  true ],
                     'email'           => ['E-Mail*',              'text',     true,  true ],
                     'phone'           => ['Telefonnummer',        'text',     true,  false],
 
                     'username'        => ['Nutzername*',          'text',     true,  true ],
-                    'password'        => ['Passwort*',            'password', false, true ],
+                    'newPassword'     => ['Passwort*',            'password', false, true ],
                     'confirmPassword' => ['Passwort bestätigen*', 'password', false, true ]
                 ];
-                foreach($fields as $attribute => $placeholder_type_remember_required) :
+                foreach($signupFields as $attribute => [$placeholder, $type, $remember, $required]) :
                     // if the remember value is true AND the post parameter is set save it into the variable, which is written into the textfield.
-                      $value = $placeholder_type_remember_required[2] ? $_POST[$attribute] ??  '' : ''; ?>
+                    $value = $remember ? $_POST[$attribute] ??  '' : ''; ?>
                     <div class="signup-input">
                         <div class="input-box">
-                            <input class="input-txt" name="<?=$attribute?>" type="<?=$placeholder_type_remember_required[1]?>" placeholder="<?=$placeholder_type_remember_required[0]?>" value="<?=htmlspecialchars($value)?>" <? if($placeholder_type_remember_required[3]) echo 'required'?> />
+                            <input class="input-txt" name="<?=$attribute?>" type="<?=$type?>" placeholder="<?=$placeholder?>" value="<?=htmlspecialchars($value)?>"<?=$required ? ' required' : ''?> />
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -95,4 +89,3 @@
 </div>
 exitsiert bereits: testUser / 123456 <!-- TODO JGE --><br>
 gültiges Pw wäre z.B.: pwT35T#+
-WERTE WERDEN IN DB GESPEICHERT <? # TODO ?>

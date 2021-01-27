@@ -13,11 +13,12 @@ include VIEWSPATH . 'navbar.php';
                 <?
                 try
                 {
+                    // didn't bother to make an extra model or function here since i am using this function only once TODO JGE?
                     $products = [];
                     $products = Product::select('`name`, `price`, `category`, `brand`, `color`, `products`.`id`, sum(`quantity`) as `sum`',
                                            'INNER JOIN `orderItems` ON `products`.id = `orderItems`.product GROUP BY `product` ORDER BY `sum` DESC');
                 foreach($products as $product): ?>
-                <a class="link-topseller" href="?c=pages&a=product&id=<?=$product->{'id'}?>">
+                <a class="link-topseller" href="?c=products&a=view&id=<?=$product->{'id'}?>">
                     <div class="product-topseller">
                         <div class="upper-topseller">
                             <img class="img-topseller" src="<?=ROOTPATH.'assets/img/products/product_'.$product->{'id'}.'.jpg'?>">
@@ -31,14 +32,9 @@ include VIEWSPATH . 'navbar.php';
                 </a>
                 <? endforeach;
                 }
-                catch (Error $error)
-                {
-                    echo 'Error caught: '.$error->getMessage(); # TODO
-                }
-                catch (PDOException $exception)
-                {
-                    echo 'Exception caught: '.$exception->getMessage(); # TODO
-                }
+                // PDOExceptions are caught in the BaseModel::select() function already
+                catch (Error $error) { echo 'Leider ist ein Fehler aufgetreten (2)'; }
+
                 ?>
             </div>
         </div>

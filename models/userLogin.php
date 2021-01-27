@@ -17,9 +17,7 @@ class UserLogin extends BaseModel
         'validated'              => ['type' => BaseModel::TYPE_TINYINT],
         'enabled'                => ['type' => BaseModel::TYPE_TINYINT],
         'username'               => ['type' => BaseModel::TYPE_STRING, 'max' => 25],
-        'lastLogin'              => ['type' => BaseModel::TYPE_STRING, 'max' => 10],
-        'lastActive'             => ['type' => BaseModel::TYPE_STRING, 'max' => 10],
-        'failedLoginCount'       => ['type' => BaseModel::TYPE_TINYINT],
+        'lastLogin'              => ['type' => BaseModel::TYPE_STRING, 'max' => 10], # TODO JGE
         'passwordHash'           => ['type' => BaseModel::TYPE_STRING, 'max' => 255],
         'customer'               => ['type' => BaseModel::TYPE_INT]
     ];

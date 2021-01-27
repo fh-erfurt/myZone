@@ -49,7 +49,7 @@ class ProductsController extends \dwp\core\Controller
                     $_SESSION['lastAdded'] = $product;
                 }
 
-                // add product to cart
+                // add product to cart (objects need to be serialized in order to be saved into the $_SESSION array)
                 $_SESSION['cart'][$id] = serialize($product);
                 $_SESSION['cartItemCount'][$id] = 1;
             }

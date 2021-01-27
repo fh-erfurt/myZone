@@ -1,42 +1,53 @@
-<form action="<?=$_SERVER['PHP_SELF']?>?c=profile&a=submitEdit" method="post" class="personal-data">
+<form action="<?=$_SERVER['PHP_SELF']?>?c=profile&a=edit" method="post" class="personal-data"> <!-- TODO actionEdit() -->
     <div class="view-box">
+        <?php if(isset($editErrors)) : foreach($editErrors as $error) : ?>
+            <div class="error-message">
+                <img class="red-x-icon" src="<?=ROOTPATH. '/assets/img/icons/red-x-icon.svg'?>">
+                <?=$error?>
+            </div>
+        <?php endforeach; endif; ?>
         <h1 class="view-headline">Kontaktdaten ändern</h1>
-        <div class="view-content">
-            <label for="firstName">Vorname</label>
+
+        <?php
+        // fields which can be edited with matching placeholder and type.
+        $editFields = [
+            'firstName'       => ['Vorname',             'text'    , true],
+            'lastName'        => ['Nachname',            'text'    , true],
+            'email'           => ['E-Mail',              'text'    , true],
+            'phone'           => ['Telefonnummer',       'text'    , false],
+            'oldPassword'     => ['Passwort',            'password', true],
+        ];
+        foreach($editFields as $attribute => [$placeholder, $type, $required]) : ?>
+
+        <div class="view-content" style="background: orange"> <!-- TODO STYLE -->
+            <label for="<?=$attribute?>"><?=$placeholder?></label>
             <div class="view-display">
-                <input class="input-txt" type="text" name="firstName" id="firstName" value="<?=htmlspecialchars($_SESSION['currentUser']['firstName'])?>">
+                <input class="input-txt" type="<?=$type?>" name="<?=$attribute?>" id="<?=$attribute?>" value="<?=htmlspecialchars($_SESSION['currentUser'][$attribute] ?? '')?>" <?= $required ? 'required' : ''?>>
             </div>
         </div>
-        <div class="view-content">
-            <label for="lastName">Nachname</label>
-            <div class="view-display">
-                <input class="input-txt" type="text" name="lastName" id="lastName" value="<?=htmlspecialchars($_SESSION['currentUser']['lastName'])?>">
-            </div>
-        </div>
-        <div class="view-content">
-            <label for="email">E-Mail</label>
-            <div class="view-display">
-                <input class="input-txt" type="text" name="email" id="email" value="<?=htmlspecialchars($_SESSION['currentUser']['email'])?>">
-            </div>
-        </div>
-        <div class="view-content">
-            <label for="phone">Telefonnummer</label>
-            <div class="view-display">
-                <input class="input-txt" type="text" name="phone" id="phone" value="<?=htmlspecialchars($_SESSION['currentUser']['phone'])?>">
-            </div>
-        </div>
-        <div class="view-content">
-            <label for="username">Benutzername</label>
-            <div class="view-display">
-                <input class="input-txt" type="text" name="username" value="<?=htmlspecialchars($_SESSION['currentUser']['username'])?>">
-            </div>
-        </div>
+
+        <? endforeach ?>
         <div class="pw-edit-box">
-            <input type="checkbox" name="changePassword" id="changePw">
             <label for="changePw">Passwort ändern?</label>
-            <div class="view-display">
-                <input  class="input-txt" type="text" name="newPassword" id="newPw">
-            </div>
+            <input type="checkbox" name="changePassword" id="changePw">
+
+            <?php
+            // fields which can be edited with matching placeholder and type.
+            $changePwFields = [
+                'newPassword'     => ['neues Passwort',      'password'],
+                'confirmPassword' => ['Passwort bestätigen', 'password']
+            ];
+            foreach($changePwFields as $attribute => [$placeholder, $type]) : ?>
+
+                <div class="view-content" style="background: orange"> <!-- TODO STYLE -->
+                    <label for="<?=$attribute?>"><?=$placeholder?></label>
+                    <div class="view-display">
+                        <input class="input-txt" type="<?=$type?>" name="<?=$attribute?>" id="<?=$attribute?>" value="">
+                    </div>
+                </div>
+
+            <? endforeach ?>
+
         </div>
         <div class="view-content">
             <input class="view-edit" type="submit" value="Ändern" name="submitNewData"> <!-- TODO altes passwort eingabe-->
@@ -46,6 +57,3 @@
 <a class="view-box" href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=view">
     <input class="logout-btn" type="submit" value="Abbrechen">
 </a>
-<?php
-var_dump($_POST);
-?>
