@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="input-submit">
-                            <input class="submit-btn" name="submit" type="submit" value="Login"/>
+                            <input class="submit-btn" name="submit" type="submit" value="Login" id="submitlogin"/>
                         </div>
 
                         <div class="login-footer">

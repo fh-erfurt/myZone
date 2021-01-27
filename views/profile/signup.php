@@ -78,7 +78,7 @@
                 <p class="input-info">* Pflichtfeld</p>
 
                 <div class="signup-submit">
-                    <input class="signup-btn" name="submit" type="submit" value="Sign Up"/>
+                    <input class="signup-btn" name="submit" type="submit" value="Sign Up" id="submitSignup"/>
                 </div>
             </form>
         </div>
