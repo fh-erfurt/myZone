@@ -1,3 +1,4 @@
+<script src="<?=ROOTPATH.'/assets/js/signup.js'?>" type="text/javascript"></script>
 <div class="signup">
     <div class="signup-login-box">
         <div class="login-box">
@@ -65,7 +66,7 @@
                     $value = $remember ? $_POST[$attribute] ??  '' : ''; ?>
                     <div class="signup-input">
                         <div class="input-box">
-                            <input class="input-txt" name="<?=$attribute?>" type="<?=$type?>" placeholder="<?=$placeholder?>" value="<?=htmlspecialchars($value)?>"<?=$required ? ' required' : ''?> />
+                            <input class="input-txt" id="<?=$attribute?>" name="<?=$attribute?>" type="<?=$type?>" placeholder="<?=$placeholder?>" value="<?=htmlspecialchars($value)?>"<?=$required ? ' required' : ''?> />
                         </div>
                     </div>
                 <?php endforeach; ?>
