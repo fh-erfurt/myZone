@@ -11,10 +11,12 @@ abstract class BaseModel
     const TYPE_FLOAT    = 'float';
     const TYPE_STRING   = 'string';
 
-    protected $schema = []; # enthält Datentypen
-    protected $data = [];   # enthält später Daten, wie in DB
+    // contains types and length
+    protected $schema = [];
+    // contains data
+    protected $data = [];
 
-    public function __construct($params) #TODO eventuell durch schema überprüfen
+    public function __construct($params)
     {
         foreach($this->schema as $key => $schemaOptions)
         {
@@ -49,13 +51,16 @@ abstract class BaseModel
 
     public function save(&$errors)
     {
-        if($this->id === null) # gleich $this->data['id'] durch __get()
+        if(!empty($this->data))
         {
-            $this->insert($errors);
-        }
-        else
-        {
-            $this->update($errors);
+            if($this->id === null)
+            {
+                $this->insert($errors);
+            }
+            else
+            {
+                $this->update($errors);
+            }
         }
     }
 
@@ -214,7 +219,9 @@ abstract class BaseModel
         }
         catch(PDOException $e)
         {
-            echo 'Select statement failed: '.$e->getMessage(); # TODO zeigt Nutzer Fehler/Schwachstellen (alle die()-Fehler))
+            // create a message which doesn't show the user what went wrong
+            echo 'Leider ist ein Fehler aufgetreten (1)';
+            #echo 'Select statement failed: '.$e->getMessage(); # TODO zeigt Nutzer Fehler/Schwachstellen (alle die()-Fehler))
         }
         finally
         {

@@ -1,35 +1,26 @@
 <div class="view-box">
     <h1 class="view-headline">Meine Kundendaten</h1>
-    <div class="view-content">
-        <label for="firstName">Vorname</label>
-        <div class="view-display">
-            <input class="input-txt" type="text" name="firstName" id="firstName" value="<?=htmlspecialchars($_SESSION['currentUser']['firstName'])?>" readonly>
+
+    <?php
+    // fields which should be shown with matching placeholder and type.
+    $viewFields = [
+        'firstName'       => ['Vorname',             'text'],
+        'lastName'        => ['Nachname',            'text'],
+        'email'           => ['E-Mail',              'text'],
+        'phone'           => ['Telefonnummer',       'text'],
+
+        'username'        => ['Nutzername',          'text']
+    ];
+    foreach($viewFields as $attribute => [$placeholder, $type]) : ?>
+
+        <div class="view-content">
+            <label for="<?=$attribute?>"><?=$placeholder?></label>
+            <div class="view-display">
+                <input class="input-txt" type="<?=$type?>" name="<?=$attribute?>" id="<?=$attribute?>" value="<?=htmlspecialchars($_SESSION['currentUser'][$attribute])?>" readonly>
+            </div>
         </div>
-    </div>
-    <div class="view-content">
-        <label for="lastName">Nachname</label>
-        <div class="view-display">
-            <input class="input-txt" type="text" name="lastName" id="lastName" value="<?=htmlspecialchars($_SESSION['currentUser']['lastName'])?>" readonly>
-        </div>
-    </div>
-    <div class="view-content">
-        <label for="email">E-Mail</label>
-        <div class="view-display">
-            <input class="input-txt" type="text" name="email" id="email" value="<?=htmlspecialchars($_SESSION['currentUser']['email'])?>" readonly>
-        </div>
-    </div>
-    <div class="view-content">
-        <label for="phone">Telefonnummer</label>
-        <div class="view-display">
-            <input class="input-txt" type="text" name="phone" id="phone" value="<?=htmlspecialchars($_SESSION['currentUser']['phone'])?>" readonly>
-        </div>
-    </div>
-    <div class="view-content">
-        <label for="username">Benutzername</label>
-        <div class="view-display">
-            <input class="input-txt" type="text" name="username" value="<?=htmlspecialchars($_SESSION['currentUser']['username'])?>" readonly>
-        </div>
-    </div>
+
+    <? endforeach ?>
     <div class="view-action">
         <a class="view-action-box" href="<?=$_SERVER['PHP_SELF']?>?c=profile&a=edit">
             <input class="view-edit" type="submit" value="Kundendaten bearbeiten">
