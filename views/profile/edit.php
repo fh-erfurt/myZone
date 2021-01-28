@@ -1,4 +1,4 @@
-<form action="<?=$_SERVER['PHP_SELF']?>?c=profile&a=edit" method="post" class="personal-data"> <!-- TODO actionEdit() -->
+<form action="<?=$_SERVER['PHP_SELF']?>?c=profile&a=edit" method="post" class="personal-data">
     <div class="view-box">
         <?php if(isset($editErrors)) : foreach($editErrors as $error) : ?>
             <div class="error-message">
@@ -19,7 +19,7 @@
         ];
         foreach($editFields as $attribute => [$placeholder, $type, $required]) : ?>
 
-        <div class="view-content" style="background: orange"> <!-- TODO STYLE -->
+        <div class="view-content">
             <label for="<?=$attribute?>"><?=$placeholder?></label>
             <div class="view-display">
                 <input class="input-txt" type="<?=$type?>" name="<?=$attribute?>" id="<?=$attribute?>" value="<?=htmlspecialchars($_SESSION['currentUser'][$attribute] ?? '')?>" <?= $required ? 'required' : ''?>>
@@ -39,7 +39,7 @@
             ];
             foreach($changePwFields as $attribute => [$placeholder, $type]) : ?>
 
-                <div class="view-content" style="background: orange"> <!-- TODO STYLE -->
+                <div class="view-content">
                     <label for="<?=$attribute?>"><?=$placeholder?></label>
                     <div class="view-display">
                         <input class="input-txt" type="<?=$type?>" name="<?=$attribute?>" id="<?=$attribute?>" value="">
