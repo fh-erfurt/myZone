@@ -3,7 +3,6 @@
 namespace dwp\models;
 
 use dwp\core\JoinedModel;
-use dwp\core\BaseModel;
 
 class JoinedProduct extends JoinedModel
 {

@@ -15,18 +15,18 @@ use dwp\models\Product;
  */
 class ProductsController extends \dwp\core\Controller
 {
-    public function actionAll($searchfor = '')
+    public function actionAll($whereStr = '')
     {
         # TODO TODO TODO Suche
-        $products = \dwp\models\JoinedProduct::joinedSelect($searchfor);
+        $products = \dwp\models\JoinedProduct::joinedSelect($whereStr);
         $this->setParam('products', $products);
-        $this->setParam('searchfor', $searchfor);
+        $this->setParam('searchfor', $whereStr); # TODO remove
     }
 
     public function actionSearch()
     {
         # TODO JGE illegale Suchen abfangen (' OR 1 = 1 OR brand like ' und so weiter)
-        $this->actionAll(isset($_GET['s']) ? "products.name like '%".(trim($_GET['s']))."%' or brands.name like '%".(trim($_GET['s']))."%'" : '');
+        $this->actionAll(isset($_GET['s']) ? " WHERE products.name like '%".(trim($_GET['s']))."%' OR brands.name like '%".(trim($_GET['s']))."%'" : '');
         $this->action = 'all';
     }
 

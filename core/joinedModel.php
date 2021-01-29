@@ -9,13 +9,8 @@ abstract class JoinedModel extends BaseModel
     // contains rules for joins
     protected static $joinRules = [];
 
-    public function bruh()
-    {
-        return self::joinedSelect();
-    }
-
     # needs array as argument TODO
-    public static function joinedSelect($where = '')
+    public static function joinedSelect($commands = '')
     {
         $db = $GLOBALS['db'];
         $class = get_called_class();
@@ -29,8 +24,7 @@ abstract class JoinedModel extends BaseModel
         {
             $joinStr .= ' JOIN '.$tableToJoin.' ON '.self::tablename().'.'.$fk.' = '.$tableToJoin.'.id';
         }
-        $whereStr = empty($where) ? '' : ' WHERE '.$where;
-        return self::select(trim($colsStr, ', '), $joinStr.$whereStr);
+        return self::select(trim($colsStr, ', '), $joinStr.$commands);
     }
 
     public static function selectWhere($where = '')

@@ -1,8 +1,5 @@
-<?php /** @noinspection SqlResolve */
-# TODO JGE echo password_hash('123456', PASSWORD_DEFAULT);
-?>
 <?
-use \dwp\models\Product;
+use \dwp\models\JoinedProduct;
 include VIEWSPATH . 'navbar.php';
 ?>
 <div class="home">
@@ -15,8 +12,7 @@ include VIEWSPATH . 'navbar.php';
                 {
                     // didn't bother to make an extra model or function here since i am using this function only once TODO JGE?
                     $products = [];
-                    $products = Product::select('`name`, `price`, `category`, `brand`, `color`, `products`.`id`, sum(`quantity`) as `sum`',
-                                           'INNER JOIN `orderItems` ON `products`.id = `orderItems`.product GROUP BY `product` ORDER BY `sum` DESC');
+                    $products = JoinedProduct::joinedSelect(' INNER JOIN orderItems ON products.id = orderItems.product GROUP BY product ORDER BY sum(orderitems.quantity) DESC');
                 foreach($products as $product): ?>
                 <a class="link-topseller" href="?c=products&a=view&id=<?=$product->{'id'}?>">
                     <div class="product-topseller">
@@ -33,7 +29,7 @@ include VIEWSPATH . 'navbar.php';
                 <? endforeach;
                 }
                 // PDOExceptions are caught in the BaseModel::select() function already
-                catch (Error $error) { echo 'Leider ist ein Fehler aufgetreten (2)'; }
+                catch (Error $error) { echo 'Leider ist ein Fehler aufgetreten (2)'.$error->getMessage(); }
 
                 ?>
             </div>

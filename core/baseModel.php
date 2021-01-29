@@ -214,8 +214,6 @@ abstract class BaseModel
 
         try
         {
-            $sql = 'SELECT '.(empty($colsStr) ? '*' : $colsStr).' FROM '.self::tablename().' '.$commands;
-            echo $sql;
             $results = $db->query('SELECT '.(empty($colsStr) ? '*' : $colsStr).' FROM '.self::tablename().' '.$commands)->fetchAll();
             $l = count($results);
             for ($i = 0; $i < $l; $i++)
@@ -226,7 +224,7 @@ abstract class BaseModel
         catch(PDOException $e)
         {
             // create a message which doesn't show the user what went wrong but an error code to report
-            echo 'Leider ist ein Fehler aufgetreten (1)';
+            echo 'Leider ist ein Fehler aufgetreten (1)'.$e->getMessage();
         }
         finally
         {
