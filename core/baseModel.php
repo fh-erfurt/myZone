@@ -12,13 +12,14 @@ abstract class BaseModel
     const TYPE_STRING   = 'string';
 
     // contains types and length
-    protected $schema = [];
+    protected static $schema = [];
     // contains data
     protected $data = [];
 
     public function __construct($params)
     {
-        foreach($this->schema as $key => $schemaOptions)
+        $class = get_called_class();
+        foreach($class::$schema as $key => $schemaOptions)
         {
             if(isset($params[$key]))
             {
@@ -42,7 +43,8 @@ abstract class BaseModel
 
     public function __set($key, $value)
     {
-        if(array_key_exists($key, $this->schema))
+        $class = get_called_class();
+        if(array_key_exists($key, $class::$schema))
         {
             $this->data[$key] = $value;
         }
@@ -67,13 +69,14 @@ abstract class BaseModel
     protected function insert(&$errors)
     {
         $db =  $GLOBALS['db'];
+        $class = get_called_class();
 
         try
         {
             $sql = 'INSERT INTO '.self::tablename().' (';
             $valueString = ' VALUES (';
 
-            foreach($this->schema as $key => $schemaOptions)
+            foreach($class::$schema as $key => $schemaOptions)
             {
                 // don't insert values that are equal to null since it generates errors when not null is set
                 if($this->{$key} !== null)
@@ -141,7 +144,8 @@ abstract class BaseModel
 
     public function validate(&$errors = null)
     {
-        foreach($this->schema as $key => $schemaOptions)
+        $class = get_called_class();
+        foreach($class::$schema as $key => $schemaOptions)
         {
             if(isset($this->{$key}) && is_array($schemaOptions))
             {
@@ -198,11 +202,11 @@ abstract class BaseModel
 
     /**
      * be careful with using this since it is easy to get syntax errors.
-     * @param string $cols the columns you want to be returned
+     * @param string $colsStr the columns you want to be returned
      * @param string $commands the additional commands to execute in the query
      * @return mixed
      */
-    public static function select($cols = '', $commands = '')
+    public static function select($colsStr = '', $commands = '')
     {
         $db = $GLOBALS['db'];
         $results = [];
@@ -210,7 +214,9 @@ abstract class BaseModel
 
         try
         {
-            $results = $db->query('SELECT '.(empty($cols) ? '*' : $cols).' FROM '.self::tablename().' '.$commands)->fetchAll();
+            $sql = 'SELECT '.(empty($colsStr) ? '*' : $colsStr).' FROM '.self::tablename().' '.$commands;
+            echo $sql;
+            $results = $db->query('SELECT '.(empty($colsStr) ? '*' : $colsStr).' FROM '.self::tablename().' '.$commands)->fetchAll();
             $l = count($results);
             for ($i = 0; $i < $l; $i++)
             {
@@ -219,9 +225,8 @@ abstract class BaseModel
         }
         catch(PDOException $e)
         {
-            // create a message which doesn't show the user what went wrong
+            // create a message which doesn't show the user what went wrong but an error code to report
             echo 'Leider ist ein Fehler aufgetreten (1)';
-            #echo 'Select statement failed: '.$e->getMessage(); # TODO zeigt Nutzer Fehler/Schwachstellen (alle die()-Fehler))
         }
         finally
         {

@@ -12,6 +12,7 @@ require_once './config/database.php';
 // load controllers
 require_once COREPATH.'controller.php';
 require_once COREPATH.'baseModel.php';
+require_once COREPATH.'joinedModel.php';
 # require_once COREPATH.'functions.php';
 
 require_once CONTROLLERSPATH.'errorsController.php';
@@ -20,6 +21,7 @@ require_once CONTROLLERSPATH.'errorsController.php';
 require_once MODELSPATH.'userLogin.php';
 require_once MODELSPATH.'customer.php';
 require_once MODELSPATH.'product.php';
+require_once MODELSPATH.'joinedProduct.php';
 
 // check get parameters and assign variables to determine controller and action to run
 $controllerName = $_GET['c'] ?? 'pages';
