@@ -26,7 +26,7 @@ class ProductsController extends \dwp\core\Controller
     public function actionSearch()
     {
         # TODO JGE illegale Suchen abfangen (' OR 1 = 1 OR brand like ' und so weiter)
-        $this->actionAll(isset($_GET['s']) ? "'name' like '%".(trim($_GET['s']))."%' or 'brand' like '%".(trim($_GET['s']))."%'" : '');
+        $this->actionAll(isset($_GET['s']) ? "products.name like '%".(trim($_GET['s']))."%' or brands.name like '%".(trim($_GET['s']))."%'" : '');
         $this->action = 'all';
     }
 
