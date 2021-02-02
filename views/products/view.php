@@ -20,7 +20,7 @@ $db = $GLOBALS['db'];
                 <div class="product-data">
                     <h1 class="pp-brand"><?=$product->brand?></h1>
                     <h2 class="pp-model"><?=$product->name?></h2>
-                    <h3 class="pp-color">Calk / Paperwhite / Cya FARBE AUS DB: <?=$product->color?></h3>
+                    <h3 class="pp-color"><?=$product->descriptionColor ?? $product->color?></h3>
                     <h4 class="pp-price"><?=$product->price?>€</h4>
                 </div>
                 <img class="brand-logo" src="<?=ROOTPATH. '/assets/img/brand_logos/'.$product->brand.'_logo.png'?>">
@@ -37,7 +37,7 @@ $db = $GLOBALS['db'];
             <div class="product-description-text-box">
                 <h1 class="product-description-headline">Artikelbeschreibung</h1>
                 <p class="product-description-text">
-                    Kein Schnickschnack, nur die pure Ästhetik des Tennissports schwingt beim Club C 85 von Reebok mit. Weiches Leder als Obermaterial, strategisch gepolstertes Textilfutter, eine cleane Farbe für die Sohle in Braun und einfache, nachvollziehbare Linien mit ideal dosierten Overlays sind die Merkmale von Reebok's Club C 85 MU. Tennis war in den Achtziger Jahren einfach der Sport, der eine Menge cooler Sneaker hervorgebracht hat, deren Design immer auf traditionelle Werte bedacht war ohne zu konservativ zu wirken.
+                    <?=$product->description ?? 'PrOdUkTbEsChReIbUnG'?>
                 </p>
             </div>
         </div>
@@ -45,7 +45,7 @@ $db = $GLOBALS['db'];
     <div class="product-description-box-mob">
         <h1 class="product-description-headline">Artikelbeschreibung</h1>
         <p class="product-description-text">
-            Kein Schnickschnack, nur die pure Ästhetik des Tennissports schwingt beim Club C 85 von Reebok mit. Weiches Leder als Obermaterial, strategisch gepolstertes Textilfutter, eine cleane Farbe für die Sohle in Braun und einfache, nachvollziehbare Linien mit ideal dosierten Overlays sind die Merkmale von Reebok's Club C 85 MU. Tennis war in den Achtziger Jahren einfach der Sport, der eine Menge cooler Sneaker hervorgebracht hat, deren Design immer auf traditionelle Werte bedacht war ohne zu konservativ zu wirken.
+            <?=$product->description ?? 'PrOdUkTbEsChReIbUnG'?>
         </p>
     </div>
     <div class="all-Products-brand">

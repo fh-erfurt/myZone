@@ -5,6 +5,7 @@ namespace dwp\controllers;
 
 
 use dwp\models\Product;
+use dwp\models\JoinedProduct;
 
 /**
  * Class ProductsController
@@ -36,6 +37,7 @@ class ProductsController extends \dwp\core\Controller
 
     public function actionAddToCart()
     {
+        $db = $GLOBALS['db'];
         // check if there even is a given GET parameter in the request
         if (isset ($_GET['id']))
         {
@@ -45,15 +47,8 @@ class ProductsController extends \dwp\core\Controller
             if(isset($_SESSION['cart'][$id])) $_SESSION['cartItemCount'][$id]++;
             else
             {
-
-                // if the last added item is the same as the current item, we don't need to run another query (performance)
-                if ($_SESSION['lastAdded']->{'id'} == $id) $product = $_SESSION['lastAdded'];
-                else
-                {
-                    // get the product from the database by id
-                    $product = Product::selectWhere('id = ' . $GLOBALS['db']->quote($id))[0];
-                    $_SESSION['lastAdded'] = $product;
-                }
+                // get the product from the database by id
+                $product = JoinedProduct::joinedSelect(' WHERE products.id = '.$db->quote($id))[0];
 
                 // add product to cart (objects need to be serialized in order to be saved into the $_SESSION array)
                 $_SESSION['cart'][$id] = serialize($product);

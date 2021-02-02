@@ -223,8 +223,9 @@ abstract class BaseModel
         }
         catch(PDOException $e)
         {
+            $results = $e->getMessage();
             // create a message which doesn't show the user what went wrong but an error code to report
-            echo 'Leider ist ein Fehler aufgetreten (1)'.$e->getMessage();
+            echo 'Leider ist ein Fehler aufgetreten (1)'.$e->getMessage(); # TODO
         }
         finally
         {

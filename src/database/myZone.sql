@@ -137,6 +137,8 @@ CREATE TABLE IF NOT EXISTS `myZone`.`products` (
   `category` INT NOT NULL,
   `brand` INT NOT NULL,
   `color` INT NOT NULL,
+  `descriptionColor` VARCHAR(64) NULL DEFAULT NULL,
+  `description` VARCHAR(1000) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
     CONSTRAINT `fk_products_categories1`
     FOREIGN KEY (`category`)
@@ -212,11 +214,12 @@ VALUES (1, 'white'),
        (3, 'bronze'),
        (4, 'green');
 
-INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`)
-VALUES (1, 'Club C85 Vintage', 99.99, 1, 1, 1),
-       (2, 'Air Max 97', 129.99, 1, 2, 2),
-       (3, 'Classic Clog', 69.69, 1, 3, 3),
-       (4, 'Yeezy Boost 380 "Alien"', 199.99, 1, 4, 4);
+INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`, `descriptionColor`, `description`)
+VALUES (1, 'Club C85 Vintage', 99.99, 1, 1, 1, 'Calk / Paperwhite / Cya',
+        'Kein Schnickschnack, nur die pure Ästhetik des Tennissports schwingt beim Club C 85 von Reebok mit. Weiches Leder als Obermaterial, strategisch gepolstertes Textilfutter, eine cleane Farbe für die Sohle in Braun und einfache, nachvollziehbare Linien mit ideal dosierten Overlays sind die Merkmale von Reebok''s Club C 85 MU. Tennis war in den Achtziger Jahren einfach der Sport, der eine Menge cooler Sneaker hervorgebracht hat, deren Design immer auf traditionelle Werte bedacht war ohne zu konservativ zu wirken.'),
+       (2, 'Air Max 97', 129.99, 1, 2, 2, NULL, NULL),
+       (3, 'Classic Clog', 69.69, 1, 3, 3, NULL, NULL),
+       (4, 'Yeezy Boost 380 "Alien"', 199.99, 1, 4, 4, NULL, NULL);
 
 INSERT INTO `myZone`.`orders` (`shipmentDate`, `customer`)
 VALUES ('2020-12-30', 1),
