@@ -31,6 +31,7 @@ if(inputPassword)
         });
     }
 
+
 if(inputPassword_2)
     {
         inputPassword_2.addEventListener('keyup', function()
