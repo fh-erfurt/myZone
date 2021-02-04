@@ -1,55 +1,58 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var btnSubmit = document.getElementById('submitSignup');
-    var inputUsername = document.getElementsByClassName('username'); // TODO FZW get by Id
-    var inputPassword = document.getElementsByClassName('password');
+document.addEventListener('DOMContentLoaded', function()
+{
+    var inputBox = document.getElementById('newPassword');
+    var inputBox_2 = document.getElementById('confirmPassword');
+    var inputPassword = document.getElementById('newPassword');
+    var inputPassword_2 = document.getElementById('confirmPassword');
 
-    if(btnSubmit)
+
+if(inputPassword)
     {
-        btnSubmit.addEventListener('click', function(event){
-            var valid = true;
-            if(!inputUsername || inputUsername.value.length < 2)
-            {
-                valid = false;
-            }
-
-            var regex = /^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m;
-            if(!inputPassword || inputPassword.value.length < 8 || !inputPassword.value.match(regex))
-            {
-                valid = false;
-            }
-
-
-            if(valid === false)
-            {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-
-            return valid;
-        });
-    }
-
-
-    if(inputPassword)
-    {
-        inputPassword.addEventListener('keyup', function(){
+        inputPassword.addEventListener('keyup', function()
+        {
 
             var regex1 = /^(?=.*?[A-Z].*?)(?=.*?[a-z].*?)(?=.*?[0-9].*?)(?=.*?[^\w\s].*?).{8,}$/m;
             var regex2 = /^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m;
             var str = this.value;
-            'Passwort zu schwach (jeweils 2 Groß- und Kleinbuchstaben, 2 Zahlen und 2 Sonderzeichen).'
             if(str.match(regex2))
             {
-                inputPassword.style.border = '2px solid green';
+                inputBox.style.backgroundColor = 'green';
             }
             else if(str.match(regex1))
             {
-                inputPassword.style.border = '2px solid yellow';
+                inputBox.style.backgroundColor = 'orange';
             }
             else
             {
-                inputPassword.style.border = '2px solid red';
+                inputBox.style.backgroundColor = 'red';
             }
+
+
+        });
+    }
+
+if(inputPassword_2)
+    {
+        inputPassword_2.addEventListener('keyup', function()
+        {
+
+            var regex1 = /^(?=.*?[A-Z].*?)(?=.*?[a-z].*?)(?=.*?[0-9].*?)(?=.*?[^\w\s].*?).{8,}$/m;
+            var regex2 = /^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m;
+            var str = this.value;
+            if(str.match(regex2))
+            {
+                inputBox_2.style.backgroundColor = 'green';
+            }
+            else if(str.match(regex1))
+            {
+                inputBox_2.style.backgroundColor = 'orange';
+            }
+            else
+            {
+                inputBox_2.style.backgroundColor = 'red';
+            }
+
+
         });
     }
 });
