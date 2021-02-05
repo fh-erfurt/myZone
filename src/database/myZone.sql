@@ -96,6 +96,36 @@ CREATE TABLE IF NOT EXISTS `myZone`.`orders` (
 
 
 -- -----------------------------------------------------
+-- Table `myZone`.`categories`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myZone`.`categories` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `name` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`id`));
+
+    -- -----------------------------------------------------
+-- Table `myZone`.`brands`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myZone`.`brands` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`));
+
+    -- -----------------------------------------------------
+-- Table `myZone`.`colors`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myZone`.`colors` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`));
+
+    -- -----------------------------------------------------
 -- Table `myZone`.`products`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `myZone`.`products` (
@@ -104,10 +134,27 @@ CREATE TABLE IF NOT EXISTS `myZone`.`products` (
   `updatedAt` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `name` VARCHAR(45) NOT NULL,
   `price` DECIMAL(5,2) NOT NULL,
-  `category` VARCHAR(20) NULL,
-  `brand` VARCHAR(45) NULL,
-  `color` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`));
+  `category` INT NOT NULL,
+  `brand` INT NOT NULL,
+  `color` INT NOT NULL,
+  `descriptionColor` VARCHAR(64) NULL DEFAULT NULL,
+  `description` VARCHAR(1000) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+    CONSTRAINT `fk_products_categories1`
+    FOREIGN KEY (`category`)
+    REFERENCES `myZone`.`categories` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_products_brands1`
+    FOREIGN KEY (`brand`)
+    REFERENCES `myZone`.`brands` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_products_colors1`
+    FOREIGN KEY (`color`)
+    REFERENCES `myZone`.`colors` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
@@ -152,11 +199,27 @@ INSERT INTO `myZone`.`userLogins` (`id`, `validated`, `enabled`, `username`,  `p
 VALUES (1, 1, 1, 'testUser', '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 1),
        (2, 1, 0, 'realUser', '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 2);
 
-INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`)
-VALUES (1, 'Club C85 Vintage', 99.99, 'shoes', 'Reebok', 'white'),
-       (2, 'Air Max 97', 129.99, 'shoes', 'Nike', 'red'),
-       (3, 'Classic Clog', 69.69, 'shoes', 'crocs', 'bronze'),
-       (4, 'Yeezy Boost 380 "Alien"', 199.99, 'shoes', 'Adidas', 'green');
+INSERT INTO `myZone`.`categories` (`id`, `name`)
+VALUES (1, 'shoes');
+
+INSERT INTO `myZone`.`brands` (`id`, `name`)
+VALUES (1, 'Reebok'),
+       (2, 'Nike'),
+       (3, 'crocs'),
+       (4, 'Adidas');
+
+INSERT INTO `myZone`.`colors` (`id`, `name`)
+VALUES (1, 'white'),
+       (2, 'red'),
+       (3, 'bronze'),
+       (4, 'green');
+
+INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`, `descriptionColor`, `description`)
+VALUES (1, 'Club C85 Vintage', 99.99, 1, 1, 1, 'Calk / Paperwhite / Cya',
+        'Kein Schnickschnack, nur die pure Ästhetik des Tennissports schwingt beim Club C 85 von Reebok mit. Weiches Leder als Obermaterial, strategisch gepolstertes Textilfutter, eine cleane Farbe für die Sohle in Braun und einfache, nachvollziehbare Linien mit ideal dosierten Overlays sind die Merkmale von Reebok''s Club C 85 MU. Tennis war in den Achtziger Jahren einfach der Sport, der eine Menge cooler Sneaker hervorgebracht hat, deren Design immer auf traditionelle Werte bedacht war ohne zu konservativ zu wirken.'),
+       (2, 'Air Max 97', 129.99, 1, 2, 2, NULL, NULL),
+       (3, 'Classic Clog', 69.69, 1, 3, 3, NULL, NULL),
+       (4, 'Yeezy Boost 380 "Alien"', 199.99, 1, 4, 4, NULL, NULL);
 
 INSERT INTO `myZone`.`orders` (`shipmentDate`, `customer`)
 VALUES ('2020-12-30', 1),

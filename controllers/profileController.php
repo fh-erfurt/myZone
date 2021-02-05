@@ -107,6 +107,7 @@ class ProfileController extends \dwp\core\Controller
      */
     public function validateCustomerAndUserLoginAndSaveToDB($customerData, $userLoginData, &$sqlErrors)
     {
+        $db = $GLOBALS['db'];
         // create and validate new customer and user login objects from given data
         $newCustomer  = new Customer($customerData);
         $newUserLogin = new UserLogin($userLoginData);
@@ -120,7 +121,7 @@ class ProfileController extends \dwp\core\Controller
                 // if the user is logged in, get the customer id from the session
                 $newUserLogin->customer = $this->loggedIn()
                     ? $_SESSION['currentUser']['customerId']
-                    : Customer::select('id','WHERE email ='.$GLOBALS['db']->quote($_SESSION['currentUser']['email']))[0]->id;
+                    : Customer::select('id','WHERE email ='.$db->quote($customerData['email']))[0]->id;
 
                 $newUserLogin->save($sqlErrors);
             }
@@ -141,7 +142,7 @@ class ProfileController extends \dwp\core\Controller
         ];
     }
 
-    public function updateCurrentUserInSession()
+    public function updateCurrentUserInSession() # TODO
     {
         $this->updateCurrentUserInSessionWithUserLoginData(UserLogin::selectWhere("id = ".$GLOBALS['db']->quote(trim($_SESSION['currentUser']['userId'])))[0]);
     }
@@ -355,7 +356,7 @@ class ProfileController extends \dwp\core\Controller
                             if (empty($sqlErrors))
                             {
                                 // get user ID from db to generate a validation link
-                                $_SESSION['validateUserID'] = UserLogin::select('id', 'WHERE username ='.$GLOBALS['db']->quote($userLoginData['username']))[0]->{'id'};
+                                $_SESSION['validateUserID'] = UserLogin::select('id', 'WHERE username ='.$GLOBALS['db']->quote($userLoginData['username']))[0]->id;
                                 header('Location: index.php?c=profile&a=login');
                             }
                         }

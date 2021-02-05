@@ -8,7 +8,7 @@ class Order extends BaseModel  // TODO brauchen wir hierfür ein model?
 {
     const TABLENAME = '`orders`';
 
-    protected $schema = [
+    protected static $schema = [
         'id'                     => ['type' => BaseModel::TYPE_INT],
         'createdAt'              => ['type' => BaseModel::TYPE_STRING, 'max' => 10],
         'updatedAt'              => ['type' => BaseModel::TYPE_STRING, 'max' => 10],

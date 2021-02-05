@@ -10,7 +10,7 @@ class UserLogin extends BaseModel
 
     const TABLENAME = '`userLogins`';
 
-    protected $schema = [
+    protected static $schema = [
         'id'                     => ['type' => BaseModel::TYPE_INT],
         'createdAt'              => ['type' => BaseModel::TYPE_STRING, 'max' => 10],
         'updatedAt'              => ['type' => BaseModel::TYPE_STRING, 'max' => 10],
