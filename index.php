@@ -2,8 +2,7 @@
 
 use \dwp\controllers\ErrorsController;
 
-#session_save_path(__DIR__.DIRECTORY_SEPARATOR.'data');
-if (session_status() == PHP_SESSION_NONE) session_start();
+session_start();
 
 // load configurations
 require_once './config/paths.php';
