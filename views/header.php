@@ -73,18 +73,7 @@
     <a href="<?=$_SERVER['PHP_SELF']?>"                           >HOME</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart" >CART</a>
     <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=all"          >ALLE PRODUKTE</a>
-    <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=page3"           >SEITE3</a>
-    <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >SEITE4</a>
-    <a href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=ProductPage"     >Produktseite</a>
+    <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >ERROR</a>
     <? if($loggedIn) :?><p>-------------You are logged in as <?=$_SESSION['currentUser']['username'] ?? 'ERROR'?>!--</p> <? endif; ?>
     <? if(isset($GLOBALS['errorMessages']['login'])) : ?><div class="error-message"><?=$GLOBALS['errorMessages']['login']?></div>   <? endif; ?>
 </nav>
-<div class="login-notification">
-    <? if(isset($GLOBALS['errorMessages']['login'])) : ?>
-        <div class="error-message">
-            <img class="red-x-icon" src="<?=ROOTPATH. '/assets/img/icons/red-x-icon.svg'?>">
-            <?=$GLOBALS['errorMessages']['login']?>
-            <label class="close-not-icon" for="close-error-btn"></label>
-        </div>
-    <? endif; ?>
-</div>
