@@ -1,6 +1,6 @@
 .main{
     display: flex;
-    width: 75%;
+    width: 70%;
     margin: 0 auto;
     flex-wrap: wrap;
 }
@@ -45,7 +45,7 @@
 }
 
 .brand-logo{
-    height: 75px;
+    height: 65px;
 }
 
 .pp-brand{
@@ -145,7 +145,7 @@
     font-size: 22px;
 }
 
-@media only screen and (max-width: 1040px) {
+@media only screen and (max-width: 1280px) {
 
     .main{
         width: 90%;
@@ -180,7 +180,7 @@
     .product-description-box-mob{
         display: flex;
         flex-direction: column;
-        padding: 0 10px 10px 10px;
+        padding: 0 10px 20px 10px;
     }
 
     .all-Products-brand{
@@ -191,7 +191,7 @@
     }
 }
 
-@media only screen and (max-width: 670px){
+@media only screen and (max-width: 630px){
     .product-description-box{
         width: 100%;
     }
@@ -201,6 +201,15 @@
     }
     .inset-product{
         flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .add-to-cart{
+        padding: 10px;
+    }
+
+    .add-to-cart-box{
+        justify-content: center;
     }
 }
 
