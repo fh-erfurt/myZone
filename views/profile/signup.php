@@ -65,7 +65,7 @@
                     // if the remember value is true AND the post parameter is set save it into the variable, which is written into the textfield.
                     $value = $remember ? $_POST[$attribute] ??  '' : ''; ?>
                     <div class="signup-input">
-                        <div class="input-box">
+                        <div class="input-box" id="input-box-<?=$attribute?>">
                             <input class="input-txt" id="<?=$attribute?>" name="<?=$attribute?>" type="<?=$type?>" placeholder="<?=$placeholder?>" value="<?=htmlspecialchars($value)?>"<?=$required ? ' required' : ''?> />
                         </div>
                     </div>
