@@ -4,7 +4,11 @@
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logo">myZone</a>
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logoMob">mZ</a>
         <div class="interact">
-            <form method="get">
+            <input class="search-btn-mob" type="checkbox" id="search-btn-mob"/>
+            <label class="search-mob-box" for="search-btn-mob">
+                <img class="search-icon-mob" src="<?=ROOTPATH. '/assets/img/icons/search-icon.svg'?>">
+            </label>
+            <form class="search-pop-up" method="get">
                 <input name="c" value="products" hidden>
                 <input name="a" value="search" hidden>
                 <div class="search-box">
@@ -12,6 +16,7 @@
                     <button class="search-btn" type="submit">
                         <img class="search-icon" src="<?=ROOTPATH. '/assets/img/icons/search-icon.svg'?>">
                     </button>
+
                 </div>
             </form>
             <div class="shopping-cart">
@@ -63,6 +68,9 @@
                     </form>
                 </div>
             </div>
+            <label class="close-search-icon" for="search-btn-mob">
+                <img class="x-search-icon" src="<?=ROOTPATH. '/assets/img/icons/white-close-icon.svg'?>">
+            </label>
         </div>
     </div>
 </header>

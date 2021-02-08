@@ -32,19 +32,19 @@ body {
 
 .header {
     background-color: var(--headercolor);
-    height: 70px;
-    padding: 10px;
     align-items: center;
     display: flex;
+    width: 100%;
 }
 
 .inset{
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
 }
 .logo {
     font-family: PermanentMarker;
@@ -56,7 +56,7 @@ body {
 }
 
 .logo:hover{
-    font-size: 46px;
+    color: var(--footercolor);
 }
 
 .logoMob{
@@ -104,12 +104,8 @@ body {
 
 .search-icon{
     width: 23px;
-    transition: width 0.2s ease-out;
 }
 
-.search-icon:hover{
-    width: 27px;
-}
 
 .search-txt{
     border: none;
@@ -128,16 +124,41 @@ body {
     padding:0 15px 0 15px;
 }
 
-.shopping-cart-btn{
-}
-
 .shopping-cart-icon{
     width: 37px;
     transition: width 0.2s ease-out;
 }
 
-.shopping-cart-icon:hover{
-    width: 41px;
+.search-btn-mob{
+    display: none;
+}
+
+.search-mob-box{
+    display: none;
+    background: white;
+    height: 15px;
+    border-radius: 20px;
+    padding: 10px;
+    transition: 0.4s linear;
+    position: relative;
+}
+
+.search-icon-mob{
+    width: 23px;
+    margin-top: -4px;
+}
+
+.close-search-icon{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 0 15px;
+    margin-top: -3px;
+}
+
+.x-search-icon{
+    width: 21px;
+    color: white;
 }
 
 /******* login pop-up ********/
@@ -152,12 +173,7 @@ body {
     transition: width 0.2s ease-out;
 }
 
-.user-icon:hover{
-    width: 40px;
-}
-
 .pop-up-btn{
-    padding: 10px;
     display:none;
 }
 
@@ -203,22 +219,7 @@ body {
     width: 14px;
 }
 
-.close-btn{
-    display: none;
-}
 
-.close-btn:checked ~ .login{
-    max-height: 0;
-    opacity: 0;
-}
-
-.close-btn:checked ~ .close-icon .x-icon:before{
-    background: transparent;
-}
-
-.close-btn:checked ~ .close-icon .x-icon:after{
-    background: transparent;
-}
 
 
 .login{
@@ -274,7 +275,6 @@ body {
     outline: none;
     color: black;
     font-size: 14px;
-    text-align: center;
 }
 
 .input-submit{
@@ -307,10 +307,6 @@ body {
     transition: font-size 0.2s ease-out;
 }
 
-.login-footer-link:hover{
-    font-size: 16px;
-}
-
 /******** media queries **************/
 
 @media only screen and (max-width: 1280px) {
@@ -324,28 +320,39 @@ body {
     body {
         overflow-x: hidden;
     }
-
-    .header {
-        height: 65px;
-    }
 }
 
 @media only screen and (max-width: 570px) {
-    .header {
-        height: 60px;
-    }
-
     .inset {
-        width: 100%;
+        padding: 8px;
     }
 
-    .search-txt {
-        width: 0;
+    .search-pop-up{
+        display: none;
     }
 
-    .search-icon{
-        width: 20px;
-        margin-top: 2px;
+    .search-mob-box{
+        display: inline-block;
+    }
+
+    .search-btn-mob:checked ~.search-pop-up{
+        display: flex;
+    }
+
+    .search-btn-mob:checked ~.search-mob-box{
+        display: none;
+    }
+
+    .search-btn-mob:checked ~.shopping-cart{
+        display: none;
+    }
+
+    .search-btn-mob:checked ~.user{
+        display: none;
+    }
+
+    .search-btn-mob:checked ~.close-search-icon{
+        display: flex;
     }
 
     .logo {
@@ -359,24 +366,6 @@ body {
     .close-icon{
         right: 12px;
     }
-}
-
-@media only screen and (max-width: 480px) {
-
-    .header {
-        height: 50px;
-    }
-}
-
-
-@media only screen and (max-width: 370px) {
-    .inset {
-        width: 100%;
-    }
-
-    .search-txt {
-        width: 0;
-    }
 
     .logo {
         display: none;
@@ -386,5 +375,17 @@ body {
         font-family: PermanentMarker;
         display: flex;
         font-size: 38px;
+    }
+}
+
+
+@media only screen and (max-width: 370px) {
+    .inset {
+        width: 100%;
+        padding: 5px 8px 5px 8px;
+    }
+
+    .search-txt{
+        width: 160px;
     }
 }

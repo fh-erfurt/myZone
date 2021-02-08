@@ -37,11 +37,6 @@
     margin: 0 auto;
     text-align: center;
     display: none;
-    overflow-y: auto;
-}
-
-.about-us::-webkit-scrollbar{
-    display: none;
 }
 
 .about-us-headline{
@@ -150,10 +145,6 @@
     transition: 0.1s;
 }
 
-.bottom a:hover{
-    font-size: 18px;
-}
-
 @media only screen and (max-width: 1280px) {
 
     .top-seller {
@@ -237,7 +228,7 @@
 
     .top-seller{
         margin-top: 0;
-        width: 95%;
+        width: 90%;
     }
     .upper-topseller{
         height: 150px;
@@ -253,7 +244,6 @@
     .about-us-mob{
         display: flex;
         flex-direction: column;
-        height: 100px;
     }
 
     .about-us{
@@ -262,6 +252,14 @@
 
     .top-seller-headline{
         font-size: 18px;
+    }
+
+    .background-img{
+        display: none;
+    }
+
+    .home-input{
+        position: static;
     }
 }
 
