@@ -75,6 +75,47 @@
     font-size: 14px;
 }
 
+.input-txt-order-street{
+    width: 210px;
+    border: none;
+    outline: none;
+    color: black;
+    font-size: 14px;
+}
+
+.input-box-order-street{
+    width: 220px;
+    background-color: white;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    border: 1px solid #858585;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.input-box-order-number{
+    width: 60px;
+    background-color: white;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #858585;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.input-txt-order-number{
+    width: 50px;
+    border: none;
+    outline: none;
+    color: black;
+    font-size: 14px;
+}
+
+
 .guest-submit{
     padding: 20px 10px 20px 10px;
 }

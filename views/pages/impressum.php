@@ -38,8 +38,11 @@
                 </div>
             </div>
             <div class="input-wrapper">
-                <div class="input-box-order">
-                    <input class="input-txt-order" type="text" placeholder="Straßenname und Hausnummer*"/>
+                <div class="input-box-order-street">
+                    <input class="input-txt-order-street" type="text" placeholder="Straßenname*"/>
+                </div>
+                <div class="input-box-order-number">
+                    <input class="input-txt-order-number" type="text" placeholder="Hs.-Nr.*">
                 </div>
             </div>
             <div class="input-wrapper">
