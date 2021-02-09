@@ -19,14 +19,14 @@
         background: lightgrey;
     }
 </style>
-<div id="a">
+<div id="a"><!-- TODO -->
 <?
-$totalPrice = 0;
+    $totalPrice = 0;
 
-foreach($_SESSION['cart'] as $id => $product) :
-    $product = unserialize($product);
-    $quantity = $_SESSION['cartItemCount'][$id];
-    $totalPrice += $product->price * $quantity;
+    foreach($_SESSION['cart'] as $id => $product) :
+        $product = unserialize($product);
+        $quantity = $_SESSION['cartItemCount'][$id];
+        $totalPrice += $product->price * $quantity;
 ?>
     <div class="checkout-item">
         <div class="attr">
@@ -40,24 +40,24 @@ foreach($_SESSION['cart'] as $id => $product) :
         </div>
     </div>
 <?
-endforeach;
-echo '</div>';
+    endforeach;
+    echo '</div>';
 
-echo '<br>TOTAL PRICE: '.$totalPrice.'€'; # TODO
+    echo '<br>TOTAL PRICE: '.$totalPrice.'€'; # TODO
 
-global $controller;
-$loggedIn = $controller->loggedIn();
-echo '<br> loggedIn: ';
-var_dump($loggedIn);
+    global $controller;
+    $loggedIn = $controller->loggedIn();
+    echo '<br> loggedIn: ';
+    var_dump($loggedIn);
 ?>
 
     <form action="?c=products&a=pay" method="post">
-<? if($loggedIn) : ?>
+<?  if($loggedIn) : ?>
     <label for="shipmentDate">
         Vorname
     </label>
     <input type="date" id="shipmentDate" name="shipmentDate">
-<? endif; ?>
+<?  endif; ?>
     <label for="shipmentDate">
         gewünschtes Zustellungsdatum
     </label>
