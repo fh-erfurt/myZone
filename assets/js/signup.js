@@ -21,18 +21,18 @@ document.addEventListener('DOMContentLoaded', function()
                 var str = this.value;
                 if(str.match(regex2))
                 {
-                    inputBoxPassword.style.backgroundColor = 'green';
-                    inputPassword.style.backgroundColor = 'green';
+                   inputBoxPassword.style.border = '1px solid green';
+                   inputBoxPassword.style.boxShadow = '0 0.05rem 1rem green';
                 }
                 else if(str.match(regex1))
                 {
-                    inputBoxPassword.style.backgroundColor = 'orange';
-                    inputPassword.style.backgroundColor = 'orange';
+                   inputBoxPassword.style.border = '1px solid #D05706';
+                   inputBoxPassword.style.boxShadow = '0 0.05rem 1rem #D05706';
                 }
                 else
                 {
-                    inputBoxPassword.style.backgroundColor = 'red';
-                    inputPassword.style.backgroundColor = 'red';
+                    inputBoxPassword.style.border = '1px solid red';
+                    inputBoxPassword.style.boxShadow = '0 0.05rem 1rem red';
                 }
 
 
@@ -49,18 +49,18 @@ document.addEventListener('DOMContentLoaded', function()
                 var regex2 = /^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m;
                 if(password2.match(regex2) && password2 === password)
                 {
-                    inputBoxConfirmPassword.style.backgroundColor = 'green';
-                    inputConfirmPassword.style.backgroundColor = 'green';
+                    inputBoxConfirmPassword.style.border = '1px solid green';
+                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 1rem green';
                 }
                 else if(password2.match(regex1) && password2 === password)
                 {
-                    inputBoxConfirmPassword.style.backgroundColor = 'orange';
-                    inputConfirmPassword.style.backgroundColor = 'orange';
+                    inputBoxConfirmPassword.style.border = '1px solid #D05706';
+                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 1rem #D05706';
                 }
                 else
                 {
-                    inputBoxConfirmPassword.style.backgroundColor = 'red';
-                    inputConfirmPassword.style.backgroundColor = 'red';
+                    inputBoxConfirmPassword.style.border = '1px solid red';
+                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 1rem red';
                 }
 
 
@@ -76,14 +76,13 @@ document.addEventListener('DOMContentLoaded', function()
             var str = this.value;
             if(str.match(regex3))
             {
-                inputEmail.style.backgroundColor = 'green';   // wird auf website bei autocomplete nicht umgesetzt? # TODO FZ Email green when Autocomplete
-                inputBoxEmail.style.backgroundColor = 'green';
-                inputEmail.style.borderRadius = '10px';       // optional
+                inputBoxEmail.style.border = '1px solid green';
+                inputBoxEmail.style.boxShadow = '0 0.05rem 1rem green';
             }
             else
             {
-                inputEmail.style.backgroundColor = 'red';
-                inputBoxEmail.style.backgroundColor = 'red';
+                inputBoxEmail.style.border = '1px solid red';
+                inputBoxEmail.style.boxShadow = '0 0.05rem 1rem red';
             }
         });
     }
