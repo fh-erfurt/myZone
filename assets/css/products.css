@@ -87,11 +87,6 @@
 }
 
 @media only screen and (max-width: 570px) {
-
-    .content {
-        width: auto;
-    }
-
     .row {
         justify-content: space-between;
     }
@@ -118,6 +113,10 @@
 }
 
 @media only screen and (max-width: 370px) {
+    .content{
+        width: 100%;
+        padding: 8px;
+    }
 
     .product{
         width: 125px;
@@ -146,9 +145,5 @@
 
     .price{
         font-size: 11px;
-    }
-
-    .content{
-        padding: 8px;
     }
 }
