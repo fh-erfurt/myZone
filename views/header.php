@@ -1,5 +1,6 @@
 <? global $loggedIn; ?>
 <header class="header">
+    <? if(isset($_SESSION['cart'])) echo '<div id="cart-count" hidden>'.sizeof($_SESSION['cart']).'</div>'?>
     <div class="inset">
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logo">myZone</a>
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logoMob">mZ</a>
