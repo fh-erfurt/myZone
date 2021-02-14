@@ -90,8 +90,8 @@ class ProductsController extends \dwp\core\Controller
                 'shipmentDate' => $_POST['shipmentDate'] ?? null # TODO
             ];
 
-            $newOrder = new Order($orderData);
-            if ($newOrder->validate()) $newOrder->save();
+            # $newOrder = new Order($orderData); TODO
+            # if ($newOrder->validate()) $newOrder->save(); TODO
 
             $addressData    = [ # TODO
                 'street'  => $_POST['street']  ?? null,
