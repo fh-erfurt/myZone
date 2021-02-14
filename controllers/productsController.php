@@ -4,6 +4,7 @@
 namespace dwp\controllers;
 
 
+use dwp\models\Order;
 use dwp\models\Product;
 use dwp\models\JoinedProduct;
 
@@ -68,5 +69,57 @@ class ProductsController extends \dwp\core\Controller
     {
         $_SESSION['cart'] = null;
         header('Location: index.php?c=products&a=shoppingCart');
+    }
+
+    public function actionCheckout()
+    {
+        if(empty($_SESSION['cart'])) header('Location: index.php?c=pages&a=home');
+    }
+
+    public function actionPay()
+    {
+        // TODO calculate information
+        if(empty($_SESSION['cart'])) header('Location: index.php?c=pages&a=home');
+        else
+        {
+            // TODO customer machen
+
+
+            $orderData  = [
+                'customer'     => $_SESSION['currentUser']['customerId'],
+                'shipmentDate' => $_POST['shipmentDate'] ?? null # TODO
+            ];
+
+            # $newOrder = new Order($orderData); TODO
+            # if ($newOrder->validate()) $newOrder->save(); TODO
+
+            $addressData    = [ # TODO
+                'street'  => $_POST['street']  ?? null,
+                'number'  => $_POST['number']  ?? null,
+                'city'    => $_POST['city']    ?? null,
+                'zipCode' => $_POST['zipCode'] ?? null
+            ];
+            $orderItemsData = null;
+
+            foreach($_SESSION['cart'] as $id => $product)
+            {
+                $prod = unserialize($product);
+                $qty = $_SESSION['cartItemCount'][$id];
+                $orderItemsData[$id] = [
+                    'quantity'    => $qty,
+                    'actualPrice' => $qty * $prod->price,
+                    'order'       => null, # TODO get order ID from DB
+                    'product'     => $id
+                ];
+            }
+
+            // do payment magic
+
+            // TODO insert into DB
+
+            // TODO delete cart
+            $_SESSION['cart'] = null; $_SESSION['cartItemCount'] = null;
+            header('Location: index.php?c=pages&a=thankYou');
+        }
     }
 }

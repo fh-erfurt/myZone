@@ -30,4 +30,8 @@ class PagesController extends \dwp\core\Controller
     public function actionAbout()
     {
     }
+
+    public function actionThankYou()
+    {
+    }
 }

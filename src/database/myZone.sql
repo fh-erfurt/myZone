@@ -42,14 +42,8 @@ CREATE TABLE IF NOT EXISTS `myZone`.`customers` (
   `lastName` VARCHAR(50) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `phone` VARCHAR(20) NULL,
-  `billingAddress` INT NULL,
   `deliveryAddress` INT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_customers_addresses1`
-    FOREIGN KEY (`billingAddress`)
-    REFERENCES `myZone`.`addresses` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_customers_addresses2`
     FOREIGN KEY (`deliveryAddress`)
     REFERENCES `myZone`.`addresses` (`id`)
@@ -191,9 +185,12 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 /* test data */
 
 
-INSERT INTO `myZone`.`customers` (`id`, `firstName`, `lastName`, `email`, `phone`)
-VALUES (1, 'testFirstName', 'testLastName', 'test@email.de', '018054646'),
-       (2, 'totallyRealFName', 'totallyRealLName', 'real@person.com', '010012345');
+INSERT INTO `myZone`.`addresses` (`id`, `street`, `number`, `city`, `zipCode`)
+VALUES (1, 'Teststraße', 420, 'Örtchen', '12345');
+
+INSERT INTO `myZone`.`customers` (`id`, `firstName`, `lastName`, `email`, `phone`, `deliveryAddress`)
+VALUES (1, 'testFirstName', 'testLastName', 'test@email.de', '018054646', 1),
+       (2, 'totallyRealFName', 'totallyRealLName', 'real@person.com', '010012345', NULL);
 
 INSERT INTO `myZone`.`userLogins` (`id`, `validated`, `enabled`, `username`,  `passwordHash`, `customer`)
 VALUES (1, 1, 1, 'testUser', '$2y$10$GzNBS1d96sZVhoE241Znf.Wzx9O4vBijFiU1NiPhr4SK3bzyFZNry', 1),

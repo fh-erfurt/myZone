@@ -2,7 +2,7 @@
 <div class="signup">
     <div class="signup-login-box">
         <div class="login-box">
-            <?php if(isset($loginErrors)) : foreach($loginErrors as $error) : # TODO wird auf login weitergeleitet?>
+            <?php if(isset($loginErrors)) : foreach($loginErrors as $error) : ?>
                 <div class="error-message">
                     <img class="red-x-icon" src="<?=ROOTPATH. '/assets/img/icons/red-x-icon.svg'?>">
                     <?=$error?>
