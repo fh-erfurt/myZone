@@ -1,59 +1,89 @@
 document.addEventListener('DOMContentLoaded', function()
 {
-    var inputBox = document.getElementById('newPassword');
-    var inputBox_2 = document.getElementById('confirmPassword');
+    // Password
     var inputPassword = document.getElementById('newPassword');
-    var inputPassword_2 = document.getElementById('confirmPassword');
+    var inputConfirmPassword = document.getElementById('confirmPassword');
+    var inputBoxPassword = document.getElementById('input-box-newPassword');
+    var inputBoxConfirmPassword = document.getElementById('input-box-confirmPassword');
 
+    //Email
+    var inputEmail = document.getElementById('email');
+    var inputBoxEmail = document.getElementById('input-box-email');
 
-if(inputPassword)
-    {
-        inputPassword.addEventListener('keyup', function()
+    // check Password
+    if(inputPassword)
         {
+            inputPassword.addEventListener('keyup', function()
+            {
 
-            var regex1 = /^(?=.*?[A-Z].*?)(?=.*?[a-z].*?)(?=.*?[0-9].*?)(?=.*?[^\w\s].*?).{8,}$/m;
-            var regex2 = /^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m;
+                var regex1 = /^(?=.*?[A-Z].*?)(?=.*?[a-z].*?)(?=.*?[0-9].*?)(?=.*?[^\w\s].*?).{8,}$/m;
+                var regex2 = /^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m;
+                var str = this.value;
+                if(str.match(regex2))
+                {
+                   inputBoxPassword.style.border = '1px solid green';
+                   inputBoxPassword.style.boxShadow = '0 0.05rem 1rem green';
+                }
+                else if(str.match(regex1))
+                {
+                   inputBoxPassword.style.border = '1px solid #D05706';
+                   inputBoxPassword.style.boxShadow = '0 0.05rem 1rem #D05706';
+                }
+                else
+                {
+                    inputBoxPassword.style.border = '1px solid red';
+                    inputBoxPassword.style.boxShadow = '0 0.05rem 1rem red';
+                }
+
+
+            });
+        }
+
+    if(inputConfirmPassword)
+        {
+            inputConfirmPassword.addEventListener('keyup', function()
+            {
+                var password = document.getElementById('newPassword').value;
+                var password2 = document.getElementById('confirmPassword').value;
+                var regex1 = /^(?=.*?[A-Z].*?)(?=.*?[a-z].*?)(?=.*?[0-9].*?)(?=.*?[^\w\s].*?).{8,}$/m;
+                var regex2 = /^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m;
+                if(password2.match(regex2) && password2 === password)
+                {
+                    inputBoxConfirmPassword.style.border = '1px solid green';
+                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 1rem green';
+                }
+                else if(password2.match(regex1) && password2 === password)
+                {
+                    inputBoxConfirmPassword.style.border = '1px solid #D05706';
+                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 1rem #D05706';
+                }
+                else
+                {
+                    inputBoxConfirmPassword.style.border = '1px solid red';
+                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 1rem red';
+                }
+
+
+            });
+        }
+
+// check Email
+    if(inputEmail)
+    {
+        inputEmail.addEventListener('keyup',function()
+        {
+            var regex3 = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/m;
             var str = this.value;
-            if(str.match(regex2))
+            if(str.match(regex3))
             {
-                inputBox.style.backgroundColor = 'green';
-            }
-            else if(str.match(regex1))
-            {
-                inputBox.style.backgroundColor = 'orange';
+                inputBoxEmail.style.border = '1px solid green';
+                inputBoxEmail.style.boxShadow = '0 0.05rem 1rem green';
             }
             else
             {
-                inputBox.style.backgroundColor = 'red';
+                inputBoxEmail.style.border = '1px solid red';
+                inputBoxEmail.style.boxShadow = '0 0.05rem 1rem red';
             }
-
-
-        });
-    }
-
-
-if(inputPassword_2)
-    {
-        inputPassword_2.addEventListener('keyup', function()
-        {
-
-            var regex1 = /^(?=.*?[A-Z].*?)(?=.*?[a-z].*?)(?=.*?[0-9].*?)(?=.*?[^\w\s].*?).{8,}$/m;
-            var regex2 = /^(?=.*?[A-Z].*?[A-Z])(?=.*?[a-z].*?[a-z])(?=.*?[0-9].*?[0-9])(?=.*?[^\w\s].*?[^\w\s]).{8,}$/m;
-            var str = this.value;
-            if(str.match(regex2))
-            {
-                inputBox_2.style.backgroundColor = 'green';
-            }
-            else if(str.match(regex1))
-            {
-                inputBox_2.style.backgroundColor = 'orange';
-            }
-            else
-            {
-                inputBox_2.style.backgroundColor = 'red';
-            }
-
-
         });
     }
 });

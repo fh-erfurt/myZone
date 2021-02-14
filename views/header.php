@@ -1,4 +1,5 @@
 <? global $loggedIn; ?>
+<script src="<?=ROOTPATH.'/assets/js/header.js'?>" type="text/javascript"></script>
 <header class="header">
     <? if(isset($_SESSION['cart'])) echo '<div id="cart-count" hidden>'.sizeof($_SESSION['cart']).'</div>'?>
     <div class="inset">
@@ -12,7 +13,7 @@
             <form class="search-pop-up" method="get">
                 <input name="c" value="products" hidden>
                 <input name="a" value="search" hidden>
-                <div class="search-box">
+                <div class="search-box" id="search-box">
                     <input class="search-txt" type="text" name="s" placeholder="Suchen">
                     <button class="search-btn" type="submit">
                         <img class="search-icon" src="<?=ROOTPATH. '/assets/img/icons/search-icon.svg'?>">
