@@ -26,8 +26,9 @@ include VIEWSPATH . 'navbar.php';
     </div>
     <div class="buy-or-delete">
         <div class="buy">
-            <button class="buy-btn" type="button">Zur Kasse
-            </button>
+            <form action="?c=products&a=checkout" method="post">
+                <input class="buy-btn" type="submit" value="Zur Kasse">
+            </form>
         </div>
         <form  action="?c=products&a=clearCart" method="post">
             <input class="delete-btn" type="submit" value="Warenkorb löschen">

@@ -132,13 +132,14 @@ class ProfileController extends \dwp\core\Controller
     {
         $customerData = Customer::selectWhere("id = ".$loginData->{'customer'})[0];
         $_SESSION['currentUser'] = [
-            'username'   => $loginData->{'username'},
-            'userId'     => $loginData->{'id'},
-            'customerId' => $customerData->{'id'},
-            'firstName'  => $customerData->{'firstName'},
-            'lastName'   => $customerData->{'lastName'},
-            'email'      => $customerData->{'email'},
-            'phone'      => $customerData->{'phone'}
+            'username'   => $loginData->username,
+            'userId'     => $loginData->id,
+            'customerId' => $customerData->id,
+            'firstName'  => $customerData->firstName,
+            'lastName'   => $customerData->lastName,
+            'email'      => $customerData->email,
+            'phone'      => $customerData->phone,
+            'address'    => $customerData->deliveryAddress ####### TODO TODO
         ];
     }
 
@@ -246,7 +247,7 @@ class ProfileController extends \dwp\core\Controller
         }
     }
 
-    public function actionLogin()
+    public function actionLogin($target = 'index.php?c=pages&a=home')
     {
         if($this->loggedIn()) header('Location: index.php?c=profile&a=view');
         else
@@ -280,7 +281,7 @@ class ProfileController extends \dwp\core\Controller
                             $this->updateCurrentUserInSessionWithUserLoginData($loginData);
                             // delete login data to prevent leaks before reloading home page
                             $loginData = null;
-                            header('Location: index.php?c=pages&a=home');
+                            header('Location: '.$target);
                         }
                     }
                     else $loginErrors[] = 'Nutzername oder Passwort ist falsch! Bitte versuchen Sie es noch einmal.';
@@ -292,6 +293,11 @@ class ProfileController extends \dwp\core\Controller
             $this->setParam('username',    $username    ?? null);
             $this->setParam('loginErrors', $loginErrors ?? null);
         }
+    }
+
+    public function actionLoginAtCheckout()
+    {
+        $this->actionLogin('index.php?c=products&a=checkout');
     }
 
     public function actionSignup()

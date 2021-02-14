@@ -1,14 +1,9 @@
-<?php if(isset($errMsg)) : # TODO $GLOBALS['errors'][...]?>
-    <div class="error-message">
-        <?=$errMsg?>
-    </div>
-<?php endif; ?>
-<?php if(isset($loginErrors)) : foreach($loginErrors as $error): # TODO $GLOBALS['errors'][...]?>
+<?php if(isset($loginErrors)) : foreach($loginErrors as $error) : ?>
     <div class="error-message">
         <?=$error?>
     </div>
 <?php endforeach; endif; ?>
-<?php if(isset($_SESSION['validateUserID']) && ! empty($_SESSION['validateUserID'])) : # TODO $GLOBALS['errors'][...]?>
+<?php if(isset($_SESSION['validateUserID']) && ! empty($_SESSION['validateUserID'])) : ?>
     <div class="validate-user">
         <a href="?c=profile&a=validateNewUser&uid=<?=$_SESSION['validateUserID']?>"><button>Nutzer valideren</button></a>
     </div>

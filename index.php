@@ -1,9 +1,9 @@
 <?php
 
 use \dwp\controllers\ErrorsController;
+use \dwp\core\Controller;
 
-#session_save_path(__DIR__.DIRECTORY_SEPARATOR.'data');
-if (session_status() == PHP_SESSION_NONE) session_start();
+session_start();
 
 // load configurations
 require_once './config/paths.php';
@@ -26,6 +26,7 @@ require_once MODELSPATH.'joinedProduct.php';
 // check get parameters and assign variables to determine controller and action to run
 $controllerName = $_GET['c'] ?? 'pages';
 $actionName     = $_GET['a'] ?? 'home';
+$loggedIn       = Controller::loggedIn();
 
 if(file_exists(CONTROLLERSPATH.$controllerName.'Controller.php'))
 {
@@ -64,11 +65,11 @@ $title = 'myZone';
 <body>
 
 <?
-include VIEWSPATH . 'header.php';
+include VIEWSPATH.'header.php';
 
 $controller->render();
 
-include VIEWSPATH . 'footer.php';
+include VIEWSPATH.'footer.php';
 ?>
 
 </body>

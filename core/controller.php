@@ -6,9 +6,8 @@ class Controller
 {
     protected $controller  = null;	// stores the called controllers name
     protected $action 	   = null;	// stores the called action name
-    protected $currentUser = null;  // store current logged in user here TODO
 
-    protected $params = [];			// stores useful params for view rendering
+    protected $params      = [];	// stores useful params for view rendering
 
     public function __construct($controller, $action)
     {
@@ -16,7 +15,7 @@ class Controller
         $this->action = $action;
     }
 
-    public function loggedIn()
+    public static function loggedIn()
     {
         return (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true);
     }

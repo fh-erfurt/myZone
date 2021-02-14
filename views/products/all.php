@@ -1,8 +1,6 @@
 <?php
 include VIEWSPATH . 'navbar.php';
-
 include VIEWSPATH . 'filter.php';
-echo 'searchfor:   '.($searchfor ?? 'keine Suche').'<br>'; # TODO
 ?>
 
 <section class="content">
