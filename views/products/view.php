@@ -50,16 +50,17 @@ $db = $GLOBALS['db'];
     </div>
     <div class="all-Products-brand">
         <div class="all-Products-box">
-            <h1 class="all-Products-headline">Alle Artikel von <?=$product->brand?></h1>
+            <h1 class="all-Products-headline">Andere Artikel von <?=$product->brand?></h1>
             <div class="collum">
                 <?
-                $listProducts = JoinedProduct::joinedSelect(' WHERE brands.name = '.$db->quote($product->brand)); # #TODO JGE .'AND id NOT '.$db->quote($product->{'id'})
-                if(empty($listProducts)) echo 'keine Produkte gefunden (wahrscheinlich gibt es nur das eine und es wird ausgeschlossen TODO TODO TODO)'; #TODO JGE
+                # get all products of the same brand from database (could be optimized by saving the array when user switches to one of the products)
+                $listProducts = JoinedProduct::joinedSelect(' WHERE brands.name = '.$db->quote($product->brand).' AND NOT products.id = '.$db->quote($product->{'id'}));
+                if(empty($listProducts)) echo 'keine weiteren Produkte gefunden';
                 foreach($listProducts as $listProduct) :
                     ?>
 
 
-                <a class="link" href="#">
+                <a class="link" href="?c=products&a=view&id=<?=$listProduct->id?>">
                     <div class="product">
                         <div class="upper">
                             <img class="img" src="<?=ROOTPATH.'/assets/img/products/product_'.$listProduct->id.'.jpg'?>">

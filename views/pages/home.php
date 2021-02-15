@@ -14,15 +14,15 @@ include VIEWSPATH . 'navbar.php';
                     $products = [];
                     $products = JoinedProduct::joinedSelect(' INNER JOIN orderItems ON products.id = orderItems.product GROUP BY product ORDER BY sum(orderitems.quantity) DESC');
                 foreach($products as $product): ?>
-                <a class="link-topseller" href="?c=products&a=view&id=<?=$product->{'id'}?>">
+                <a class="link-topseller" href="?c=products&a=view&id=<?=$product->id?>">
                     <div class="product-topseller">
                         <div class="upper-topseller">
-                            <img class="img-topseller" src="<?=ROOTPATH.'assets/img/products/product_'.$product->{'id'}.'.jpg'?>">
+                            <img class="img-topseller" src="<?=ROOTPATH.'assets/img/products/product_'.$product->id.'.jpg'?>">
                         </div>
                         <div class="lower-topseller">
-                            <h1 class="brand"><?=$product->{'brand'}?></h1>
-                            <h2 class="model"><?=$product->{'name'}?></h2>
-                            <h3 class="price"><?=$product->{'price'}?>€</h3>
+                            <h1 class="brand"><?=$product->brand?></h1>
+                            <h2 class="model"><?=$product->name?></h2>
+                            <h3 class="price"><?=$product->price?>€</h3>
                         </div>
                     </div>
                 </a>
