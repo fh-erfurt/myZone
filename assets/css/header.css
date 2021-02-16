@@ -269,7 +269,7 @@ body {
     padding: 5px;
 }
 
-#username, #password{
+#lg-username, #password{
     width: 153px;
     border: none;
     outline: none;

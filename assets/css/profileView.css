@@ -80,3 +80,24 @@
     display: flex;
     flex-direction: column;
 }
+
+.pw-edit-label{
+    font-weight: bold;
+    padding-bottom: 5px;
+    cursor: pointer;
+    color: var(--btncolor);
+}
+
+.pw-btn{
+    display: none;
+}
+
+.new-pw-box{
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.pw-btn:checked ~ .new-pw-box{
+    display: flex;
+}

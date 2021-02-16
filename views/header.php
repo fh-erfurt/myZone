@@ -48,7 +48,7 @@
                                 Nutzername
                             </label>
                             <div class="typein-box">
-                                <input id="username" name="username" type="username" placeholder="" value="<?=isset($username) ? $username : ''?>" required />
+                                <input id="lg-username" name="username" type="username" placeholder="" value="<?=isset($username) ? $username : ''?>" required />
                             </div>
                         </div>
 
