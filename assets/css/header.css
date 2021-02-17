@@ -129,6 +129,18 @@ body {
     transition: width 0.2s ease-out;
 }
 
+.cart-count{
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #6d6b6b;
+    vertical-align: top;
+    padding: 3px 7px;
+    font-size: 10px;
+    line-height: 1;
+    display: inline-block;
+}
+
 .search-btn-mob{
     display: none;
 }
