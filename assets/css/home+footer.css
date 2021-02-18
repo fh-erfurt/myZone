@@ -129,6 +129,8 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    position: absolute;
+    overflow: hidden;
     bottom: 0;
 }
 
@@ -206,6 +208,10 @@
 
     .footer{
         height: 100px;
+    }
+
+    .body{
+        margin-bottom: 100px;
     }
 
     .top-seller{

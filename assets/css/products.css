@@ -2,17 +2,16 @@
     width: 70%;
     margin: 0 auto;
     align-items: center;
-    padding: 10px;
 }
 
 .title{
-    margin-top: 5px;
+    padding: 20px 0 0 10px;
 }
 
 .row{
     display: flex;
     padding: 10px;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
@@ -86,13 +85,14 @@
     }
 }
 
-@media only screen and (max-width: 570px) {
-    .row {
-        justify-content: space-between;
-    }
-}
+@media only screen and (max-width: 520px){
 
-@media only screen and (max-width: 480px){
+    .title{
+        padding-left: 25px;
+    }
+    .content{
+        width: 100%;
+    }
 
     .product{
         width: 150px;
@@ -113,14 +113,13 @@
 }
 
 @media only screen and (max-width: 370px) {
-    .content{
-        width: 100%;
-        padding: 8px;
-    }
-
     .product{
         width: 125px;
         height: 180px;
+    }
+
+    .title{
+        padding-left: 10px;
     }
 
     .upper{

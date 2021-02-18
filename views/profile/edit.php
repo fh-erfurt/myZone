@@ -28,8 +28,8 @@
 
         <? endforeach ?>
         <div class="pw-edit-box">
-            <label for="changePw">Passwort ändern?</label>
-            <input type="checkbox" name="changePassword" id="changePw">
+            <label class="pw-edit-label" for="changePw">Passwort ändern?</label>
+            <input class="pw-btn" type="checkbox" name="changePassword" id="changePw">
 
             <?php
             // fields which can be edited with matching placeholder and type.
@@ -39,7 +39,7 @@
             ];
             foreach($changePwFields as $attribute => [$placeholder, $type]) : ?>
 
-                <div class="view-content">
+                <div class="new-pw-box">
                     <label for="<?=$attribute?>"><?=$placeholder?></label>
                     <div class="view-display">
                         <input class="input-txt" type="<?=$type?>" name="<?=$attribute?>" id="<?=$attribute?>" value="">

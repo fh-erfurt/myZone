@@ -26,8 +26,16 @@
     list-style: none;
 }
 
+html{
+    min-height: 100%;
+    position: relative;
+}
+
 body {
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 120px 0 ;
 }
 
 .header {
@@ -281,7 +289,7 @@ body {
     padding: 5px;
 }
 
-#username, #password{
+#lg-username, #password{
     width: 153px;
     border: none;
     outline: none;
