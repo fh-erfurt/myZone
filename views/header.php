@@ -1,7 +1,7 @@
 <? global $loggedIn; ?>
 <script src="<?=ROOTPATH.'/assets/js/header.js'?>" type="text/javascript"></script>
+<script src="<?=ROOTPATH.'/assets/js/shoppingCartDropdown.js'?>" type="text/javascript"></script>
 <header class="header">
-    <? if(isset($_SESSION['cart'])) echo '<div id="cart-count" hidden>'.sizeof($_SESSION['cart']).'</div>'?>
     <div class="inset">
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logo">myZone</a>
         <a href="<?=$_SERVER['PHP_SELF']?>" class="logoMob">mZ</a>
@@ -25,6 +25,11 @@
                 <a class="shopping-cart-btn" href="<?$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart">
                     <img class="shopping-cart-icon" src="<?=ROOTPATH. '/assets/img/icons/shopping-cart-icon.svg'?>">
                 </a>
+                <? if(isset($_SESSION['cart'])) echo '<div class="cart-count" id="cart-count">'.sizeof($_SESSION['cart']).'</div>'?>
+                <div class="shopping-cart-dropdown">
+                    <div class="dropdown-content" id="dropdown-content">
+                    </div>
+                </div>
             </div>
             <div class="user">
                 <? # if no user is logged in, generate the element to display the login popup on click. if you are on the login page, you don't need another form
