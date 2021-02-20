@@ -25,7 +25,31 @@
                 <a class="shopping-cart-btn" href="<?$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart">
                     <img class="shopping-cart-icon" src="<?=ROOTPATH. '/assets/img/icons/shopping-cart-icon.svg'?>">
                 </a>
-                <? if(isset($_SESSION['cart'])) echo '<div class="cart-count" id="cart-count">'.sizeof($_SESSION['cart']).'</div>'?>
+                <? if(isset($_SESSION['cart'])) : ?>
+                    <div class="cart-count" id="cart-count"><?=sizeof($_SESSION['cart'])?></div>
+                    <div class="cart-content" id="cart-content" hidden>
+                        <? foreach($_SESSION['cart'] as $id => $product) : $product= unserialize($product); ?>
+                            <div style="display:flex;flex-direction:row" class="cart-item-<?=$product->id?>">
+                                <img style="width:35px;height:35px" class="cart-item-img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->id.'.jpg'?>">
+                                <div style="display:flex;flex-direction:column;color:white" class="cart-item-info">
+                                    <div class="cart-item-name"><?=$product->brand.' '.$product->name?></div>
+                                    <div class="cart-item-count-and-price"><?=$_SESSION['cartItemCount'][$product->id].' x '.$product->price.'€'?></div>
+                                </div>
+                            </div>
+                        <? endforeach; ?>
+                    </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                           var shoppingCart = document.getElementsByClassName('shopping-cart')[0];
+                           var cartContent = document.getElementById('cart-content');
+                            console.log(shoppingCart);
+                           shoppingCart.addEventListener('mouseover', function (){
+                               cartContent.hidden = !cartContent.hidden;
+                           });
+                           console.log(cartContent.hidden);
+                        });
+                    </script>
+                <? endif; ?>
                 <div class="shopping-cart-dropdown">
                     <div class="dropdown-content" id="dropdown-content">
                     </div>

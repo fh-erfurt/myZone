@@ -22,6 +22,7 @@ require_once MODELSPATH.'userLogin.php';
 require_once MODELSPATH.'customer.php';
 require_once MODELSPATH.'product.php';
 require_once MODELSPATH.'joinedProduct.php';
+require_once MODELSPATH.'address.php';
 
 // check get parameters and assign variables to determine controller and action to run
 $controllerName = $_GET['c'] ?? 'pages';
