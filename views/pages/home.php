@@ -10,7 +10,6 @@ include VIEWSPATH . 'navbar.php';
                 <?
                 try
                 {
-                    // didn't bother to make an extra model or function here since i am using this function only once TODO JGE?
                     $products = [];
                     $products = JoinedProduct::joinedSelect(' INNER JOIN orderItems ON products.id = orderItems.product GROUP BY product ORDER BY sum(orderitems.quantity) DESC');
                 foreach($products as $product): ?>
