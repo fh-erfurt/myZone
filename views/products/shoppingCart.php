@@ -8,20 +8,27 @@ include VIEWSPATH . 'navbar.php';
     </h1>
     <div class="shopping-cart-items">
         <?php if(!empty($_SESSION['cart'])) foreach($_SESSION['cart'] as $cartItem): $product = unserialize($cartItem);?>
-
-            <a class="link" href="?c=products&a=view&id=<?=$product->id?>">
-                <div class="product">
-                    <div class="upper">
-                        <img class="img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->id.'.jpg'?>">
+        <div class="sc-product">
+            <div class="sc-product-left">
+                <a class="" href="?c=products&a=view&id=<?=$product->id?>">
+                    <img class="sc-image" src="<?=ROOTPATH.'assets/img/products/product_'.$product->id.'.jpg'?>">
+                </a>
+                <div class="sc-product-info">
+                    <div class="sc-pinfo-upper">
+                        <div class="sc-brand"><?=$product->brand?></div>
+                        <div class="sc-model"><?=$product->name?></div>
+                        <div class="sc-color"><?=$product->descriptionColor?></div>
+                        <div class="sc-amount">Stückzahl: <?=$_SESSION['cartItemCount'][$product->id].' x '?></div>
                     </div>
-                    <div class="lower">
-                        <h1 class="brand"><?=$product->brand?></h1>
-                        <h2 class="model"><?=$product->name?></h2>
-                        <h3 class="color"><?=$product->descriptionColor?></h3>
-                        <h4 class="price"><?=$_SESSION['cartItemCount'][$product->id].' x '.$product->price?>€</h4>
-                    </div>
+                    <button class="delete-product">Artikel entfernen</button>
                 </div>
-            </a>
+            </div>
+            <div class="sc-product-right">
+                <div class="sc-price"><?=$product->price?> €</div>
+                <div class="sc-info">Versandfertig</div>
+            </div>
+        </div>
+
         <?php endforeach ?>
     </div>
     <div class="buy-or-delete">

@@ -2,8 +2,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var shoppingCart = document.getElementsByClassName('shopping-cart')[0];
   var cartContent = document.getElementById('cart-content');
+  var screenWidth = document.body.offsetWidth;
+  alert(screenWidth);
 
-  if(window.location.search != '?c=products&a=shoppingCart')
+  if(window.location.search != '?c=products&a=shoppingCart' && screenWidth >= 500)
   {
     shoppingCart.addEventListener('mouseover', function()
     {

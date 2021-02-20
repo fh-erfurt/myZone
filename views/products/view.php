@@ -35,7 +35,11 @@ $db = $GLOBALS['db'];
                 </div>
             </div>
             <div class="product-description-text-box">
-                <h1 class="product-description-headline">Artikelbeschreibung</h1>
+                <input class="show-description-btn" type="checkbox" id="show-description-btn"/>
+                <label class="show-description-box" for="show-description-btn">
+                    <h1 class="product-description-headline">Artikelbeschreibung</h1>
+                    <img class="arrow-icon" src="<?=ROOTPATH. '/assets/img/icons/arrow-icon.svg'?>">
+                </label>
                 <p class="product-description-text">
                     <?=$product->description ?? 'PrOdUkTbEsChReIbUnG'?>
                 </p>
@@ -43,7 +47,11 @@ $db = $GLOBALS['db'];
         </div>
     </div>
     <div class="product-description-box-mob">
-        <h1 class="product-description-headline">Artikelbeschreibung</h1>
+        <input class="show-description-btn" type="checkbox" id="show-description-btn-mob"/>
+        <label class="show-description-box" for="show-description-btn-mob">
+            <h1 class="product-description-headline">Artikelbeschreibung</h1>
+            <img class="arrow-icon" src="<?=ROOTPATH. '/assets/img/icons/arrow-icon.svg'?>">
+        </label>
         <p class="product-description-text">
             <?=$product->description ?? 'PrOdUkTbEsChReIbUnG'?>
         </p>

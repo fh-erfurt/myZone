@@ -22,17 +22,17 @@ document.addEventListener('DOMContentLoaded', function()
                 if(str.match(regex2))
                 {
                    inputBoxPassword.style.border = '1px solid green';
-                   inputBoxPassword.style.boxShadow = '0 0.05rem 1rem green';
+                   inputBoxPassword.style.boxShadow = '0 0.05rem 0.5rem #aaffaa';
                 }
                 else if(str.match(regex1))
                 {
                    inputBoxPassword.style.border = '1px solid #D05706';
-                   inputBoxPassword.style.boxShadow = '0 0.05rem 1rem #D05706';
+                   inputBoxPassword.style.boxShadow = '0 0.05rem 0.5rem #ffae73';
                 }
                 else
                 {
                     inputBoxPassword.style.border = '1px solid red';
-                    inputBoxPassword.style.boxShadow = '0 0.05rem 1rem red';
+                    inputBoxPassword.style.boxShadow = '0 0.05rem 0.5rem #ff9d9d';
                 }
 
 
@@ -50,17 +50,17 @@ document.addEventListener('DOMContentLoaded', function()
                 if(password2.match(regex2) && password2 === password)
                 {
                     inputBoxConfirmPassword.style.border = '1px solid green';
-                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 1rem green';
+                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 0.5rem #aaffaa';
                 }
                 else if(password2.match(regex1) && password2 === password)
                 {
                     inputBoxConfirmPassword.style.border = '1px solid #D05706';
-                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 1rem #D05706';
+                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 0.5rem #ffae73';
                 }
                 else
                 {
                     inputBoxConfirmPassword.style.border = '1px solid red';
-                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 1rem red';
+                    inputBoxConfirmPassword.style.boxShadow = '0 0.05rem 0.5rem #ff9d9d';
                 }
 
 
@@ -77,12 +77,12 @@ document.addEventListener('DOMContentLoaded', function()
             if(str.match(regex3))
             {
                 inputBoxEmail.style.border = '1px solid green';
-                inputBoxEmail.style.boxShadow = '0 0.05rem 1rem green';
+                inputBoxEmail.style.boxShadow = '0 0.05rem 0.5rem #aaffaa';
             }
             else
             {
                 inputBoxEmail.style.border = '1px solid red';
-                inputBoxEmail.style.boxShadow = '0 0.05rem 1rem red';
+                inputBoxEmail.style.boxShadow = '0 0.05rem 0.5rem #ff9d9d';
             }
         });
     }

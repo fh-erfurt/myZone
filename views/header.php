@@ -24,18 +24,22 @@
             <div class="shopping-cart">
                 <a class="shopping-cart-btn" href="<?$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart">
                     <img class="shopping-cart-icon" src="<?=ROOTPATH. '/assets/img/icons/shopping-cart-icon.svg'?>">
-                </a>
-                <? if(isset($_SESSION['cart'])) : ?>
+                    <? if(isset($_SESSION['cart'])) : ?>
                     <div class="cart-count" id="cart-count"><?=sizeof($_SESSION['cart'])?></div>
+                </a>
                     <div class="cart-content" id="cart-content">
                         <? foreach($_SESSION['cart'] as $id => $product) : $product= unserialize($product); ?>
-                            <div style="display:flex;flex-direction:row" class="cart-item-<?=$product->id?>">
-                                <img style="width:35px;height:35px" class="cart-item-img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->id.'.jpg'?>">
-                                <div style="display:flex;flex-direction:column;color:black" class="cart-item-info">
-                                    <div class="cart-item-name"><?=$product->brand.' '.$product->name?></div>
+                            <div class="triangle"></div>
+                            <a class="cart-item" href="?c=products&a=view&id=<?=$product->id?>">
+                                <img class="cart-item-img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->id.'.jpg'?>">
+                                <div class="cart-item-info">
+                                    <div class="cart-item-brand-model">
+                                        <div class="cart-item-brand"><?=$product->brand?></div>
+                                        <div class="cart-item-model"><?=$product->name?></div>
+                                    </div>
                                     <div class="cart-item-count-and-price"><?=$_SESSION['cartItemCount'][$product->id].' x '.$product->price.'€'?></div>
                                 </div>
-                            </div>
+                            </a>
                         <? endforeach; ?>
                     </div>
                 <? endif; ?>

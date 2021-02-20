@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', function()
 
     searchBox.addEventListener('click',function()
     {
-        searchBox.style.border = '1px solid white';
-        searchBox.style.boxShadow = '0 0.05rem 1rem white';
+        searchBox.style.boxShadow = '0 0.05rem 1rem #808080';
     })
 
     document.addEventListener('click',function(event)
