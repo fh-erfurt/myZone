@@ -26,6 +26,6 @@ class ErrorsController extends \dwp\core\Controller
 
     public function actionSql()
     {
-        $this->setParam('errMsg', 'Upps, etwas ist schief gelaufen (SQL Fehler).'); # TODO SQL Fehler für Nutzer entfernen
+        $this->setParam('errMsg', 'Upps, etwas ist schief gelaufen (4).');
     }
 }

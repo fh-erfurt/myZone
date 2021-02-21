@@ -1,19 +1,24 @@
-<? global $loggedIn; ?>
+<?
+    use dwp\models\Address;
+    global $loggedIn;
+?>
 <h1 class="checkout-headline">Kasse</h1>
 <div class="Order">
     <div class="order-adress">
-        <? if($loggedIn) :
-        if($_SESSION['currentUser']['address'] != NULL) :?>
+        <?
+            if($loggedIn && $_SESSION['currentUser']['address'] != NULL) :
+            $address = Address::selectWhere('id = '.$_SESSION['currentUser']['address'])[0];
+        ?>
             <div class="guest-Order">
                 <h1 class="Order-Headline">Lieferadresse</h1>
                 <div class="view-order-content">
                     <label class="order-label" for="Straßenname">Straßenname und Hausnummer</label>
                     <div class="input-wrapper">
                         <div class="input-box-order-street">
-                            <input class="input-txt-order-street" type="text" value="testStraße" readonly>
+                            <input class="input-txt-order-street" type="text" value="<?=$address->street?>" readonly>
                         </div>
                         <div class="input-box-order-number">
-                            <input class="input-txt-order-number" type="text" value="069" readonly>
+                            <input class="input-txt-order-number" type="text" value="<?=$address->number?>" readonly>
                         </div>
                     </div>
                 </div>
@@ -21,7 +26,7 @@
                     <label class="order-label" for="Straßenname">Postleitzahl</label>
                     <div class="input-wrapper">
                         <div class="input-box-order">
-                            <input class="input-txt-order" type="text" value="06069" readonly>
+                            <input class="input-txt-order" type="text" value="<?=$address->zipCode?>" readonly>
                         </div>
                     </div>
                 </div>
@@ -29,24 +34,16 @@
                     <label class="order-label" for="Straßenname">Ort/Stadt</label>
                     <div class="input-wrapper">
                         <div class="input-box-order">
-                            <input class="input-txt-order" type="text" value="Mainhatten" readonly>
+                            <input class="input-txt-order" type="text" value="<?=$address->city?>" readonly>
                         </div>
                     </div>
                 </div>
             </div>
-        <input class="new-adress-btn" id="new-adress-btn" name="new-adress-btn" type="checkbox">
-        <label class="new-adress-label" for="new-adress-btn">Lieferadresse ändern</label>
-        <form class="guest-Order-pop">
-        <? /*var_dump($_SESSION['currentUser']['address']);*/
-        endif; ?>
-
-
-            <?
-            else :
-            #array
-            #foreach
-            # TODO
-            ?>
+            <input class="new-adress-btn" id="new-adress-btn" name="new-adress-btn" type="checkbox">
+            <label class="new-adress-label" for="new-adress-btn">Lieferadresse ändern</label>
+            <form class="guest-Order" action="index.php?c=profile&a=changeAddressAtCheckout" method="post">
+                <input name="address-id" value="<?=$_SESSION['currentUser']['address']?>" hidden>
+        <? else : ?>
             <div class="order-login">
                 <form class="login-input-box" action="index.php?c=profile&a=loginAtCheckout" method="post">
                     <h2 class="second-login-headline2">Ich bin bereits Kunde</h2>
@@ -72,17 +69,16 @@
                     </div>
                 </form>
             </div>
-            <form class="guest-Order">
+            <form class="guest-Order" action="index.php?c=profile&a=changeAddressAtCheckout" method="post"> <!-- TODO JGE -->
                 <h1 class="Order-Headline">Als Gast bestellen</h1>
-
                 <?
-                $signupFields = [
+                $customerFields = [
                     'firstName'       => ['Vorname*',             'text',     true,  true ],
                     'lastName'        => ['Nachname*',            'text',     true,  true ],
                     'email'           => ['E-Mail*',              'text',     true,  true ],
                     'phone'           => ['Telefonnummer',        'text',     true,  false]
                 ];
-                foreach($signupFields as $attribute => [$placeholder, $type, $remember, $required]) :
+                foreach($customerFields as $attribute => [$placeholder, $type, $remember, $required]) :
                     // if the remember value is true AND the post parameter is set save it into the variable, which is written into the textfield.
                     $value = $remember ? $_POST[$attribute] ??  '' : ''; ?>
                     <div class="input-wrapper">
@@ -93,26 +89,27 @@
                 <?php endforeach; endif; ?>
                 <div class="input-wrapper">
                     <div class="input-box-order-street">
-                        <input class="input-txt-order-street" type="text" placeholder="Straßenname*"/>
+                        <input class="input-txt-order-street" type="text" name="street" placeholder="Straßenname*"/>
                     </div>
                     <div class="input-box-order-number">
-                        <input class="input-txt-order-number" type="text" placeholder="Hs.-Nr.*">
+                        <input class="input-txt-order-number" type="text" name="number" placeholder="Hs.-Nr.*">
                     </div>
                 </div>
                 <div class="input-wrapper">
                     <div class="input-box-order">
-                        <input class="input-txt-order" type="text" placeholder="Postleitzahl*"/>
+                        <input class="input-txt-order" type="text" name="zipCode" placeholder="Postleitzahl*"/>
                     </div>
                 </div>
                 <div class="input-wrapper">
                     <div class="input-box-order">
-                        <input class="input-txt-order" type="text" placeholder="Ort/Stadt*"/>
+                        <input class="input-txt-order" type="text" name="city" placeholder="Ort/Stadt*"/>
                     </div>
                 </div>
+                <input class="submit-btn" name="submit" type="submit" value="Neue Adresse speichern"/>
             </form>
-            <div class="guest-submit">
+            <form class="checkout-submit">
                 <input class="submit-btn" name="submit" type="submit" value="<?= $loggedIn ? 'Jetzt bestellen' : 'Als Gast bestellen'?>"/>
-            </div>
+            </form>
     </div>
 
     <div class="Order-overview-box">
