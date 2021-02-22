@@ -5,6 +5,7 @@ namespace dwp\controllers;
 
 use dwp\models\UserLogin;
 use dwp\models\Customer;
+use dwp\models\Address;
 
 /**
  * Class ProfileController
@@ -71,7 +72,10 @@ class ProfileController extends \dwp\core\Controller
     public function validateForm($fields, &$errors, $except = ['confirmPassword'])
     {
         foreach($fields as $key => $value)
-        { if(!in_array($key, $except) && !$this->validateInput($key, $value)) $errors[] = $this->validationErrorMessages[$key]; }
+        {
+            if(!in_array($key, $except) && !$this->validateInput($key, $value))
+                $errors[] = $this->validationErrorMessages[$key];
+        }
     }
 
     /**
@@ -86,7 +90,7 @@ class ProfileController extends \dwp\core\Controller
         foreach($fields as $key => $value)
         {
             // don't check fields in the exceptions array
-            if(!in_array($key, $except) && (empty($value) || mb_strlen($value) < 2))
+            if(!in_array($key, $except) && empty($value))
             { $errors[] = 'Alle Felder, die mit * markiert sind, müssen ausgefüllt sein.'; break; }
         }
     }
@@ -176,7 +180,7 @@ class ProfileController extends \dwp\core\Controller
                     'firstName' => trim($_POST['firstName']),
                     'lastName'  => trim($_POST['lastName']),
                     'email'     => trim($_POST['email']),
-                    'phone'     => trim($_POST['phone']),
+                    'phone'     => trim($_POST['phone'])
                 ];
 
                 // check if the password should be changed
@@ -397,5 +401,53 @@ class ProfileController extends \dwp\core\Controller
         else echo $sqlErrors;
         $_SESSION['validateUserID'] = null;
         header('Location: index.php?c=profile&a=login');
+    }
+
+    public function actionChangeAddress($target = 'index.php?c=profile&a=edit')
+    {
+        // initialize array to store errors
+        $changeAddressErrors = [];
+
+        // check for a submitted post form
+        if(isset($_POST['submit']) && $this->loggedIn())
+        {
+            $changeAddressFields = [
+                // retrieve user inputs
+                'id'      => trim($_POST['address-id']),
+                'street'  => trim($_POST['street']),
+                'number'  => trim($_POST['number']),
+                'zipCode' => trim($_POST['zipCode']),
+                'city'    => trim($_POST['city'])
+            ];
+
+            $this->checkIfFieldsAreSet($changeAddressFields, $changeAddressErrors);
+            if(empty($changeAddressErrors))
+            {
+                // didn't really bother to validate the address since there are too many possible variations (umlaut etc.)
+
+                // check for occurred errors
+                if(empty($signupErrors))
+                {
+                    $sqlErrors = [];
+                    // create and validate new customer and user login objects from given data
+                    $newAddress  = new Address($changeAddressFields);
+                    // validate objects before saving them
+                    if ($newAddress->validate($sqlErrors) === true)
+                    {
+                        $newAddress->save($sqlErrors);
+                        header('Location: '.$target);
+                    }
+                }
+            }
+        } else $changeAddressErrors[] = 'muss eingeloggt sein'; # TODO
+        $this->controller = 'products';
+        $this->action = 'checkout';
+        $this->setParam('sqlErrors' , isset($sqlErrors) ? 'Leider ist ein Fehler aufgetreten (3)' : null);
+        $this->setParam('changeAddressErrors' , $changeAddressErrors);
+    }
+
+    public function actionChangeAddressAtCheckout()
+    {
+        $this->actionChangeAddress('index.php?c=products&a=checkout');
     }
 }
