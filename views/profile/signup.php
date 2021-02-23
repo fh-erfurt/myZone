@@ -2,12 +2,16 @@
 <div class="signup">
     <div class="signup-login-box">
         <div class="login-box">
-            <?php if(isset($loginErrors)) : foreach($loginErrors as $error) : ?>
-                <div class="error-message">
+            <div class="error-message-box">
+                <?php if(isset($loginErrors)) : foreach($loginErrors as $error) : ?>
+
+                <div class="error-text">
                     <img class="red-x-icon" src="<?=ROOTPATH. '/assets/img/icons/red-x-icon.svg'?>">
                     <?=$error?>
                 </div>
+
             <?php endforeach; endif; ?>
+        </div>
             <?php if(isset($_SESSION['validateUserID']) && ! empty($_SESSION['validateUserID'])) : ?>
                 <div class="validate-user" style="background: green">
                     <a href="?c=profile&a=validateNewUser&uid=<?=$_SESSION['validateUserID']?>"><button>Nutzer valideren</button></a>
@@ -41,11 +45,13 @@
         </div>
         <div class="signup-box">
                 <h2 class="signup-headline">Ich bin Neukunde</h2>
-            <?php if(isset($signupErrors)) : foreach($signupErrors as $error) : ?>
-                <div class="error-message">
-                    <?=$error?>
-                </div>
-            <?php endforeach; endif; ?>
+            <div class="error-message-box">
+                <?php if(isset($signupErrors)) : foreach($signupErrors as $error) : ?>
+                    <div class="error-text">
+                        <?=$error?>
+                    </div>
+                <?php endforeach; endif; ?>
+            </div>
 
             <form action="index.php?c=profile&a=signup" method="post">
 

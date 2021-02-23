@@ -140,9 +140,31 @@
     transition: height 0.2s ease-out;
 }
 
+.hide-description-box{
+    display: none;
+    align-items: center;
+    cursor: pointer;
+}
+
 .show-description-btn:checked ~.product-description-text{
     height: max-content;
     opacity: 1;
+}
+
+.show-description-btn:checked ~.hide-description-box{
+    display: flex;
+}
+
+.show-description-btn:checked ~.show-description-box{
+    display: none;
+}
+
+.show-description-btn-mob:checked ~.hide-description-box{
+    display: flex;
+}
+
+.show-description-btn-mob:checked ~.show-description-box{
+    display: none;
 }
 
 .show-description-btn-mob:checked ~.product-description-text{

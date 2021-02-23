@@ -29,13 +29,17 @@
 html{
     min-height: 100%;
     position: relative;
+    -webkit-font-smoothing: antialiased;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    margin: 0 0 120px 0 ;
+    margin: 0 0 120px 0;
+    padding: 0;
 }
 
 .header {
@@ -181,7 +185,7 @@ body {
     border-right: 10px solid transparent;
     border-bottom: 10px solid white;
     position: absolute;
-    left: 47.4%;
+    left: 47.7%;
     bottom: 100.5%;
 }
 

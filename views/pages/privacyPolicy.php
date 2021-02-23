@@ -16,5 +16,29 @@ PRIVACY POLICY
     </div>
 <? endif; ?>
 
+<div class="doc-box">
+    <h1 class="doc-headline">MyZone Dokumentation</h1>
+    <h2 class="doc-subhead">1. Idee</h2>
+    <p class="idea-text">
+        Aufgrund gemeinsaner Interessen haben wir uns entschieden einen
+    </p>
+</div>
+
+<?
+
+foreach($_SESSION['currentUser'] as $key => $value)
+{
+    echo $key.': _ '.$value.'<br>';
+}
+echo '<br><BR>';
+$address = \dwp\models\Address::selectWhere('id = '.$_SESSION['currentUser']['address'])[0];
+$schema = ['street','number','city','zipCode'];
+foreach($schema as $key)
+{
+    echo $key.': _ '.$address->$key.'<br>';
+}
+
+?>
+
 
 

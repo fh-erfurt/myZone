@@ -1,6 +1,6 @@
-.successful-login, .error-message{
+.successful-login, .error-message-box{
     display: flex;
-    padding: 10px 15px 10px 15px;
+    flex-direction: column;
     width: auto;
     height: auto;
     margin: 0 auto;
@@ -12,8 +12,7 @@
     top: 25%;
     left: 50%;
     transform: translate(-50%, -15%);
-    background-color: var(--footercolor);
-    box-shadow: var(--shadow) #b7b7b7;
+
     border-radius: 20px;
     text-align: center;
     -moz-animation: cssAnimation 0s ease-in 5s forwards;
@@ -22,8 +21,20 @@
     animation: cssAnimation 0s ease-in 5s forwards;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
-
+    background: transparent;
 }
+
+.error-text{
+    background-color: var(--footercolor);
+    padding: 10px 15px 10px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    box-shadow: var(--shadow) #b7b7b7;
+}
+
 
 @keyframes cssAnimation {
     to {

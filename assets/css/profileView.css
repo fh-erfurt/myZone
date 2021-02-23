@@ -1,12 +1,27 @@
+.view-background{
+    width: 100%;
+    background-image: url("../img/view-background.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    min-height: 750px;
+}
+
 .view-box{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    width: 50%;
+    margin: 25px;
+    width: max-content;
     text-align: center;
-    padding: 5px;
+    padding: 15px;
+    background-color: var(--footercolor);
+    opacity: 0.9;
+    border-radius: 10px;
+    height: max-content;
 }
 
 .view-headline{
@@ -33,6 +48,12 @@
     padding: 5px;
 }
 
+.view-edit-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .view-edit{
     padding: 10px 15px 10px 15px;
     background-color: #1122db;
@@ -47,6 +68,13 @@
 
 .view-edit:hover{
     background-color: var(--btnhvrcolor);
+}
+
+.logout-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 10px 10px 10px;
 }
 
 .logout-btn{
@@ -66,8 +94,9 @@
 }
 
 .view-action{
-    padding: 5px 10px 10px 10px;
+    padding: 5px 10px 0 10px;
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -100,4 +129,16 @@
 
 .pw-btn:checked ~ .new-pw-box{
     display: flex;
+}
+
+@media only screen and (max-width: 1470px){
+    .view-background{
+        background-image: none;
+        min-height: 0;
+    }
+
+    .view-box{
+        background-color: white;
+        margin: 0;
+    }
 }

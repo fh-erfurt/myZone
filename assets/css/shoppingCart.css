@@ -8,7 +8,7 @@
 
 .sc-headline{
     font-size: 26px;
-    padding-bottom: 10px;
+    padding-bottom: 9px;
 }
 
 .shopping-cart-items{
@@ -19,7 +19,7 @@
 .sc-product{
     display: flex;
     justify-content: space-between;
-    padding: 10px 0 10px 0;
+    padding: 15px 0 10px 0;
     border-top: 1px solid var(--headercolor);
 }
 
@@ -47,19 +47,19 @@
 }
 
 .sc-color{
-    font-size: 18px;
-    font-weight: normal;
+    font-size: 20px;
     padding-bottom: 3px;
 }
 
 .sc-amount{
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     padding-bottom: 3px;
 }
 
 .sc-image{
     width: 200px;
+    border: 1px solid var(--headercolor);
 }
 
 .sc-product-right{
@@ -86,7 +86,9 @@
     border: none;
     background-color: transparent;
     color: var(--btncolor);
-    font-size: 14px;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
 }
 
 .buy-or-delete{

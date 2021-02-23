@@ -24,9 +24,9 @@
             <div class="shopping-cart">
                 <a class="shopping-cart-btn" href="<?$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart">
                     <img class="shopping-cart-icon" src="<?=ROOTPATH. '/assets/img/icons/shopping-cart-icon.svg'?>">
-                    <? if(isset($_SESSION['cart'])) : ?>
-                    <div class="cart-count" id="cart-count"><?=sizeof($_SESSION['cart'])?></div>
                 </a>
+                <? if(isset($_SESSION['cart'])) : ?>
+                    <div class="cart-count" id="cart-count"><?=sizeof($_SESSION['cart'])?></div>
                     <div class="cart-content" id="cart-content">
                         <? foreach($_SESSION['cart'] as $id => $product) : $product= unserialize($product); ?>
                             <div class="triangle"></div>
@@ -40,8 +40,8 @@
                                     <div class="cart-item-count-and-price"><?=$_SESSION['cartItemCount'][$product->id].' x '.$product->price.'€'?></div>
                                 </div>
                             </a>
-                        <? endforeach; ?>
                     </div>
+                <? endforeach; ?>
                 <? endif; ?>
             </div>
             <div class="user">
