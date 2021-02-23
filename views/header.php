@@ -28,8 +28,8 @@
                 <? if(isset($_SESSION['cart'])) : ?>
                     <div class="cart-count" id="cart-count"><?=sizeof($_SESSION['cart'])?></div>
                     <div class="cart-content" id="cart-content">
+                    <div class="triangle"></div>
                         <? foreach($_SESSION['cart'] as $id => $product) : $product= unserialize($product); ?>
-                            <div class="triangle"></div>
                             <a class="cart-item" href="?c=products&a=view&id=<?=$product->id?>">
                                 <img class="cart-item-img" src="<?=ROOTPATH.'assets/img/products/product_'.$product->id.'.jpg'?>">
                                 <div class="cart-item-info">
@@ -40,8 +40,8 @@
                                     <div class="cart-item-count-and-price"><?=$_SESSION['cartItemCount'][$product->id].' x '.$product->price.'€'?></div>
                                 </div>
                             </a>
-                    </div>
                 <? endforeach; ?>
+                    </div>
                 <? endif; ?>
             </div>
             <div class="user">
