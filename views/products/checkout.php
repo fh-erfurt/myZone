@@ -69,7 +69,7 @@
                     </div>
                 </form>
             </div>
-            <form class="guest-Order" action="index.php?c=profile&a=changeAddressAtCheckout" method="post"> <!-- TODO JGE -->
+            <form class="guest-Order" action="?c=products&a=pay" method="post"> <!-- TODO JGE -->
                 <h1 class="Order-Headline">Als Gast bestellen</h1>
                 <?
                 $customerFields = [
@@ -105,9 +105,20 @@
                         <input class="input-txt-order" type="text" name="city" placeholder="Ort/Stadt*"/>
                     </div>
                 </div>
-                <input class="submit-btn" name="submit" type="submit" value="Neue Adresse speichern"/>
-            </form>
-            <form class="checkout-submit">
+                <? if(!$loggedIn) : ?>
+                    <label for="shipmentDate">
+                        gewünschtes Zustellungsdatum
+                    </label>
+                    <input type="date" id="shipmentDate" name="shipmentDate">
+                <? else : ?>
+                    <input class="submit-btn" name="submit" type="submit" value="Neue Adresse speichern"/>
+                </form>
+                <form class="checkout-submit" action="?c=products&a=pay" method="post">
+                    <label for="shipmentDate">
+                        gewünschtes Zustellungsdatum
+                    </label>
+                    <input type="date" id="shipmentDate" name="shipmentDate">
+                <? endif; ?>
                 <input class="submit-btn" name="submit" type="submit" value="<?= $loggedIn ? 'Jetzt bestellen' : 'Als Gast bestellen'?>"/>
             </form>
     </div>

@@ -109,7 +109,7 @@ class ProfileController extends \dwp\core\Controller
      * @param $userLoginData
      * @param $sqlErrors
      */
-    public function validateCustomerAndUserLoginAndSaveToDB($customerData, $userLoginData, &$sqlErrors)
+    public static function validateCustomerAndUserLoginAndSaveToDB($customerData, $userLoginData, &$sqlErrors)
     {
         $db = $GLOBALS['db'];
         // create and validate new customer and user login objects from given data
@@ -123,11 +123,38 @@ class ProfileController extends \dwp\core\Controller
             {
                 // get the id of the created customer and add field customer to user login to connect the table entries via foreign key
                 // if the user is logged in, get the customer id from the session
-                $newUserLogin->customer = $this->loggedIn()
+                $newUserLogin->customer = self::loggedIn()
                     ? $_SESSION['currentUser']['customerId']
                     : Customer::select('id','WHERE email ='.$db->quote($customerData['email']))[0]->id;
 
                 $newUserLogin->save($sqlErrors);
+            }
+        }
+    }
+
+    /**
+     * takes an array of data with address and customer information and saves it into the database, if inputs are valid.
+     * if given, looks for id first to decide between INSERT and UPDATE.
+     * @param $addressData
+     * @param $customerData
+     * @param $sqlErrors
+     */
+    public static function validateAddressAndCustomerAndSaveToDB($addressData, $customerData, &$sqlErrors)
+    {
+        $db = $GLOBALS['db'];
+        // create and validate new address and customer objects from given data
+        $newAddress  = new Address($addressData);
+        $newCustomer = new Customer($customerData);
+        // validate objects before saving them
+        if ($newAddress->validate($sqlErrors) === true && $newCustomer->validate($sqlErrors) === true)
+        {
+            $newAddress->save($sqlErrors);
+            if (empty($sqlErrors) && !empty($customerData))
+            {
+                // get the id of the created address and add field address to customer to connect the table entries via foreign key
+                $newCustomer->deliveryAddress = Address::lastInsertedId();
+
+                $newCustomer->save($sqlErrors);
             }
         }
     }
@@ -153,9 +180,21 @@ class ProfileController extends \dwp\core\Controller
     }
 
 
-    ##             ##
-    # ActionMethods #
-    ##             ##
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # ActionMethods
 
     public function actionView()
     {

@@ -13,7 +13,7 @@ class Product extends BaseModel
         'createdAt'              => ['type' => BaseModel::TYPE_STRING, 'max' => 10],
         'updatedAt'              => ['type' => BaseModel::TYPE_STRING, 'max' => 10],
         'name'                   => ['type' => BaseModel::TYPE_STRING, 'max' => 45],
-        'price'                  => ['type' => BaseModel::TYPE_FLOAT],
+        'price'                  => ['type' => BaseModel::TYPE_DECIMAL],
         'category'               => ['type' => BaseModel::TYPE_STRING, 'max' => 20],
         'brand'                  => ['type' => BaseModel::TYPE_STRING, 'max' => 45],
         'color'                  => ['type' => BaseModel::TYPE_STRING, 'max' => 45],
