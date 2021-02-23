@@ -16,7 +16,6 @@ class Customer extends BaseModel
         'lastName'               => ['type' => BaseModel::TYPE_STRING, 'max' => 50],
         'email'                  => ['type' => BaseModel::TYPE_STRING, 'max' => 45],
         'phone'                  => ['type' => BaseModel::TYPE_STRING, 'max' => 20],
-        'billingAddress'         => ['type' => BaseModel::TYPE_INT],
         'deliveryAddress'        => ['type' => BaseModel::TYPE_INT]
     ];
 }

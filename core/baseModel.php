@@ -8,7 +8,7 @@ abstract class BaseModel
 {
     const TYPE_INT      = 'int';
     const TYPE_TINYINT  = 'tinyint';
-    const TYPE_FLOAT    = 'float';
+    const TYPE_DECIMAL  = 'decimal';
     const TYPE_STRING   = 'string';
 
     // contains types and length
@@ -49,6 +49,12 @@ abstract class BaseModel
             $this->data[$key] = $value;
         }
         else throw new \Exception('You can not write to property "'.$key.'" for the class "'.get_called_class().'".');
+    }
+
+    # TODO probably not the best way to do it when there is a lot of traffic but will do for now
+    public static function lastInsertedId()
+    {
+        return $results = $GLOBALS['db']->query('SELECT MAX(id) FROM '.self::tablename())->fetchAll()[0]['MAX(id)'];
     }
 
     public function save(&$errors)
@@ -94,7 +100,6 @@ abstract class BaseModel
         }
         catch(\PDOException $e)
         {
-            #die('Message');
             $errors[] = 'Error inserting '.get_called_class().': '.$e->getMessage();
         }
         return false;
@@ -169,7 +174,7 @@ abstract class BaseModel
         switch($type)
         {
             case BaseModel::TYPE_INT:
-            case BaseModel::TYPE_FLOAT:
+            case BaseModel::TYPE_DECIMAL:
                 break;
             case BaseModel::TYPE_STRING:
                 {

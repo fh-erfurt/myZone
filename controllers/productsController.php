@@ -5,7 +5,8 @@ namespace dwp\controllers;
 
 
 use dwp\models\Order;
-use dwp\models\Product;
+use dwp\models\OrderItem;
+use dwp\models\Customer;
 use dwp\models\JoinedProduct;
 
 /**
@@ -76,50 +77,80 @@ class ProductsController extends \dwp\core\Controller
         if(empty($_SESSION['cart'])) header('Location: index.php?c=pages&a=home');
     }
 
+    /**
+     * handles checkout payment based on the loggedIn status of the session
+     */
     public function actionPay()
     {
         // TODO calculate information
         if(empty($_SESSION['cart'])) header('Location: index.php?c=pages&a=home');
         else
         {
-            // TODO customer machen
-
-
-            $orderData  = [
-                'customer'     => $_SESSION['currentUser']['customerId'],
-                'shipmentDate' => $_POST['shipmentDate'] ?? null # TODO
-            ];
-
-            # $newOrder = new Order($orderData); TODO
-            # if ($newOrder->validate()) $newOrder->save(); TODO
-
-            $addressData    = [ # TODO
-                'street'  => $_POST['street']  ?? null,
-                'number'  => $_POST['number']  ?? null,
-                'city'    => $_POST['city']    ?? null,
-                'zipCode' => $_POST['zipCode'] ?? null
-            ];
-            $orderItemsData = null;
-
-            foreach($_SESSION['cart'] as $id => $product)
+            $sqlErrors = [];
+            # if it is a guest order
+            if(!$this->loggedIn())
             {
-                $prod = unserialize($product);
-                $qty = $_SESSION['cartItemCount'][$id];
-                $orderItemsData[$id] = [
-                    'quantity'    => $qty,
-                    'actualPrice' => $qty * $prod->price,
-                    'order'       => null, # TODO get order ID from DB
-                    'product'     => $id
+                $addressFields = [
+                    // retrieve user inputs
+                    'street'  => trim($_POST['street']),
+                    'number'  => trim($_POST['number']),
+                    'zipCode' => trim($_POST['zipCode']),
+                    'city'    => trim($_POST['city'])
                 ];
+
+                $customerFields = [
+                    'firstName'       => trim($_POST['firstName']),
+                    'lastName'        => trim($_POST['lastName']),
+                    'email'           => trim($_POST['email']),
+                    'phone'           => trim($_POST['phone'])
+                ];
+
+                require_once CONTROLLERSPATH.'profileController.php';
+                ProfileController::validateAddressAndCustomerAndSaveToDB($addressFields, $customerFields, $sqlErrors);
             }
+            $orderData  = [
+                'customer'     => $this->loggedIn() ? $_SESSION['currentUser']['customerId'] : Customer::lastInsertedId(),
+                'shipmentDate' => $_POST['shipmentDate'] ?? null
+            ];
 
-            // do payment magic
+            require_once MODELSPATH.'order.php';
+            $newOrder = new Order($orderData);
+            if ($newOrder->validate($sqlErrors))
+            {
+                # save the order into the database and get the id for later use in the orderItems
+                $newOrder->save($sqlErrors);
+                $orderId = Order::lastInsertedId();
 
-            // TODO insert into DB
+                if(empty($sqlErrors))
+                {
+                    # insert each ordered item from the cart into the database
+                    require_once MODELSPATH.'orderItem.php';
+                    foreach($_SESSION['cart'] as $id => $product)
+                    {
+                        $product = unserialize($product);
+                        $qty = $_SESSION['cartItemCount'][$id];
+                        $orderItemData = [
+                            'quantity'    => $qty,
+                            'actualPrice' => $qty * $product->price,
+                            '`order`'       => $orderId,
+                            'product'     => $id
+                        ];
 
-            // TODO delete cart
-            $_SESSION['cart'] = null; $_SESSION['cartItemCount'] = null;
-            header('Location: index.php?c=pages&a=thankYou');
+                        $newOrderItem = new OrderItem($orderItemData);
+                        if ($newOrderItem->validate($sqlErrors))
+                        {
+                            $newOrderItem->save($sqlErrors);
+                        }
+                    }
+
+                    // do payment magic
+
+                    // delete cart
+                    $_SESSION['cart'] = null;
+                    $_SESSION['cartItemCount'] = null;
+                    header('Location: index.php?c=pages&a=thankYou');
+                }
+            }
         }
     }
 }

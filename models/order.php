@@ -4,7 +4,7 @@ namespace dwp\models;
 
 use dwp\core\BaseModel;
 
-class Order extends BaseModel  // TODO brauchen wir hierfür ein model?
+class Order extends BaseModel
 {
     const TABLENAME = '`orders`';
 
