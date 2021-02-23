@@ -1,0 +1,79 @@
+.imprint-box{
+    width: 70%;
+    display: flex;
+    padding: 10px;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.imprint-headline{
+    padding: 10px;
+    font-size: 28px;
+    border-bottom: 1px solid black;
+}
+
+.imprint-input{
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.info-box{
+    margin: 10px 10px 10px 10px;
+    width: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--footercolor);
+}
+
+.info-headline{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.info{
+    font-size: 16px;
+    text-align: center;
+}
+
+.info-link{
+    font-size: 16px;
+    color: var(--btncolor);
+}
+
+.docu-link-box{
+    width: 200px;
+    margin: 10px 10px 10px 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.docu-link{
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--btncolor);
+    color: white;
+}
+
+@media only screen and (max-width: 1280px)  {
+    .imprint-box{
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 370px)  {
+    .imprint-box{
+        width: 100%;
+    }
+}
