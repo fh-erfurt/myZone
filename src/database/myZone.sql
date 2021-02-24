@@ -248,7 +248,6 @@ VALUES ('2020-12-30', 1),
        ('2021-01-01', 1),
        ('2021-01-10', 2);
 
-/* TODO */
 INSERT INTO `myZone`.`orderItems` (`quantity`, `actualPrice`, `order`, `product`)
 VALUES (2, 199.98, 1, 1),
        (1, 199.99, 1, 4),

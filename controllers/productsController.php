@@ -66,6 +66,23 @@ class ProductsController extends \dwp\core\Controller
     {
     }
 
+    public function actionRemoveFromCart()
+    {
+        if(!empty($_SESSION['cart']) && isset($_GET['id']))
+        {
+            $id = $_GET['id'];
+            if(isset($_SESSION['cart'][$id]))
+            {
+                unset($_SESSION['cart'][$id], $_SESSION['cartItemCount'][$id]);
+                header('Location: index.php?c=products&a=shoppingCart');
+            }
+        }
+        if(empty($_SESSION['cart']))
+        {
+            $this->actionClearCart();
+        }
+    }
+
     public function actionClearCart()
     {
         $_SESSION['cart'] = null;
@@ -82,7 +99,6 @@ class ProductsController extends \dwp\core\Controller
      */
     public function actionPay()
     {
-        // TODO calculate information
         if(empty($_SESSION['cart'])) header('Location: index.php?c=pages&a=home');
         else
         {
@@ -108,6 +124,15 @@ class ProductsController extends \dwp\core\Controller
                 require_once CONTROLLERSPATH.'profileController.php';
                 ProfileController::validateAddressAndCustomerAndSaveToDB($addressFields, $customerFields, $sqlErrors);
             }
+            else
+            {
+                if(!isset($_SESSION['currentUser']['deliveryAddress']))
+                {
+                    header('Location: index.php?c=products&a=checkout');
+                    return;
+                }
+            }
+
             $orderData  = [
                 'customer'     => $this->loggedIn() ? $_SESSION['currentUser']['customerId'] : Customer::lastInsertedId(),
                 'shipmentDate' => $_POST['shipmentDate'] ?? null
@@ -132,7 +157,7 @@ class ProductsController extends \dwp\core\Controller
                         $orderItemData = [
                             'quantity'    => $qty,
                             'actualPrice' => $qty * $product->price,
-                            '`order`'       => $orderId,
+                            '`order`'     => $orderId,
                             'product'     => $id
                         ];
 
