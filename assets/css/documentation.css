@@ -76,7 +76,7 @@
     height: 100%;
 }
 
-.page-hierarchy{
+.page-hierarchy, .database-model{
     width: 100%;
     padding: 20px;
 }
