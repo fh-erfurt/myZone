@@ -7,8 +7,12 @@
 
 .jakob {
     background: var(--navcolor);
+    display: none;
 }
 
+.jakob a{
+
+}
 .jakob a:hover {
     background: var(--navcolor2);
 }
