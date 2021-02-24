@@ -386,6 +386,7 @@ body {
 }
 
 .submit-btn{
+    width: max-content;
     padding: 10px 25px 10px 25px;
     border-radius: 10px;
     background-color: var(--btncolor);
@@ -394,6 +395,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    justify-content: center;
 
 }
 

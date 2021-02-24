@@ -1,7 +1,7 @@
 .home{
     display: flex;
     justify-content: center;
-    background-image: url("../img/BackgroundHomepage.jpeg");
+    background-image: url("../img/Background/Homepage.jpeg");
     background-size: 100%;
     background-repeat: no-repeat;
     height: max-content;
