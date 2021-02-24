@@ -176,11 +176,3 @@
         </div>
     </div>
 </div>
-<?
-
-    global $controller;
-    $loggedIn = $controller->loggedIn();
-    echo '<br> loggedIn: ';
-    var_dump($loggedIn);
-    var_dump($_SESSION['currentUser']);
-?>

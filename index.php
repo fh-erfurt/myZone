@@ -51,7 +51,6 @@ if(isset($errCause) && !empty($errCause)) $controller = new ErrorsController('er
 
 // set the shown title for the page
 $title = 'myZone';
-#$title = ucfirst($actionName); # TODO JGE dynamic title switch case?
 ?>
 
 <!DOCTYPE html>

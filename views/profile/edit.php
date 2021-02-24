@@ -51,7 +51,7 @@
 
                 </div>
                 <div class="view-edit-box">
-                    <input class="view-edit" type="submit" value="Ändern" name="submitNewData"> <!-- TODO altes passwort eingabe-->
+                    <input class="view-edit" type="submit" value="Ändern" name="submitNewData">
                 </div>
 
         </form>
