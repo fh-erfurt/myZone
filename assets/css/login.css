@@ -12,27 +12,29 @@
     top: 25%;
     left: 50%;
     transform: translate(-50%, -15%);
-
     border-radius: 20px;
     text-align: center;
-    -moz-animation: cssAnimation 0s ease-in 5s forwards;
-    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
-    -o-animation: cssAnimation 0s ease-in 5s forwards;
-    animation: cssAnimation 0s ease-in 5s forwards;
+    -moz-animation: cssAnimation 0s ease-in 10s forwards;
+    -webkit-animation: cssAnimation 0s ease-in 10s forwards;
+    -o-animation: cssAnimation 0s ease-in 10s forwards;
+    animation: cssAnimation 0s ease-in 10s forwards;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
     background: transparent;
+
 }
 
 .error-text{
-    background-color: var(--footercolor);
+    background-color: #ff5656;
+    box-shadow: 0 0.05rem 0.5rem #ffae73;
     padding: 10px 15px 10px 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     margin-bottom: 5px;
-    box-shadow: var(--shadow) #b7b7b7;
+    border: 1px solid red;
+    color: white;
 }
 
 
@@ -89,12 +91,28 @@
     opacity: 0;
 }
 
+.login-inset{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../img/background.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: max-content;
+    min-height: 750px;
+}
+
 .second-login{
-    position: absolute;
-    margin: 0 auto;
-    z-index: 2;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -15%);
+    width: max-content;
+    margin: 20px;
+}
+
+@media only screen and (max-width: 1240px) {
+    .login-inset{
+        min-height: 0;
+        background-image: none;
+
+    }
+
 }
 

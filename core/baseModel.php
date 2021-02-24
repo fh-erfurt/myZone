@@ -230,7 +230,7 @@ abstract class BaseModel
         {
             $results = $e->getMessage();
             // create a message which doesn't show the user what went wrong but an error code to report
-            echo 'Leider ist ein Fehler aufgetreten (1)'; # TODO
+            echo 'Leider ist ein Fehler aufgetreten (1)';
         }
         finally
         {

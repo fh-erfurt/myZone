@@ -26,11 +26,11 @@
         </a>
         <a class="website-link" href="https://www.hhv.de/shop/de" target=”_blank”>
             <img class="screenshot" src="<?=ROOTPATH. '/assets/img/docu-images/hhvScreenshot.png'?>">
-            <div class="screenshot-info">Adidas Webshop</div>
+            <div class="screenshot-info">HHV Webshop</div>
         </a>
         <a class="website-link" href="https://www.mifcom.de/" target=”_blank”>
             <img class="screenshot" src="<?=ROOTPATH. '/assets/img/docu-images/MifComScreenshot.png'?>">
-            <div class="screenshot-info">Adidas Webshop</div>
+            <div class="screenshot-info">MifCom Webshop</div>
         </a>
     </div>
     <h2 class="doc-subhead">3. Design</h2>
@@ -111,7 +111,8 @@
     </div>
     <h2 class="doc-subhead">4. Navigationsstruktur</h2>
     <img class="page-hierarchy" src="<?=ROOTPATH. '/assets/img/docu-images/Seitenhierachie.png'?>">
-
+    <h2 class="doc-subhead">5. Datenbankmodell</h2>
+    <img class="database-model" src="<?=ROOTPATH. '/assets/img/docu-images/Seitenhierachie.png'?>">
 </div>
 
 

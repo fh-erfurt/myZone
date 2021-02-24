@@ -31,8 +31,7 @@ class Controller
         {
             // redirect to an error page
             $viewPath = VIEWSPATH.'errors'.DIRECTORY_SEPARATOR.'error404.php';
-            $this->setParam('errCause', 'The view for your called controller is missing'); # TODO braucht Nutzer nicht sehen
-            #$errCause = 'The view for your called controller is missing';
+            $this->setParam('errCause', 'The view for your called controller is missing');
         }
 
         extract($this->params);
