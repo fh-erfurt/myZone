@@ -67,7 +67,7 @@ $db = $GLOBALS['db'];
     <div class="all-Products-brand">
         <div class="all-Products-box">
             <h1 class="all-Products-headline">Andere Artikel von <?=$product->brand?></h1>
-            <div class="collum">
+            <div class="product-scrollbar">
                 <?
                 # get all products of the same brand from database (could be optimized by saving the array when user switches to one of the products)
                 $listProducts = JoinedProduct::joinedSelect(' WHERE brands.name = '.$db->quote($product->brand).' AND NOT products.id = '.$db->quote($product->{'id'}));

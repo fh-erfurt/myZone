@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="docu-link-box">
-            <a class="docu-link" href="#">
+            <a class="docu-link" href="<?=$_SERVER['PHP_SELF']?>?c=pages&a=privacyPolicy">
                 MyZone Dokumentation
             </a>
         </div>

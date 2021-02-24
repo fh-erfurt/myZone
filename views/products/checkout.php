@@ -39,10 +39,10 @@
                         </div>
                     </div>
                 </div>
+                <label class="new-adress-label" for="new-adress-btn">Lieferadresse ändern</label>
             </div>
             <input class="new-adress-btn" id="new-adress-btn" name="new-adress-btn" type="checkbox">
-            <label class="new-adress-label" for="new-adress-btn">Lieferadresse ändern</label>
-        <form class="guest-Order" action="index.php?c=profile&a=changeAddressAtCheckout" method="post">
+        <form class="guest-Order-pop" action="index.php?c=profile&a=changeAddressAtCheckout" method="post">
             <input name="address-id" value="<?=$_SESSION['currentUser']['address']?>" hidden>
         <? else : ?>
             <form class="guest-Order" action="index.php?c=profile&a=changeAddressAtCheckout" method="post">
@@ -111,18 +111,23 @@
                     </div>
                 </div>
                 <? if(!$loggedIn) : ?>
-                    <label for="shipmentDate">
+                    <label class="shipmentDate-label" for="shipmentDate">
                         gewünschtes Zustellungsdatum
                     </label>
-                    <input type="date" id="shipmentDate" name="shipmentDate">
+                    <div class="input-wrapper">
+                        <div class="input-box-order">
+                            <input class="input-txt-order" type="date" id="shipmentDate" name="shipmentDate">
+                        </div>
+                    </div>
                 <? else : ?>
                     <input class="submit-btn" name="submit" type="submit" value="Neue Adresse speichern"/>
                 </form>
                 <form class="checkout-submit" action="?c=products&a=pay" method="post">
-                    <label for="shipmentDate">
-                        gewünschtes Zustellungsdatum
-                    </label>
-                    <input type="date" id="shipmentDate" name="shipmentDate">
+                    <div class="input-wrapper">
+                        <div class="input-box-order">
+                            <input class="input-txt-order" type="date" id="shipmentDate" name="shipmentDate">
+                        </div>
+                    </div>
                 <? endif; ?>
                 <input class="submit-btn" name="submit" type="submit" value="<?= $loggedIn ? 'Jetzt bestellen' : 'Als Gast bestellen'?>"/>
             </form>

@@ -51,6 +51,7 @@
     align-items: center;
     flex-direction: column;
     padding: 10px;
+    justify-content: center;
 }
 
 .guest-Order-pop {
@@ -154,6 +155,10 @@
 
 .checkout-submit{
     padding: 15px 10px 20px 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .Order-overview-box{
@@ -233,6 +238,10 @@
 
 .edit-order:hover{
     background-color: #353535;
+}
+
+.shipmentDate-label{
+    padding-top: 5px;
 }
 
 @media only screen and (max-width: 700px) {

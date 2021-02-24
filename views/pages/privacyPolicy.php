@@ -94,8 +94,8 @@
         Die Hintergrundbilder zeigen typische Motive urbaner Hip-Hop Kultur: Street Art, Basketball, Caps und entspannte Alltagskleidung. Unsere Zielgruppe, die mit dieser Kultur aufgewachsen ist, soll sich durch diese Bildauswahl auf unserer Website wohlfühlen und sich angesprochen fühlen.
     </p>
     <div class="website-screenshot-box">
-        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/BackgroundHomepage.jpeg'?>">
-        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/BackgroundProfile.jpg'?>">
+        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/Homepage.jpeg'?>">
+        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/profile.jpg'?>">
         <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/BackgroundSignup.jpg'?>">
     </div>
     <p>
@@ -110,9 +110,45 @@
         <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/docu-images/ResponsiveDesign3.png'?>">
     </div>
     <h2 class="doc-subhead">4. Navigationsstruktur</h2>
-    <img class="page-hierarchy" src="<?=ROOTPATH. '/assets/img/docu-images/Seitenhierachie.png'?>">
+    <img class="big-img" src="<?=ROOTPATH. '/assets/img/docu-images/Seitenhierachie.png'?>">
     <h2 class="doc-subhead">5. Datenbankmodell</h2>
-    <img class="database-model" src="<?=ROOTPATH. '/assets/img/docu-images/Seitenhierachie.png'?>">
+    <img class="big-img" src="<?=ROOTPATH. '/assets/img/docu-images/Datenbankmodell.png'?>">
+    <h2 class="doc-subhead">6. Funktionen</h2>
+    <h2 class="doc-subsubhead">6.1 Homepage</h2>
+    <img class="big-img" src="<?=ROOTPATH. '/assets/img/docu-images/FunktionenHome.png'?>">
+    <h2 class="doc-subsubhead">6.2 Signup</h2>
+    <img class="big-img" src="<?=ROOTPATH. '/assets/img/docu-images/FunktionenSignup.png'?>">
+    <h2 class="doc-subsubhead">6.3 Produktübersicht</h2>
+    <img class="big-img" src="<?=ROOTPATH. '/assets/img/docu-images/FunktionenProductsAll.png'?>">
+    <h2 class="doc-subsubhead">6.4 Produktseite</h2>
+    <img class="big-img" src="<?=ROOTPATH. '/assets/img/docu-images/FunktionenView.png'?>">
+    <h2 class="doc-subsubhead">6.5 Warenkorb</h2>
+    <img class="big-img" src="<?=ROOTPATH. '/assets/img/docu-images/FunktionenShoppingCart.png'?>">
+    <h2 class="doc-subsubhead">6.6 Kasse</h2>
+    <img class="big-img" src="<?=ROOTPATH. '/assets/img/docu-images/FunktionenCheckout.png'?>">
+    <h2 class="doc-subsubhead">6.7 Profil bearbeiten</h2>
+    <img class="big-img" src="<?=ROOTPATH. '/assets/img/docu-images/FunktionenProfileEdit.png'?>">
+    <p>
+        <b>Legende:</b><br>
+        Blau: CSS <br>
+        Lila: PHP <br>
+        Gelb: Java <br>
+        Orange: MySQL Datenbank <br>
+
+    </p>
+    <h2 class="doc-subhead">7. Besonderheiten</h2>
+    <p>Da wir uns auf die fehlerfreie Implementierung aller wichtigen Features konzentriert haben, mussten wir auf die komplette Kategorie
+    Streetwear verzichten. Aufgrund der wenigen unterschiedlichen Produkte konnten wir zudem kein Dropdownmenü für eine feinere Kategorisierung unserer Produkte einbauen. Zusätzlich konnten wir mit Javascript den Blureffekt für den Login Pop-up nicht auf den Header anwenden, weil sich
+    der Pop-up-Container im Header befindet. Zudem konnten wir wegen mangelnder Zeit keinen count für die Stückzahl im Warenkorb implementieren. </p>
+    <h2 class="doc-subhead">8. Lessons Learned</h2>
+
+    <h2 class="doc-subhead">9. Projektmanagement</h2>
+    <p>
+        <b>Jakob Gensel: </b> PHP, SQL, Projektstruktur, Aufgabenverteilung;<br>
+        <b>Dariush Naghed: </b> Idee, HTML, CSS, Design, Wireframes, Dokumentation, Produkte, Texte;<br>
+        <b>Felix Zwicker: </b> Idee, Javascript, Präsentation, Wireframes, Navigationsstruktur;
+    </p>
+
 </div>
 
 
