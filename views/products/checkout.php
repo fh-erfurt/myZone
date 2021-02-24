@@ -6,8 +6,9 @@
 <div class="Order">
     <div class="order-adress">
         <?
-            if($loggedIn && $_SESSION['currentUser']['address'] != NULL) :
-            $address = Address::selectWhere('id = '.$_SESSION['currentUser']['address'])[0];
+            if($loggedIn) :
+            if($_SESSION['currentUser']['deliveryAddress'] != NULL) :
+            $address = Address::selectWhere('id = '.$_SESSION['currentUser']['deliveryAddress'])[0];
         ?>
             <div class="guest-Order">
                 <h1 class="Order-Headline">Lieferadresse</h1>
@@ -41,9 +42,13 @@
             </div>
             <input class="new-adress-btn" id="new-adress-btn" name="new-adress-btn" type="checkbox">
             <label class="new-adress-label" for="new-adress-btn">Lieferadresse ändern</label>
+        <form class="guest-Order" action="index.php?c=profile&a=changeAddressAtCheckout" method="post">
+            <input name="address-id" value="<?=$_SESSION['currentUser']['address']?>" hidden>
+        <? else : ?>
             <form class="guest-Order" action="index.php?c=profile&a=changeAddressAtCheckout" method="post">
                 <input name="address-id" value="<?=$_SESSION['currentUser']['address']?>" hidden>
-        <? else : ?>
+
+        <? endif; else : ?>
             <div class="order-login">
                 <form class="login-input-box" action="index.php?c=profile&a=loginAtCheckout" method="post">
                     <h2 class="second-login-headline2">Ich bin bereits Kunde</h2>
@@ -172,18 +177,5 @@
     $loggedIn = $controller->loggedIn();
     echo '<br> loggedIn: ';
     var_dump($loggedIn);
+    var_dump($_SESSION['currentUser']);
 ?>
-
-    <form action="?c=products&a=pay" method="post">
-<?  if($loggedIn) : ?>
-    <label for="shipmentDate">
-        Vorname
-    </label>
-    <input type="date" id="shipmentDate" name="shipmentDate">
-<?  endif; ?>
-    <label for="shipmentDate">
-        gewünschtes Zustellungsdatum
-    </label>
-    <input type="date" id="shipmentDate" name="shipmentDate">
-    <input class="checkout-pay-btn" type="submit" value="Jetzt bezahlen">
-</form>

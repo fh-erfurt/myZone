@@ -20,7 +20,7 @@ include VIEWSPATH . 'navbar.php';
                         <div class="sc-color"><?=$product->descriptionColor?></div>
                         <div class="sc-amount">Stückzahl: <?=$_SESSION['cartItemCount'][$product->id].' x '?></div>
                     </div>
-                    <form action="<?='?c=products&a=deleteItem&id='.$product->id?>" method="post">
+                    <form action="<?='?c=products&a=removeFromCart&id='.$product->id?>" method="post">
                         <input class="delete-product" type="submit" value="Artikel entfernen">
                     </form>
                 </div>
