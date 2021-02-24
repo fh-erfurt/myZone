@@ -66,6 +66,23 @@ class ProductsController extends \dwp\core\Controller
     {
     }
 
+    public function actionDeleteItem()
+    {
+        if(!empty($_SESSION['cart']) && isset($_GET['id']))
+        {
+            $id = $_GET['id'];
+            if(isset($_SESSION['cart'][$id]))
+            {
+                unset($_SESSION['cart'][$id]);
+                header('Location: index.php?c=products&a=shoppingCart');
+            }
+        }
+        if(empty($_SESSION['cart']))
+        {
+            $this->actionClearCart();
+        }
+    }
+
     public function actionClearCart()
     {
         $_SESSION['cart'] = null;

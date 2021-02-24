@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cartContent = document.getElementById('cart-content');
   var screenWidth = document.body.offsetWidth;
 
-  if(window.location.search != '?c=products&a=shoppingCart' && screenWidth >= 500)
+  if(window.location.search != '?c=products&a=shoppingCart' && window.location.search != '?c=products&a=checkout' && screenWidth >= 500)
   {
     shoppingCart.addEventListener('mouseover', function()
     {

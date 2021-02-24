@@ -40,8 +40,8 @@
                                     <div class="cart-item-count-and-price"><?=$_SESSION['cartItemCount'][$product->id].' x '.$product->price.'€'?></div>
                                 </div>
                             </a>
-                    </div>
                 <? endforeach; ?>
+                    </div>
                 <? endif; ?>
             </div>
             <div class="user">
