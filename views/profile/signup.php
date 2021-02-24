@@ -14,7 +14,7 @@
         </div>
             <?php if(isset($_SESSION['validateUserID']) && ! empty($_SESSION['validateUserID'])) : ?>
                 <div class="validate-user" style="background: green">
-                    <a href="?c=profile&a=validateNewUser&uid=<?=$_SESSION['validateUserID']?>"><button>Nutzer valideren</button></a>
+                    <a href="?c=profile&a=validateNewUser&uid=<?=$_SESSION['validateUserID']?>"><button>Nutzer validieren</button></a>
                 </div>
             <?php endif; ?>
                 <div class="second-try">
@@ -94,5 +94,3 @@
             <label class="close-not-icon" for="close-not-btn"></label>
         </div> <? endif; ?>
 </div>
-exitsiert bereits: testUser / 123456 <!-- TODO JGE --><br>
-gültiges Pw wäre z.B.: pwT35T#+
