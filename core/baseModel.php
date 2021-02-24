@@ -120,7 +120,7 @@ abstract class BaseModel
                 }
             }
 
-            $sql = trim($sql, ',').' WHERE id = '.$this->{'id'};
+            $sql = trim($sql, ',').' WHERE id = '.$this->id;
             $db->prepare($sql)->execute();
 
             return true;

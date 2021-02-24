@@ -161,20 +161,20 @@ class ProfileController extends \dwp\core\Controller
 
     public function updateCurrentUserInSessionWithUserLoginData($loginData)
     {
-        $customerData = Customer::selectWhere("id = ".$loginData->{'customer'})[0];
+        $customerData = Customer::selectWhere("id = ".$loginData->customer)[0];
         $_SESSION['currentUser'] = [
-            'username'   => $loginData->username,
-            'userId'     => $loginData->id,
-            'customerId' => $customerData->id,
-            'firstName'  => $customerData->firstName,
-            'lastName'   => $customerData->lastName,
-            'email'      => $customerData->email,
-            'phone'      => $customerData->phone,
-            'address'    => $customerData->deliveryAddress ####### TODO TODO
+            'username'        => $loginData->username,
+            'userId'          => $loginData->id,
+            'customerId'      => $customerData->id,
+            'firstName'       => $customerData->firstName,
+            'lastName'        => $customerData->lastName,
+            'email'           => $customerData->email,
+            'phone'           => $customerData->phone,
+            'deliveryAddress' => $customerData->deliveryAddress
         ];
     }
 
-    public function updateCurrentUserInSession() # TODO
+    public function updateCurrentUserInSession()
     {
         $this->updateCurrentUserInSessionWithUserLoginData(UserLogin::selectWhere("id = ".$GLOBALS['db']->quote(trim($_SESSION['currentUser']['userId'])))[0]);
     }
@@ -452,20 +452,20 @@ class ProfileController extends \dwp\core\Controller
         {
             $changeAddressFields = [
                 // retrieve user inputs
-                'id'      => trim($_POST['address-id']),
+                'id'      => $_SESSION['currentUser']['deliveryAddress'] ?? null,
                 'street'  => trim($_POST['street']),
                 'number'  => trim($_POST['number']),
                 'zipCode' => trim($_POST['zipCode']),
                 'city'    => trim($_POST['city'])
             ];
 
-            $this->checkIfFieldsAreSet($changeAddressFields, $changeAddressErrors);
+            $this->checkIfFieldsAreSet($changeAddressFields, $changeAddressErrors, ['id']);
             if(empty($changeAddressErrors))
             {
-                // didn't really bother to validate the address since there are too many possible variations (umlaut etc.)
+                // didn't really bother to validate the address since there are too many possible variations for regEx (umlaut etc.)
 
                 // check for occurred errors
-                if(empty($signupErrors))
+                if(empty($changeAddressErrors))
                 {
                     $sqlErrors = [];
                     // create and validate new customer and user login objects from given data
@@ -474,11 +474,29 @@ class ProfileController extends \dwp\core\Controller
                     if ($newAddress->validate($sqlErrors) === true)
                     {
                         $newAddress->save($sqlErrors);
+                        // if the user has not entered an address yet, link it to his account
+                        if($_SESSION['currentUser']['deliveryAddress'] == null)
+                        {
+                            $updatedCustomer = new Customer([
+                                'id'              => $_SESSION['currentUser']['customerId'],
+                                'deliveryAddress' => Address::lastInsertedId()
+                            ]);
+
+                            if ($updatedCustomer->validate($sqlErrors) === true)
+                            {
+                                $updatedCustomer->save($sqlErrors);
+                                if(empty($sqlErrors)) $this->updateCurrentUserInSession();
+                            }
+                        }
                         header('Location: '.$target);
                     }
                 }
             }
-        } else $changeAddressErrors[] = 'muss eingeloggt sein'; # TODO
+        }
+        else {
+            header('Location: index.php?c=profile&a=login');
+        }
+
         $this->controller = 'products';
         $this->action = 'checkout';
         $this->setParam('sqlErrors' , isset($sqlErrors) ? 'Leider ist ein Fehler aufgetreten (3)' : null);
