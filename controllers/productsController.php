@@ -20,16 +20,41 @@ class ProductsController extends \dwp\core\Controller
 {
     public function actionAll($whereStr = '')
     {
-        # TODO TODO TODO Suche
         $products = \dwp\models\JoinedProduct::joinedSelect($whereStr);
         $this->setParam('products', $products);
-        $this->setParam('searchfor', $whereStr); # TODO remove
     }
 
     public function actionSearch()
     {
-        # TODO JGE illegale Suchen abfangen (' OR 1 = 1 OR brand like ' und so weiter)
-        $this->actionAll(isset($_GET['s']) ? " WHERE products.name like '%".(trim($_GET['s']))."%' OR brands.name like '%".(trim($_GET['s']))."%'" : '');
+        # TODO catch sql injections, improve logic. (this is a last minute fix)
+        $allBrands = empty($_GET['brand']);
+        $allColors = empty($_GET['color']);
+        $sqlCommands  =  isset($_GET['s'])
+                         ? " WHERE products.name like '%".(trim($_GET['s']))."%' OR brands.name like '%".(trim($_GET['s']))."%'"
+                         : ($allBrands && $allColors
+                           ? ''
+                           : ' WHERE');
+        $sqlCommands .=  $allBrands ? '' : ' brands.id = '.$_GET['brand'].($allColors ? '' : ' AND');
+        $sqlCommands .=  $allColors ? '' : ' colors.id = '.$_GET['color'];
+
+        if(isset($_GET['sortBy']))
+        {
+            switch ($_GET['sortBy']) {
+                case 'price_asc':
+                    $sqlCommands .= ' ORDER BY products.price ASC';
+                    break;
+                case 'price_desc':
+                    $sqlCommands .= ' ORDER BY products.price DESC';
+                    break;
+                case 'alph_asc':
+                    $sqlCommands .= ' ORDER BY products.name ASC';
+                    break;
+                case 'alph_desc':
+                    $sqlCommands .= ' ORDER BY products.name DESC';
+                    break;
+            }
+        }
+        $this->actionAll($sqlCommands);
         $this->action = 'all';
     }
 
