@@ -84,7 +84,7 @@
             </form>
         </div>
     </div>
-    <img class="signup-background" src="<?=ROOTPATH. '/assets/img/signup-background.jpg'?>">
+    <img class="signup-background" src="<?=ROOTPATH. '/assets/img/signup-login.jpg'?>">
 </div>
 <div class="login-notification">
     <? if($_SESSION['loggedIn']) :?>

@@ -94,8 +94,8 @@
         Die Hintergrundbilder zeigen typische Motive urbaner Hip-Hop Kultur: Street Art, Basketball, Caps und entspannte Alltagskleidung. Unsere Zielgruppe, die mit dieser Kultur aufgewachsen ist, soll sich durch diese Bildauswahl auf unserer Website wohlfühlen und sich angesprochen fühlen.
     </p>
     <div class="website-screenshot-box">
-        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/BackgroundHomepage.jpeg'?>">
-        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/BackgroundProfile.jpg'?>">
+        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/Homepage.jpeg'?>">
+        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/profile.jpg'?>">
         <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/BackgroundSignup.jpg'?>">
     </div>
     <p>
