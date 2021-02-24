@@ -12,7 +12,6 @@
         <a href="?c=profile&a=validateNewUser&uid=<?=$_SESSION['validateUserID']?>"><button>Nutzer valideren</button></a>
     </div>
 <?php endif; ?>
-test account: testUser / 123456 <!-- TODO JGE-->
 <div class="login-inset">
     <div class="second-login">
             <form class="login" action="index.php?c=profile&a=login" method="post">
