@@ -2,51 +2,57 @@
     <input name="c" value="products" hidden>
     <input name="a" value="search" hidden>
     <section class="filter-bar">
-        <div class="inset-filter">
-            <div class="filter">Sortieren:
-                <div class="filter-box">
-                    <select class="sort-by_f" name="sortBy">
-                        <option class="filter-option">-</option>
-                        <option class="filter-option" value="price_asc">Preis aufsteigend</option>
-                        <option class="filter-option" value="price_desc">Preis absteigend</option>
-                        <option class="filter-option" value="alph_asc">Alphabetisch aufsteigend</option>
-                        <option class="filter-option" value="alph_desc">Alphabetisch absteigend</option>
-                    </select>
+        <div class="filter-main">
+            <div class="inset-filter">
+                <div class="filter">Sortieren:
+                    <div class="filter-box">
+                        <select class="sort-by_f" name="sortBy">
+                            <option class="filter-option">-</option>
+                            <option class="filter-option" value="price_asc">Preis aufsteigend</option>
+                            <option class="filter-option" value="price_desc">Preis absteigend</option>
+                            <option class="filter-option" value="alph_asc">Alphabetisch aufsteigend</option>
+                            <option class="filter-option" value="alph_desc">Alphabetisch absteigend</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="filter">Marke:
-                <div class="filter-box">
-                    <select class="brand_f" name="brand">
-                        <option class="filter-option" value="">Alle</option>
-                        <?
+                <div class="filter">Marke:
+                    <div class="filter-box">
+                        <select class="brand_f" name="brand">
+                            <option class="filter-option" value="">Alle</option>
+                            <?
                             $brands = \dwp\models\Brand::select();
                             if(isset($brands)) :
-                            foreach ($brands as $brand) :
-                        ?>
-                            <option class="filter-option" value="<?=$brand->id?>"><?=$brand->name?></option>
-                        <? endforeach; endif;?>
-                    </select>
+                                foreach ($brands as $brand) :
+                                    ?>
+                                    <option class="filter-option" value="<?=$brand->id?>"><?=$brand->name?></option>
+                                <? endforeach; endif;?>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="filter">Farbe:
-                <div class="filter-box">
-                    <select class="color_f" name="color">
-                        <option class="filter-option" value="">Alle</option>
-                        <?
+                <div class="filter">Farbe:
+                    <div class="filter-box">
+                        <select class="color_f" name="color">
+                            <option class="filter-option" value="">Alle</option>
+                            <?
                             $colors = \dwp\models\Color::select();
                             if(isset($colors)) :
-                            foreach ($colors as $color) :
-                        ?>
-                            <option class="filter-option" value="<?=$color->id?>"><?=$color->name?></option>
-                        <? endforeach; endif;?>
-                    </select>
+                                foreach ($colors as $color) :
+                                    ?>
+                                    <option class="filter-option" value="<?=$color->id?>"><?=$color->name?></option>
+                                <? endforeach; endif;?>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-submit-box">
+                    <button class="filter-submit-btn" type="submit">
+                        Anwenden
+                    </button>
                 </div>
             </div>
+
         </div>
     </section>
-    <button type="submit">
-        TODO TODO TODO DNA!!!!!!!!
-    </button>
+
 </form>
 <form method="get">
     <input name="c" value="products" hidden>
@@ -102,9 +108,13 @@
                     </div>
                 </li>
             </ul>
+            <div class="filter-submit-box">
+                <button class="filter-submit-btn" type="submit">
+                    Anwenden
+                </button>
+            </div>
         </nav>
+
     </section>
-    <button type="submit">
-        TODO TODO TODO DNA MOBILE!!!!!!!!
-    </button>
+
 </form>
