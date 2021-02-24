@@ -7,10 +7,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
--- -----------------------------------------------------
--- Schema myZone
--- -----------------------------------------------------
-
+DROP DATABASE IF EXISTS `myzone`;
 -- -----------------------------------------------------
 -- Schema myZone
 -- -----------------------------------------------------
@@ -202,26 +199,25 @@ VALUES (1, 'shoes');
 INSERT INTO `myZone`.`brands` (`id`, `name`)
 VALUES (1, 'Reebok'),
        (2, 'Nike'),
-       (3, 'Adidas'),
-       (4, 'crocs');
+       (3, 'Adidas');
 
 INSERT INTO `myZone`.`colors` (`id`, `name`)
-VALUES (1, 'white'),
-       (2, 'red'),
-       (3, 'black'),
-       (4, 'green'),
-       (5, 'blue'),
-       (6, 'yellow');
+VALUES (1, 'weiss'),
+       (2, 'rot'),
+       (3, 'schwarz'),
+       (4, 'grün'),
+       (5, 'blau'),
+       (6, 'gelb');
 
 
 INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`, `descriptionColor`, `description`)
-VALUES (1, 'Continental 80', 79.99, 1, 3, 1, 'Core Black',
+VALUES (1, 'Continental 80', 79.99, 1, 3, 3, 'Core Black',
         'Mit dem Continental 80 bringt adidas uns die pure, unverfälschte Ästhetik des Tennissports der Achtziger Jahre zurück. Alles wird immer technischer, wilder und hektischer, aber dieses Design gibt sich einer Schlichtheit hin, die etwas Meditatives hat. Die Linien sind simpel und unaufgeregt, der Look so puristisch wie möglich. Spiel, Satz und Sieg adidas!'),
        (2, 'NMD R1', 89.99, 1, 3, 3, 'Core Black / Silver Mettalic / Solar Red',
         'adidas Originals ging vor nicht allzu langer Zeit mal wieder einen Schritt weiter Richtung Zukunft und präsentierte mit dem NMD Runner ein junges innovatives Design aus Herzogenaurach. Mit dem höchst atmungsaktiven, elastischen Mesh-Obermaterial und der ultrabequemen boost™-Sohle setzt der NMD Runner in Sachen Flexibilität, Gestaltung und Technologie Maßstäbe. Als fast schon revolutionär konnte man Anfang der 2010er die hauseigene boost™-Technologie bezeichnen, die dem Träger dieses adidas-Schuhs eine Energieeffizienz verschaffte, die ihresgleichen sucht - so wurde praktisch mit jedem Schritt das Akku neu aufgeladen, was die Ermüdungserscheinungen des Läufers auf ein Minimum reduzierte.'),
        (3, 'Supercourt', 99.99, 1, 3, 1, 'Footwear White',
         'Der Supercourt von adidas ist ein Design, das mit vielen Zitaten der Tennisschuhe aus den Achtziger Jahren punkten kann. Ein Schaft aus geschmeidigem Leder auf einer sehr schlicht gehaltenen Gummisohle, gefinisht mit spärlichen Logoakzenten, so machen Retro-Sneakers 2019 Freude.'),
-       (4, 'Ultra Boost', 149.99, 1, 3, 1, 'Core Black',
+       (4, 'Ultra Boost', 149.99, 1, 3, 3, 'Core Black',
         'Mit dem UltraBOOST hat adidas einen echten Sure Shot kreiert, bei dem sich Technologie, Material und Performance auf höchstem Niveau treffen. Es handelt sich dabei um eine dieser genialen Konstruktionen mit anschmiegsamem Primeknit als Obermaterial und der der ultrabequemen Boost™-Zwischensohle als Basis für einen dynamischen Antritt. Natürlich ist der an Socken angelehnte Schaft nahtlos konstruiert sowie höchst atmungsaktiv, und mit der Boost™-Technologie hat adidas eine kleine Revolution losgetreten, da diese dem Träger eine Energieeffizienz vermittelte, die ihresgleichen sucht - so wurde praktisch mit jedem Schritt das Akku neu aufgeladen, was die Ermüdungserscheinungen des Läufers auf ein Minimum reduzierte.'),
        (5, 'I-5923', 49.99, 1, 3, 6, 'Yellow-Night / Indigo-Gum 3',
         'Inspiriert von den adidas-Modellen der Siebziger Jahre steht der I-5923 Runner für einen schlichten Auftritt, allerdings hat dieser Sneaker einiges unter der Haube. Das ist in erster Linie die elitäre boost™-Mittelsohle, die nicht nur einen unvergleichlichen Komfort vermittelt, sondern sich auch noch positiv auf das Gesamtgewicht auswirkt. Mit der boost™-Technologie hat adidas übrigens eine kleine Revolution losgetreten, da diese dem Träger eine Energieeffizienz vermittelte, die ihresgleichen sucht - so wurde praktisch mit jedem Schritt das Akku neu aufgeladen, was die Ermüdungserscheinungen des Läufers auf ein Minimum reduzierte.'),
@@ -232,15 +228,9 @@ VALUES (1, 'Continental 80', 79.99, 1, 3, 1, 'Core Black',
        (8, 'Air Force 1 ''07', 99.99, 1, 2, 1, 'Grey / Black / Infrared',
         'Für die aktuelle Saison hat Nike den Air Force 1 ''07 nochmal etwas überarbeitet, allerdings ohne charakteristische Züge dieses Schuhs zu verändern. Es gibt robustes Leder als Obermaterial und einen puristischen Two Tone-Colorway. Man schrieb das Jahr 1982, als Nikes Air Force 1 die Welt veränderte. Nachdem Nike das Problem von Basketballschuhen in den eigenen Labors analysiert hatte, kam man zu der Einsicht, dass die mangelnde Dämpfung im Mittelfuß- und Fersenbereich ein hohes Verletzungsrisiko birgt. Um dem entgegenzuwirken, bestückte Nike die Mittelsohle des Air Force 1 mit einem Luftpolster (Air-Technologie) in genau diesem sensiblen Bereich, wodurch dieser Schuh unmittelbar nach seiner Markteinführung zur ultimativen Court-Waffe gekürt wurde und seitdem maßgeblich für die fast schon revolutionäre Weiterentwicklung von Basketballschuhen verantwortlich ist. Du merkst schon, sein Name kommt nicht von ungefähr...'),
        (9, 'WMNS Air Max 1', 109.99, 1, 2, 2, 'Gym Red / Sail / Black',
-        'Der Über-Runner Nike Air Max 1 in einer exzellenten neuen Farbkombi, die wie gewohnt perfekt abgestimmt wurde und keine Wünsche offen lässt! Als die Urform vom Nike Air Max, also die Nummer 1, 1987 für den Markt freigegeben wurde, konnte noch niemand ahnen, welch einen Einfluss dieser Runner auf seine Art ausüben sollte. Den revolutionären Charakter konnte man bereits erahnen, denn er war das erste Modell, dass seine Air Unit nicht in der Mittelsohle versteckte, sondern es dem Betrachter gestattete, durch kleine, in den Fersenbereich der Mittelsohle integrierte Fenster einen Blick auf die die sagenumwobene Lufteinheit zu werfen, die NASA-Wissenschaftler Frank Rudy 1979 für Nike erschuf. Im Lauf der Jahre wurde der Air Max 1 stetig weiterentwickelt und verbessert, sodass sein Gewicht nochmals um ein paar Gramm reduziert und seine Performance verbessert werden konnte. Selbstredend, dass Nike seit ''87 sich nicht auf den Trophäen ausruht, wodurch es nachvollziehbar ist, dass einige Nachfolger des Air Max 1 inzwischen dem Original in puncto Gewicht, Komfort oder Dämpfung den Schneid abkaufen konnten, doch kein einziger dieser Schuhe genießt heute einen solchen Kultstatus.');
-
-
-INSERT INTO `myZone`.`products` (`id`, `name`, `price`, `category`, `brand`, `color`, `descriptionColor`, `description`)
-VALUES (101, 'Club C85 Vintage', 99.99, 1, 1, 1, 'Calk / Paperwhite / Cya',
-        'Kein Schnickschnack, nur die pure Ästhetik des Tennissports schwingt beim Club C 85 von Reebok mit. Weiches Leder als Obermaterial, strategisch gepolstertes Textilfutter, eine cleane Farbe für die Sohle in Braun und einfache, nachvollziehbare Linien mit ideal dosierten Overlays sind die Merkmale von Reebok''s Club C 85 MU. Tennis war in den Achtziger Jahren einfach der Sport, der eine Menge cooler Sneaker hervorgebracht hat, deren Design immer auf traditionelle Werte bedacht war ohne zu konservativ zu wirken.'),
-       (102, 'Air Max 97', 129.99, 1, 2, 2, NULL, NULL),
-       (103, 'Classic Clog', 69.69, 1, 4, 3, NULL, NULL),
-       (104, 'Yeezy Boost 380 "Alien"', 199.99, 1, 3, 4, NULL, NULL);
+        'Der Über-Runner Nike Air Max 1 in einer exzellenten neuen Farbkombi, die wie gewohnt perfekt abgestimmt wurde und keine Wünsche offen lässt! Als die Urform vom Nike Air Max, also die Nummer 1, 1987 für den Markt freigegeben wurde, konnte noch niemand ahnen, welch einen Einfluss dieser Runner auf seine Art ausüben sollte. Den revolutionären Charakter konnte man bereits erahnen, denn er war das erste Modell, dass seine Air Unit nicht in der Mittelsohle versteckte, sondern es dem Betrachter gestattete, durch kleine, in den Fersenbereich der Mittelsohle integrierte Fenster einen Blick auf die die sagenumwobene Lufteinheit zu werfen, die NASA-Wissenschaftler Frank Rudy 1979 für Nike erschuf. Im Lauf der Jahre wurde der Air Max 1 stetig weiterentwickelt und verbessert, sodass sein Gewicht nochmals um ein paar Gramm reduziert und seine Performance verbessert werden konnte. Selbstredend, dass Nike seit ''87 sich nicht auf den Trophäen ausruht, wodurch es nachvollziehbar ist, dass einige Nachfolger des Air Max 1 inzwischen dem Original in puncto Gewicht, Komfort oder Dämpfung den Schneid abkaufen konnten, doch kein einziger dieser Schuhe genießt heute einen solchen Kultstatus.'),
+       (101, 'Club C85 Vintage', 99.99, 1, 1, 1, 'Calk / Paperwhite / Cya',
+        'Kein Schnickschnack, nur die pure Ästhetik des Tennissports schwingt beim Club C 85 von Reebok mit. Weiches Leder als Obermaterial, strategisch gepolstertes Textilfutter, eine cleane Farbe für die Sohle in Braun und einfache, nachvollziehbare Linien mit ideal dosierten Overlays sind die Merkmale von Reebok''s Club C 85 MU. Tennis war in den Achtziger Jahren einfach der Sport, der eine Menge cooler Sneaker hervorgebracht hat, deren Design immer auf traditionelle Werte bedacht war ohne zu konservativ zu wirken.');
 
 INSERT INTO `myZone`.`orders` (`shipmentDate`, `customer`)
 VALUES ('2020-12-30', 1),
