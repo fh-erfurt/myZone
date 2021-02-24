@@ -94,11 +94,3 @@
         </div>
     </div>
 </header>
-<nav class="jakob"><!-- TODO remove in final version -->
-    <a href="<?=$_SERVER['PHP_SELF']?>"                           >HOME</a>
-    <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=shoppingCart" >CART</a>
-    <a href="<?=$_SERVER['PHP_SELF']?>?c=products&a=all"          >ALLE PRODUKTE</a>
-    <a href="<?=$_SERVER['PHP_SELF']?>?c=wrongController&a=page3" >ERROR</a>
-    <? if($loggedIn) :?><p>-------------You are logged in as <?=$_SESSION['currentUser']['username'] ?? 'ERROR'?>!--</p> <? endif; ?>
-    <? if(isset($GLOBALS['errorMessages']['login'])) : ?><div class="error-message"><?=$GLOBALS['errorMessages']['login']?></div>   <? endif; ?>
-</nav>
