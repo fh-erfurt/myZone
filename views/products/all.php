@@ -26,11 +26,11 @@ include VIEWSPATH . 'filter.php';
         }
         catch (Error $error)
         {
-            echo 'Error caught: '.$error->getMessage(); # TODO
+            echo 'Error caught: '.$error->getMessage();
         }
         catch (PDOException $exception)
         {
-            echo 'Exception caught: '.$exception->getMessage(); # TODO
+            echo 'Exception caught: '.$exception->getMessage();
         }
         ?>
     </div>
