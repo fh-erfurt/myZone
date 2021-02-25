@@ -79,7 +79,7 @@ $db = $GLOBALS['db'];
                 <a class="link" href="?c=products&a=view&id=<?=$listProduct->id?>">
                     <div class="product">
                         <div class="upper">
-                            <img class="img" src="<?=ROOTPATH.'/assets/img/products/product_'.$listProduct->id.'.jpg'?>">
+                            <img alt="" class="img" src="<?=ROOTPATH.'/assets/img/products/product_'.$listProduct->id.'.jpg'?>">
                         </div>
                         <div class="lower">
                             <h1 class="brand"><?=$listProduct->brand?></h1>
