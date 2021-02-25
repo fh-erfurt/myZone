@@ -5,7 +5,7 @@
         Aufgrund gemeinsaner Interessen haben wir uns entschieden im Rahmen der Varanstaltungen Grundlagen
         der Webprogrammierung und Dynamische Webprogrammierung einen Streetwear Online-Shop zu erstellen.
         <h2 class="doc-subsubhead">1.1 Zielgruppe:</h2>
-        Wie für einen Streetwear Online-Shop üblich soll auch unser Dhop vorwiegend modebewusste jugendliche und junge Erwachsene ansprechen, die
+        Wie für einen Streetwear Online-Shop üblich soll auch unser Shop vorwiegend modebewusste jugendliche und junge Erwachsene ansprechen, die
         auf der Suche nach lässiger Alltagskleidung oder bequemen Sneakern sind. Unsere Kunden können auf unserer Shopseite nach Produkten suchen und
         sie entweder als Gast oder als registrierter Benutzer bestellen.
     </p>
@@ -83,7 +83,13 @@
         <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/docu-images/WireframeProducts.png'?>">
         <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/docu-images/WireframeMobile.png'?>">
     </div>
-    <p><b>Finales Layout:</b></p>
+    <p><b>Finales Layout:</b><br><br>
+        Das Layout unserer Seite ähnelt dem vieler Webshops und wurde mittels CSS <b>Flexboxen</b> realisiert.<br> Der <b>Header</b> beinhaltet unser Logo, welches gleichzeitig auch als Link zu unserer Homepage fungiert,
+        eine Suchleiste, sowie Links zum Warenkorb und zum Login/Profilübersicht. Auf spezielle Funktionen gehen wir im späteren Verlauf noch ein.<br>
+        Die <b>Navigationsleiste</b> unterhalb des Headers führt zu den beiden zentralen Kategorien unseres Webshops (Schuhe / Streetwear). Ein Dropdownmenü mit weiteren Unterkategorien konnten wir leider nicht implementieren, da wir einerseits erst eine überschaubare Menge an Produkten hinzugefügt haben und uns andererseits die Zeit gefehlt hat.
+        Unter der Navigationsleiste befindet sich auf der Seite aller Schuhe der <b>Filter</b>. Dieser filtert die Suche nach verschiedenen Marken, Farben oder sortiert das Ergebnis alphabetisch / preislich.
+        Auf der Homepage befindet sich eine Auswahl der <b>Topseller</b> um den Kunden direkt die am besten verkauften Produkte zu präsentieren. Der aufklappbare Text unterhalb der Topseller soll dem Besucher unser “Unternehmen” näher bringen.
+    </p>
     <div class="website-screenshot-box">
         <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/docu-images/Layout1.png'?>">
         <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/docu-images/Layout2.png'?>">
@@ -94,9 +100,9 @@
         Die Hintergrundbilder zeigen typische Motive urbaner Hip-Hop Kultur: Street Art, Basketball, Caps und entspannte Alltagskleidung. Unsere Zielgruppe, die mit dieser Kultur aufgewachsen ist, soll sich durch diese Bildauswahl auf unserer Website wohlfühlen und sich angesprochen fühlen.
     </p>
     <div class="website-screenshot-box">
-        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/Homepage.jpeg'?>">
-        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/profile.jpg'?>">
-        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/BackgroundSignup.jpg'?>">
+        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/Background/Homepage.jpeg'?>">
+        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/Background/profile.jpg'?>">
+        <img class="wireframe-screenshot" src="<?=ROOTPATH. '/assets/img/Background/BackgroundSignup.jpg'?>">
     </div>
     <p>
         <h2 class="doc-subsubhead">3.5 Responsive Design</h2>
@@ -139,16 +145,28 @@
     <h2 class="doc-subhead">7. Besonderheiten</h2>
     <p>Da wir uns auf die fehlerfreie Implementierung aller wichtigen Features konzentriert haben, mussten wir auf die komplette Kategorie
     Streetwear verzichten. Aufgrund der wenigen unterschiedlichen Produkte konnten wir zudem kein Dropdownmenü für eine feinere Kategorisierung unserer Produkte einbauen. Zusätzlich konnten wir mit Javascript den Blureffekt für den Login Pop-up nicht auf den Header anwenden, weil sich
-    der Pop-up-Container im Header befindet. Zudem konnten wir wegen mangelnder Zeit keinen count für die Stückzahl im Warenkorb implementieren. </p>
+    der Pop-up-Container im Header befindet. Zudem konnten wir wegen mangelnder Zeit keinen count für die Stückzahl im Warenkorb implementieren. Obwohl es in der Datenbank möglich ist, verschiedenen Usern die selbe Adresse zuzuordnen, haben wir uns aus Zeitgründen dazu entschieden, dies in den PHP Funktionen als 1:1 Beziehung zu nutzen.
+    Da die Funktionen "Bestellung" und "Filter" unter einem gewissen Zeitdruck implementiert wurden, könnten diese eventuell unsauber umgesetzt worden sein.<br>
+    <b>Error Codes:</b> Wir haben bewusst bestimmte Fehlerfälle in Form von Fehlercodes für den Nutzer sichtbar gemacht, um diese an den Support weitergeben zu können.
+    </p>
     <h2 class="doc-subhead">8. Lessons Learned</h2>
+    <p>
+        Der <b>Git-Workflow</b> hat Dariush Naghed und Felix Zwicker am Anfang des Projektes noch etwas Probleme bereitet. Jedoch konnte Jakob Gensel dem Team mit Erfahrung und Geduld bei dieser Hürde weiterhelfen.<br><br>
+        Im folgenden haben wir einige Erfahrungen, die wir bei den verschiedenen Teilbereichen gesammelt haben, aufgelistet:<br>
+        <b>CSS:</b> Die Nutzung von Flexbox-Layout; Checkbox als workaround für das Ein- und Ausblenden von Containern; Bildimplementierung; einbinden von Fonts etc. <br>
+        <b>PHP:</b> Aufbau, Nutzung und Pflege der MVC-Struktur (Wie teile ich meine Controller auf?); Joined SQL Models in MVC implementieren; Codestyle PHP/HTML; das Abfangen von Fehlern ist in Skriptsprachen sehr aufwendig <br>
+        <b>MySQL:</b> ER: Zuhammenhang zwischen User, Customer und Address in einem Shop-System; Foreign Key immer mit Suffix nutzen, da Spaltennamen sonst Keywords enthalten können (order)<br>
+        <b>JavaScript:</b> Umgang mit getElementsByClassName; Funktionen, die nur auf gewissen Seiten funktionieren; EventListener; Manipulation des Styles</b>
 
+    </p>
     <h2 class="doc-subhead">9. Projektmanagement</h2>
     <p>
+        Die <b>Kommunikation</b> in unserem Team lief gut und konstant. Wir kommunizierten regelmäßig in unserer WhatsApp-Gruppe oder auf dem Discord-Server unseres Jahrgangs. Dabei tauschten tauschten wir Ideen aus und verteilten die zu erledigenden Aufgaben.<br>
+        Im folgenden ist die Einteilung der Arbeitsbereiche aufgelistet:<br>
         <b>Jakob Gensel: </b> PHP, SQL, Projektstruktur, Aufgabenverteilung;<br>
         <b>Dariush Naghed: </b> Idee, HTML, CSS, Design, Wireframes, Dokumentation, Produkte, Texte;<br>
         <b>Felix Zwicker: </b> Idee, Javascript, Präsentation, Wireframes, Navigationsstruktur;
     </p>
-
 </div>
 
 
