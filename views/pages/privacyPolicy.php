@@ -2,17 +2,17 @@
     <h1 class="doc-headline">Dokumentation</h1>
     <h2 class="doc-subhead">1. Idee</h2>
     <p>
-        Aufgrund gemeinsaner Interessen haben wir uns entschieden im Rahmen der Varanstaltungen Grundlagen
+        Aufgrund gemeinsamer Interessen haben wir uns entschieden im Rahmen der Veranstaltungen Grundlagen
         der Webprogrammierung und Dynamische Webprogrammierung einen Streetwear Online-Shop zu erstellen.
         <h2 class="doc-subsubhead">1.1 Zielgruppe:</h2>
-        Wie für einen Streetwear Online-Shop üblich soll auch unser Dhop vorwiegend modebewusste jugendliche und junge Erwachsene ansprechen, die
+        Wie für einen Streetwear Online-Shop üblich soll auch unser Shop vorwiegend modebewusste jugendliche und junge Erwachsene ansprechen, die
         auf der Suche nach lässiger Alltagskleidung oder bequemen Sneakern sind. Unsere Kunden können auf unserer Shopseite nach Produkten suchen und
         sie entweder als Gast oder als registrierter Benutzer bestellen.
     </p>
     <h2 class="doc-subhead">2. Recherche</h2>
     <p>
         Um einen Einblick in die Gestaltung und den Funktionsumfang anderer Shopseiten zu erhalten, haben wir uns verschiedene
-        Webshops angeschaut. Nach eingehender Analyse verschiedener Seiten, sind uns folgende Dinge aufgeffale, die wir bei der Umsetzung unseres Projektes beachten wollen:
+        Webshops angeschaut. Nach eingehender Analyse verschiedener Seiten, sind uns folgende Dinge aufgefallen, die wir bei der Umsetzung unseres Projektes beachten wollen:
     </p>
     <ul>
         <li><b>1.</b> Ein schlichtes und modernes Design mit dezenten Farben trägt dazu bei, dass sich die Aufmerksamkeit des Kunden auf die Produkte richtet.</li>
@@ -138,7 +138,7 @@
     </p>
     <h2 class="doc-subhead">7. Besonderheiten</h2>
     <p>Da wir uns auf die fehlerfreie Implementierung aller wichtigen Features konzentriert haben, mussten wir auf die komplette Kategorie
-    Streetwear verzichten. Aufgrund der wenigen unterschiedlichen Produkte konnten wir zudem kein Dropdownmenü für eine feinere Kategorisierung unserer Produkte einbauen. Zusätzlich konnten wir mit Javascript den Blureffekt für den Login Pop-up nicht auf den Header anwenden, weil sich
+    Streetwear verzichten. Aufgrund der wenigen unterschiedlichen Produkte konnten wir zudem kein Dropdown Menü für eine feinere Kategorisierung unserer Produkte einbauen. Zusätzlich konnten wir mit Javascript den Blureffekt für den Login Pop-up nicht auf den Header anwenden, weil sich
     der Pop-up-Container im Header befindet. Zudem konnten wir wegen mangelnder Zeit keinen count für die Stückzahl im Warenkorb implementieren. </p>
     <h2 class="doc-subhead">8. Lessons Learned</h2>
 
@@ -146,7 +146,7 @@
     <p>
         <b>Jakob Gensel: </b> PHP, SQL, Projektstruktur, Aufgabenverteilung;<br>
         <b>Dariush Naghed: </b> Idee, HTML, CSS, Design, Wireframes, Dokumentation, Produkte, Texte;<br>
-        <b>Felix Zwicker: </b> Idee, Javascript, Präsentation, Wireframes, Navigationsstruktur;
+        <b>Felix Zwicker: </b> Idee, Javascript, Präsentationen, Wireframes, Navigationsstruktur;
     </p>
 
 </div>
