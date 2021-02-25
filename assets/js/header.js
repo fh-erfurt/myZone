@@ -6,45 +6,25 @@ document.addEventListener('DOMContentLoaded', function()
     searchBox.addEventListener('click',function()
     {
         searchBox.style.boxShadow = '0 0.05rem 1rem #808080';
-    })
+    });
 
     document.addEventListener('click',function(event)
     {
-        var isClicked = searchBox.contains(event.target);
+        var isClicked = searchBox.contains(event.target);     // clicked outside of searchBox
         if(!isClicked)
         {
             searchBox.style.border = 'none';
             searchBox.style.boxShadow = 'none';
         }
-    })
+    });
 
 
     //popUp
 /*
-PopUp Container ist leider auch geblured trotz versuchen ihn zu separieren
+PopUp Container ist leider auch geblured trotz versuchen ihn von Header zu separieren
 Kommentar entfernen und der Hintergrund wird beim aufrufen des Login PopUps geblured
-
-Versuche PopUp vom Header zu separieren und nicht mit zu stylen:
-1.
-    var header1 = document.getElementsByClassName('header')[0];
-    var header = header1.querySelectorAll('div:not(.pop-up)');
-    header.style.webkitFilter = 'blur(2px)';
-
-2.
-    var header1 = document.getElementsByClassName('header')[0];
-    var header = header1.query('div');
-    var del = header[6]     --PopUp Element in array
-    header1.splice(del,1);
-    header1.style.webkitFilter = 'blur(2px)';
-
-3.
-   var header = document.getElementsByClassName('header')[0];
-   var popup = document.getElementsByClassName('pop-up')[0];
-   header.style.webkitFilter = 'blur(2px)';
-   popup.style.webkitFilter = 'blur(0px)';
 */
 
-    //Entkommentieren zum Testen!
 /*
     var openPopUp = document.getElementsByClassName('pop-icon')[0];
     var closePopUp = document.getElementsByClassName('x-icon')[0];
@@ -91,19 +71,15 @@ Versuche PopUp vom Header zu separieren und nicht mit zu stylen:
     function setStyle(page,navbar,footer)
     {
         page.style.webkitFilter = 'blur(2px)';
-
         navbar.style.webkitFilter = 'blur(2px)';
         footer.style.webkitFilter = 'blur(2px)';
-        console.log('here')
-
     }
 
     function unsetStyle(page,navbar,footer)
     {
-        page.style.webkitFilter = 'none';
-        navbar.style.webkitFilter = 'none';
-        footer.style.webkitFilter = 'none';
-
+        page.style.webkitFilter = 'blur(0px)';
+        navbar.style.webkitFilter = 'blur(0px)';
+        footer.style.webkitFilter = 'blur(0px)';
     }
 */
 });

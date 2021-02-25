@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function()
     var inputBoxPassword = document.getElementById('input-box-newPassword');
     var inputBoxConfirmPassword = document.getElementById('input-box-confirmPassword');
 
-    //Email
+    // Email
     var inputEmail = document.getElementById('email');
     var inputBoxEmail = document.getElementById('input-box-email');
 
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function()
 
             });
         }
-
+    // check Confirm Password and compare to Password
     if(inputConfirmPassword)
         {
             inputConfirmPassword.addEventListener('keyup', function()

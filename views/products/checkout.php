@@ -74,7 +74,7 @@
                     </div>
                 </form>
             </div>
-            <form class="guest-Order" action="?c=products&a=pay" method="post"> <!-- TODO JGE -->
+            <form class="guest-Order" action="?c=products&a=pay" method="post">
                 <h1 class="Order-Headline">Als Gast bestellen</h1>
                 <?
                 $customerFields = [
